@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TestCaseEntry } from './components/TestCaseEntry';
+import { TestCaseList } from './components/TestCaseList';
 import logo from './logo.svg';
 import './App.css';
 
@@ -14,7 +14,7 @@ class App extends Component {
         <p className="App-intro">
           To get started, enter your first test case below
         </p>
-        <TestCaseEntry />
+        <TestCaseList />
       </div>
     );
   }

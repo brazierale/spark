@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './TestCaseEntry.css';
+import './TestCase.css';
 
 export class TestCaseEntry extends Component {
     constructor(props) {
@@ -10,12 +10,18 @@ export class TestCaseEntry extends Component {
         };
 
         this.handleUserInput = this.handleUserInput.bind(this);
+        this.handleKeyPress = this.handleKeyPress.bind(this);
     }
     render() { 
         return (
             <div>
-                <input className={this.state.entryType} value={this.state.userInput} onChange={this.handleUserInput} />
-                <h1>Type: {this.state.entryType}</h1>
+                <input 
+                    type="text"
+                    className={this.state.entryType}
+                    value={this.state.userInput}
+                    onChange={this.handleUserInput}
+                    onKeyPress={this.handleKeyPress}
+                />
             </div>
         )
     }
@@ -24,17 +30,25 @@ export class TestCaseEntry extends Component {
     handleUserInput(e) {
         let v = e.target.value;
         let t = 'Test-case';
+        let firstChar = v.charAt(0);
 
-        if ( v.charAt(0) === '/' && v.charAt(1) === '/' ) {
+        if ( firstChar === '/' && v.charAt(1) === '/' ) {
             t = 'Comment';
         }
-        else if ( v.charAt(0) === '#') {
+        else if ( firstChar === '#') {
             t = 'Tag';
         }
-        else if ( v.charAt(0) === ':' ) {
+        else if ( firstChar === '-' || firstChar === '*' ) {
             t = 'Sub-test-case';
         }
 
         this.setState({ entryType: t, userInput: v})
+    }
+
+    handleKeyPress(e) {
+        if (e.key === 'Enter') {
+            this.props.addTestCase(this.state.userInput, this.state.entryType);
+            this.setState({ entryType: '', userInput: ''});
+        }
     }
 }

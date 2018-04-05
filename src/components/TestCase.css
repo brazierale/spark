@@ -1,0 +1,50 @@
+* {
+    font-size: 1rem;
+}
+
+input, .Test-case, .Sub-test-case, .Comment, .Tag {
+    min-width: 500px;
+    width: 80%;
+    margin: auto;
+}
+
+input {
+    border: 2px solid #233232;
+    border-radius: 4px;
+    line-height: 24px;
+}
+
+input:focus {
+    border: 2px solid #009EC1;
+}
+
+.Test-case, .Sub-test-case, .Comment, .Tag {
+    min-width: 500px;
+    width: 80%;
+    line-height: 24px;
+}
+
+.Test-case {
+    font-size: 1.2rem;
+    line-height: 28px;
+    text-align: left;
+}
+
+.Sub-test-case {
+    width: 75%;
+    min-width: 420px;
+    text-align: left;
+}
+
+.Comment {
+    width: 65%;
+    min-width: 360px;
+    color: grey;
+    text-align: left;
+}
+
+.Tag {
+    text-transform: uppercase;
+    font-weight: bold;
+    text-align: right;
+}
