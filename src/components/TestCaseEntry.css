@@ -1,0 +1,31 @@
+input {
+    border: 2px solid #233232;
+    border-radius: 4px;
+    padding: 10px 10px;
+    min-width: 500px;
+    width: 80%;
+    font-size: 14pt;
+}
+.Test-case {
+    background: #009EC1;
+}
+
+.Test-case:focus {
+    border: 2px solid #009EC1;
+}
+
+.Sub-test-case {
+    border: 1px dashed #233232;
+    background: green;
+    padding: 2px;
+}
+
+.Comment {
+    border: none;
+    color: grey;
+}
+
+.Tag {
+    text-transform: uppercase;
+    font-size: bold;
+}
