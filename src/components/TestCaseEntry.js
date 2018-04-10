@@ -52,7 +52,7 @@ export class TestCaseEntry extends Component {
             //increment last test case created, later this will be the last selected test case
             let t = this.state.lastTestCase + 1;
 
-            this.props.addTestCase(this.state.userInput, this.state.entryType);
+            this.props.addLine(this.state.userInput, this.state.entryType);
             this.setState({ entryType: '', userInput: ''});
         }
     }

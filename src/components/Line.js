@@ -1,5 +1,13 @@
 import React, { Component } from 'react';
 
+export function TestCaseGroup(props) {
+    return (
+        <div className="Test-case-group" depth={props.depth}>
+            {props.text}
+        </div>
+    )
+}
+
 export function TestCase(props) {
     return (
         <div className="Test-case" depth={props.depth}>

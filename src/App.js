@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TestCaseList } from './components/TestCaseList';
+import { LineList } from './components/TestCaseList';
 import logo from './logo.svg';
 import './App.css';
 
@@ -8,7 +8,7 @@ class App extends Component {
     return (
       <div>
         <Header />
-        <TestCaseList />
+        <LineList />
       </div>
     );
   }
