@@ -2,30 +2,40 @@
     font-size: 1rem;
 }
 
-input, .Test-case-group, .Test-case, .Comment, .Tag {
+h3 {
+    margin-left: 20%;
+}
+
+h3 span {
+    font-weight: 300;
+}
+
+input, .Test-case-header, .Test-case, .Comment, .Tag {
     width: 80%;
     min-width: 500px;
     margin: auto;
 }
 
 input {
+    display: block;
     border: 2px solid #233232;
     border-radius: 4px;
-    line-height: 24px;
+    line-height: 28px;
 }
 
 input:focus {
     border: 2px solid #009EC1;
 }
 
-.Test-case-group, .Test-case, .Comment, .Tag {
+.Test-case-header, .Test-case, .Comment, .Tag {
     min-width: 500px;
     width: 80%;
     line-height: 24px;
 }
 
-.Test-case-group {
+.Test-case-header {
     font-size: 1.2rem;
+    font-weight: bold;
     line-height: 28px;
     text-align: left;
 }
@@ -45,6 +55,5 @@ input:focus {
 
 .Tag {
     text-transform: uppercase;
-    font-weight: bold;
     text-align: right;
 }
