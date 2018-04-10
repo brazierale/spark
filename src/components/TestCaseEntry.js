@@ -6,7 +6,8 @@ export class TestCaseEntry extends Component {
         super(props);
         this.state = {
             userInput: '',
-            entryType: 'Test-case'
+            entryType: 'Test-case',
+            lastTestCase: 1,
         };
 
         this.handleUserInput = this.handleUserInput.bind(this);
@@ -48,6 +49,9 @@ export class TestCaseEntry extends Component {
     // when the user presses Enter, create the item and clear the input field
     handleKeyPress(e) {
         if (e.key === 'Enter') {
+            //increment last test case created, later this will be the last selected test case
+            let t = this.state.lastTestCase + 1;
+
             this.props.addTestCase(this.state.userInput, this.state.entryType);
             this.setState({ entryType: '', userInput: ''});
         }

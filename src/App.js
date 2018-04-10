@@ -6,7 +6,17 @@ import './App.css';
 class App extends Component {
   render() {
     return (
-      <div className="App">
+      <div>
+        <Header />
+        <TestCaseList />
+      </div>
+    );
+  }
+}
+
+function Header(props) {
+  return (
+    <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">This is the Spark</h1>
@@ -14,10 +24,8 @@ class App extends Component {
         <p className="App-intro">
           To get started, enter your first test case below
         </p>
-        <TestCaseList />
       </div>
-    );
-  }
+  );
 }
 
 export default App;
