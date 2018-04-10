@@ -26,7 +26,7 @@ export class TestCaseEntry extends Component {
         )
     }
 
-    // set the
+    // update entry field type based on first character(s)
     handleUserInput(e) {
         let v = e.target.value;
         let t = 'Test-case';
@@ -45,6 +45,7 @@ export class TestCaseEntry extends Component {
         this.setState({ entryType: t, userInput: v})
     }
 
+    // when the user presses Enter, create the item and clear the input field
     handleKeyPress(e) {
         if (e.key === 'Enter') {
             this.props.addTestCase(this.state.userInput, this.state.entryType);

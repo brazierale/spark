@@ -3,8 +3,8 @@
 }
 
 input, .Test-case, .Sub-test-case, .Comment, .Tag {
-    min-width: 500px;
     width: 80%;
+    min-width: 500px;
     margin: auto;
 }
 
@@ -37,9 +37,9 @@ input:focus {
 }
 
 .Comment {
+    color: grey;
     width: 65%;
     min-width: 360px;
-    color: grey;
     text-align: left;
 }
 

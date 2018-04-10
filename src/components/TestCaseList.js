@@ -7,7 +7,7 @@ export class TestCaseList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            testCases: []
+            lineItems: []
         };
 
         this.addTestCase = this.addTestCase.bind(this);
@@ -15,19 +15,19 @@ export class TestCaseList extends Component {
     render() {
         return (
             <div>
-                {this.state.testCases}
+                {this.state.lineItems}
                 <TestCaseEntry addTestCase={this.addTestCase}/>
             </div>
         )
     }
 
     addTestCase(testCase, type) {
-        var newArray = this.state.testCases.slice();
+        var newArray = this.state.lineItems.slice();
 
         newArray.push(
             <TestCaseListItem text={testCase} type={type} />
         );
 
-        this.setState({ testCases: newArray });
+        this.setState({ lineItems: newArray });
     }
 }
