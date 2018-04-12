@@ -62,4 +62,18 @@ export class DisplayComponents extends Component {
         newArray.push(row);
         this.setState({ rows: newArray });
     }
+
+    swapRows(rowId, direction) {
+        let x = this.state.rows[rowId];
+
+        if (direction === 'up') {
+            rowId--
+        }
+        else if (direction === 'down') {
+            rowId++
+        }
+        
+        let y = this.state.rows[rowId];
+
+    }
 }

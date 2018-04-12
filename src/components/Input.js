@@ -68,7 +68,7 @@ export class Input extends Component {
             }      
 
             this.props.addComponent(this.state.userInput, this.state.entryType, this.state.currentDepth, this.state.lastTestCase);
-            this.setState({ entryType: '', userInput: '', currentDepth: newDepth, lastTestCase: newTestCase});
+            this.setState({ entryType: 'Test-case-header', userInput: '', currentDepth: newDepth, lastTestCase: newTestCase});
         }
     }
 }
