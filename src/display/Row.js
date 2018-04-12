@@ -31,7 +31,7 @@ export class Row extends Component {
     handleUp(e) {
         let newId = this.state.rowId;
         if (newId > 0) {
-            newId--;
+            newId++;
         }
         this.setState({rowId: newId})
     }
@@ -39,7 +39,7 @@ export class Row extends Component {
     handleDown(e) {
         let newId = this.state.rowId;
         
-        newId++;
+        newId--;
 
         this.setState({rowId: newId})
     }
