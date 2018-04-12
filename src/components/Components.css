@@ -10,13 +10,10 @@ h3 span {
     font-weight: 300;
 }
 
-input, .Test-case-header, .Test-case, .Comment, .Tag {
-    width: 80%;
+input {
+    width: 90%;
     min-width: 500px;
     margin: auto;
-}
-
-input {
     display: block;
     border: 2px solid #233232;
     border-radius: 4px;
@@ -27,12 +24,6 @@ input:focus {
     border: 2px solid #009EC1;
 }
 
-.Test-case-header, .Test-case, .Comment, .Tag {
-    min-width: 500px;
-    width: 80%;
-    line-height: 24px;
-}
-
 .Test-case-header {
     font-size: 1.2rem;
     font-weight: bold;
@@ -41,16 +32,20 @@ input:focus {
 }
 
 .Test-case {
-    width: 75%;
-    min-width: 420px;
+    font-size: 1.2rem;
+    margin-left: 56px;
     text-align: left;
 }
 
 .Comment {
+    font-size: 1.2rem;
     color: grey;
-    width: 65%;
-    min-width: 360px;
+    margin-left: 56px;
     text-align: left;
+}
+
+input .Test-case-header, input .Test-case, input .Comment {
+    margin: auto;
 }
 
 .Tag {

@@ -1,0 +1,38 @@
+.Row {
+    display: grid;
+    width: 90%;
+    margin: auto;
+    grid-template: 28px / 28px 28px auto;
+}
+
+.Row-id {
+    line-height: 28px;
+    text-align: right;
+}
+
+.Arrows {
+    display: grid;
+}
+
+.Up {
+    display: block;
+    width: 4px;
+    height: 4px;
+    border: solid black;
+    border-width: 0 2px 2px 0;
+    margin: auto;
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+}
+
+.Down {
+    display: block;
+    width: 4px;
+    height: 4px;
+    border: solid black;
+    border-width: 0 2px 2px 0;
+    margin: auto;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    align-self: center;
+}

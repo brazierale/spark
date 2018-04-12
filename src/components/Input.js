@@ -6,7 +6,7 @@ export class Input extends Component {
         super(props);
         this.state = {
             userInput: '',
-            entryType: 'Test-case=header',
+            entryType: 'Test-case-header',
             currentDepth: 0,
             lastTestCase: 1,
         };
