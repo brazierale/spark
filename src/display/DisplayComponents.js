@@ -15,6 +15,7 @@ export class DisplayComponents extends Component {
         };
 
         this.addComponent = this.addComponent.bind(this);
+        this.swapRows = this.swapRows.bind(this);
     }
     render() {
         return (
@@ -32,28 +33,28 @@ export class DisplayComponents extends Component {
 
         if (type === 'Test-case-header') {
             row = (
-                <Row rowId={id}>
+                <Row rowid={id} swapRows={this.swapRows}>
                     <TestCaseHeader text={text} depth={depth}/>
                 </Row>
             );
         }
         else if (type === 'Test-case') {
             row = (
-                <Row rowId={id}>
+                <Row rowid={id} swapRows={this.swapRows}>
                     <TestCase text={text} depth={depth}/>
                 </Row>
             );
         }
         else if (type === 'Comment') {
             row = (
-                <Row rowId={id}>
+                <Row rowid={id} swapRows={this.swapRows}>
                     <Comment text={text} depth={depth}/>
                 </Row>
             );
         }
         else if (type === 'Tag') {
             row = (
-                <Row rowId={id}>
+                <Row rowid={id} swapRows={this.swapRows}>
                     <Tag text={text} depth={testCase}/>
                 </Row>
             );
@@ -64,6 +65,7 @@ export class DisplayComponents extends Component {
     }
 
     swapRows(rowId, direction) {
+        console.log('Im here')
         let x = this.state.rows[rowId];
 
         if (direction === 'up') {

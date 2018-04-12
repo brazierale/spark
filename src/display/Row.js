@@ -13,7 +13,7 @@ export class Row extends Component {
 
     render() {
         return (
-            <div className="Row" rowId={this.props.rowId}>
+            <div className="Row" rowid={this.props.rowId}>
                 <div className="Row-id">
                     {this.state.rowId}
                 </div>
@@ -29,19 +29,11 @@ export class Row extends Component {
     }
 
     handleUp(e) {
-        let newId = this.state.rowId;
-        if (newId > 0) {
-            newId--;
-        }
-        this.setState({rowId: newId})
+        this.props.swapRows(this.rowId, 'up');
     }
 
     handleDown(e) {
-        let newId = this.state.rowId;
-        
-        newId++;
-
-        this.setState({rowId: newId})
+        this.props.swapRows(this.rowId, 'down');
     }
 }
 
