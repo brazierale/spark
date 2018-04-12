@@ -64,18 +64,25 @@ export class DisplayComponents extends Component {
         this.setState({ rows: newArray });
     }
 
-    swapRows(rowId, direction) {
-        console.log('Im here')
-        let x = this.state.rows[rowId];
+    swapRows(oldId, direction) {
+        // ***WIP***
+        // this swaps the rows based on their ID. However, it needs to update the id of the row too (or track it in a different way) for this to work properly
+        var newArray = this.state.rows.slice();
+        let newId = oldId;
 
-        if (direction === 'up') {
-            rowId--
+        if (oldId > 0 || direction === 'up') {
+            newId--
         }
-        else if (direction === 'down') {
-            rowId++
+        else if (oldId < this.state.rows.length || direction === 'down') {
+            newId++
         }
-        
-        let y = this.state.rows[rowId];
 
+        let rowToMove = this.state.rows[oldId];
+        let rowToSwapWith = this.state.rows[newId];
+
+        newArray[newId] = rowToMove;
+        newArray[oldId] = rowToSwapWith;
+
+        this.setState({ rows: newArray });
     }
 }

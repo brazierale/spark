@@ -4,7 +4,7 @@ export class Row extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            rowId: props.rowId,
+            rowId: props.rowid,
         };
 
         this.handleUp = this.handleUp.bind(this);
@@ -29,11 +29,11 @@ export class Row extends Component {
     }
 
     handleUp(e) {
-        this.props.swapRows(this.rowId, 'up');
+        this.props.swapRows(this.props.rowid, 'up');
     }
 
     handleDown(e) {
-        this.props.swapRows(this.rowId, 'down');
+        this.props.swapRows(this.props.rowid, 'down');
     }
 }
 
