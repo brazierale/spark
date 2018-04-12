@@ -33,28 +33,28 @@ export class DisplayComponents extends Component {
 
         if (type === 'Test-case-header') {
             row = (
-                <Row rowid={id} swapRows={this.swapRows}>
+                <Row key={id} swapRows={this.swapRows}>
                     <TestCaseHeader text={text} depth={depth}/>
                 </Row>
             );
         }
         else if (type === 'Test-case') {
             row = (
-                <Row rowid={id} swapRows={this.swapRows}>
+                <Row key={id} swapRows={this.swapRows}>
                     <TestCase text={text} depth={depth}/>
                 </Row>
             );
         }
         else if (type === 'Comment') {
             row = (
-                <Row rowid={id} swapRows={this.swapRows}>
+                <Row key={id} swapRows={this.swapRows}>
                     <Comment text={text} depth={depth}/>
                 </Row>
             );
         }
         else if (type === 'Tag') {
             row = (
-                <Row rowid={id} swapRows={this.swapRows}>
+                <Row key={id} swapRows={this.swapRows}>
                     <Tag text={text} depth={testCase}/>
                 </Row>
             );
@@ -67,7 +67,8 @@ export class DisplayComponents extends Component {
     swapRows(oldId, direction) {
         // ***WIP***
         // this swaps the rows based on their ID. However, it needs to update the id of the row too (or track it in a different way) for this to work properly
-        var newArray = this.state.rows.slice();
+        let newArray = this.state.rows.slice();
+        let numbers = [];
         let newId = oldId;
 
         if (oldId > 0 || direction === 'up') {
@@ -82,6 +83,10 @@ export class DisplayComponents extends Component {
 
         newArray[newId] = rowToMove;
         newArray[oldId] = rowToSwapWith;
+
+        for (let i = 0; i < newArray.length; i++) {
+            numbers.push(i);
+        }
 
         this.setState({ rows: newArray });
     }
