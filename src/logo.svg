@@ -1,13 +1,1 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg width="100%" height="100%" viewBox="0 0 200 200" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
-    <g transform="matrix(0.9,0,0,0.9,10,10)">
-        <path d="M200,100C200,44.808 155.192,0 100,0C44.808,0 0,44.808 0,100C0,155.192 44.808,200 100,200C155.192,200 200,155.192 200,100Z" style="fill:rgb(35,50,50);stroke:rgb(59,71,71);stroke-width:1.11px;"/>
-    </g>
-    <g transform="matrix(1.20085,0,0,1.20085,-20.0852,-24.5267)">
-        <path d="M143.995,164.363C131.636,173.346 116.432,178.645 100,178.645C83.568,178.645 68.364,173.346 56.005,164.363L100,132.399L143.995,164.363ZM72.755,112.604L55.95,164.323C37.23,150.692 25.053,128.606 25.053,103.699C25.053,95.636 26.329,87.869 28.69,80.589L72.755,112.604ZM171.31,80.589C173.671,87.869 174.947,95.636 174.947,103.699C174.947,128.606 162.77,150.692 144.05,164.323L127.245,112.604L171.31,80.589ZM100,28.752L83.161,80.576L28.694,80.576C38.449,50.512 66.703,28.752 100,28.752ZM100,28.752C133.297,28.752 161.551,50.512 171.306,80.576L116.839,80.576L100,28.752Z" style="fill:rgb(0,158,193);stroke:rgb(0,158,193);stroke-width:6.66px;"/>
-        <g transform="matrix(2.0309,0,0,2.0309,-78.4867,-70.6114)">
-            <circle cx="87.885" cy="85.829" r="34.853" style="fill:none;stroke:white;stroke-width:2.05px;"/>
-        </g>
-    </g>
-</svg>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg width="100%" height="100%" viewBox="0 0 200 200" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;"><rect id="Transparent" x="0" y="0" width="200" height="200" style="fill:none;"/><clipPath id="_clip1"><rect x="0" y="0" width="200" height="200"/></clipPath><g clip-path="url(#_clip1)"><circle cx="100" cy="100" r="100" style="fill:#fff;"/><path d="M127.978,32.019c26.683,11.013 45.481,37.296 45.481,67.935c0,40.544 -32.916,73.46 -73.459,73.46c-6.1,0 -29.968,22.01 -29.968,22.01l71.96,-116.783l-41.992,8.679l27.978,-55.301Z" style="fill:#06b8e0;"/><path d="M72.666,168.152c-27.024,-10.854 -46.125,-37.313 -46.125,-68.198c0,-40.543 32.916,-73.459 73.459,-73.459c2.336,0 34.664,-20.19 35.487,-20.005l-78.776,103.75l39.995,-7.416l-24.04,65.328Z" style="fill:#3b4747;"/></g></svg>

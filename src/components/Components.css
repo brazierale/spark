@@ -1,4 +1,7 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
 * {
+    font-family: Nunito;
     font-size: 1rem;
 }
 
@@ -21,7 +24,7 @@ input {
 }
 
 input:focus {
-    border: 2px solid #009EC1;
+    border: 2px solid #06B8E0;
 }
 
 .Test-case-header {

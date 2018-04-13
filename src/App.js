@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { DisplayComponents } from './display/DisplayComponents';
-import logo from './logo.svg';
+import logo from './header.svg';
 import './App.css';
 
 class App extends Component {
@@ -17,9 +17,9 @@ class App extends Component {
 function Header(props) {
   return (
     <div className="App">
+        <div className="Blue-strip" />
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">This is the Spark</h1>
         </header>
         <p className="App-intro">
           To get started, enter your first test case below
