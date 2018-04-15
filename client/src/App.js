@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { DisplayComponents } from './display/DisplayComponents';
+import { TestCaseList } from './testing/TestCaseList';
 import { ExpressTest } from './testing/ExpressTest';
 import logo from './header.svg';
 import './App.css';
@@ -9,6 +10,7 @@ class App extends Component {
     return (
       <div>
         <Header />
+        <TestCaseList />
         <ExpressTest />
         <DisplayComponents />
       </div>

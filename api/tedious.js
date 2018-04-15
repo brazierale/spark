@@ -22,8 +22,8 @@ connection.on('connect', function(err) {
     }
 });
 
-function executeStatement() {
-    request = new Request("select 123, 'hello world'", function(err, rowCount) {
+function executeStatement(sql) {
+    request = new Request(sql, function(err, rowCount) {
         if (err) {
             console.log(err);
         } else {
