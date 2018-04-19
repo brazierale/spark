@@ -1,9 +1,20 @@
 const express = require('express')
 const app = express()
+const executeSql = require('./tedious')
 
-app.get('/api/getTestCases', (req, res) =>  {
+app.get('/api/test', (req, res) =>  {
     res.send({ express: 'Hello World!' });
 });
+
+app.get('/api/getTestCases', (req, res) =>  {
+    let sql = 'SELECT * FROM spark.spark.TestCase' 
+
+    testCases = executeSql(sql);
+    console.log('Returned test cases: ' + testCases);
+
+    res.send({ express: testCases });
+});
+
 
 app.listen(5000, () => console.log('Example app listening on port 5000!'));
 

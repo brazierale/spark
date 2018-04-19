@@ -12,34 +12,36 @@ var config = {
     }
 }
 
+
 var connection = new Connection(config);
+
+var sql = 'SELECT * FROM spark.spark.TestCase' 
+
 connection.on('connect', function(err) {
     if (err) {
-        console.log('error')
         console.log(err);
     } else {
-        
+        executeStatement(sql);
     }
 });
 
 function executeStatement(sql) {
-    let result = [];
+    console.log('SQL going in ' + sql)
     request = new Request(sql, function(err, rowCount) {
         if (err) {
             console.log(err);
+        } else {
+            console.log(rowCount + ' rows');
         }
-        console.log('Closing connction');
         connection.close();
-        return result;
     });
 
     request.on('row', function(columns) {
         columns.forEach(function(column) {
             if (column.value === null) {
-                result.push('NULL');
+                console.log('NULL');
             } else {
-                result.push(column.value);
-                console.log(result);
+                console.log(column.value);
             }
         });
     });
