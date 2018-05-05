@@ -22,7 +22,7 @@ connection.on('connect', function(err) {
     }
 });
 
-function executeStatement(sql) {
+function executeStatement(sql, callback) {
     let result = [];
     request = new Request(sql, function(err, rowCount) {
         if (err) {
@@ -30,7 +30,7 @@ function executeStatement(sql) {
         }
         console.log('Closing connction');
         connection.close();
-        return result;
+        callback(result);
     });
 
     request.on('row', function(columns) {
