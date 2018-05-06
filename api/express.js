@@ -7,11 +7,10 @@ app.get('/api/test', (req, res) =>  {
 });
 
 app.get('/api/getTestCases', (req, res) =>  {
-    let sql = 'SELECT * FROM spark.spark.TestCase' 
+    let sql = 'SELECT * FROM spark.spark.TestCase FOR JSON AUTO' 
 
     executeSql(sql, function(result) {
         console.log('Returned test cases: ' + result);
-
         res.send({ express: result });
     });
 });

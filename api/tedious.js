@@ -34,14 +34,7 @@ function executeStatement(sql, callback) {
     });
 
     request.on('row', function(columns) {
-        columns.forEach(function(column) {
-            if (column.value === null) {
-                result.push('NULL');
-            } else {
-                result.push(column.value);
-                console.log(result);
-            }
-        });
+        result.push(columns[0].value);
     });
 
     connection.execSql(request);
