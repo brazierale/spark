@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import { DisplayComponents } from './display/DisplayComponents';
 import { TestCaseList } from './testing/TestCaseList';
 import { ExpressTest } from './testing/ExpressTest';
-import logo from './header.svg';
+import logo from './small-header.svg';
 import './App.css';
 
 class App extends Component {
   render() {
     return (
-      <div>
+      <div className="App">
         <Header />
         <TestCaseList />
         
@@ -20,8 +20,7 @@ class App extends Component {
 
 function Header(props) {
   return (
-    <div className="App">
-        <div className="Blue-strip" />
+    <div className="Header">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
         </header>
