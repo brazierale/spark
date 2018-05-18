@@ -10,10 +10,11 @@
 .App-header {
   display: grid;
   grid-template-columns: 50px auto;
-  background-color: #002D37;
+  background: #005B70;
   height: 40px;
   padding: 5px 20px;
   color: white;
+  box-shadow: 0px 2px 5px grey;
 }
 
 .App-title {
