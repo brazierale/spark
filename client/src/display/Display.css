@@ -2,11 +2,17 @@
     display: grid;
     width: 90%;
     margin: auto;
-    grid-template: 28px / 28px 28px auto;
+    margin-top: -1px;
+    padding: 0px 22px;
+    grid-template: 22px / 22px 22px auto;
+    background: white;
+    border: 1px solid #CCCCCC;
+    border-radius: 4px;
+    box-sizing: border-box;
 }
 
 .Row-id {
-    line-height: 28px;
+    line-height: 22px;
     text-align: right;
 }
 

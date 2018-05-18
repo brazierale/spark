@@ -23,7 +23,7 @@ export class Row extends Component {
                     <span className="Down arrow" onClick={this.handleDown} />
                     <div />
                 </div>
-                <div className="Test-case">{this.props.children}</div>
+                <div className="Test-case-container">{this.props.children}</div>
             </div>
         )
     }
