@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Row } from '../display/Row';
 import './Components.css';
 
 export class Input extends Component {
@@ -6,7 +7,7 @@ export class Input extends Component {
         super(props);
         this.state = {
             userInput: '',
-            entryType: 'Test-case-header',
+            entryType: 'Empty',
             currentDepth: 0,
             lastTestCase: 1,
         };
@@ -18,15 +19,16 @@ export class Input extends Component {
         return (
             <div>
                 <div>
-                    <div className="input-row">
+                    <Row>
                         <input 
                             type="text"
+                            placeholder="Enter your test case here..."
                             className={this.state.entryType}
                             value={this.state.userInput}
                             onChange={this.handleUserInput}
                             onKeyPress={this.handleKeyPress}
                         />
-                    </div>
+                    </Row>
                     <h3>User input: <span>{this.state.userInput}</span></h3>
                     <h3>Current entry type: <span>{this.state.entryType}</span></h3>
                     <h3>Current depth: <span>{this.state.currentDepth}</span></h3>
@@ -42,7 +44,10 @@ export class Input extends Component {
         let t = 'Test-case-header';
         let firstChar = v.charAt(0);
 
-        if ( firstChar === '/' && v.charAt(1) === '/' ) {
+        if ( !firstChar ) {
+            t = 'Empty';
+        }
+        else if ( firstChar === '/' && v.charAt(1) === '/' ) {
             t = 'Comment';
         }
         else if ( firstChar === '#') {
