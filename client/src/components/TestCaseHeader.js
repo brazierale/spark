@@ -2,8 +2,10 @@ import React from 'react';
 
 export function TestCaseHeader(props) {
     return (
-        <div className="Test-case-header" depth={props.depth}>
-            {props.text}
-        </div>
+        <input className="Test-case-header"
+            type="text"
+            value={props.text}
+            depth={props.depth}
+        />
     )
 }

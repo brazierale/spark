@@ -14,16 +14,16 @@ export class Row extends Component {
     render() {
         return (
             <div className="Row" rowid={this.props.rowId}>
-                <div className="Row-id">
-                    {this.state.rowId}
-                </div>
+                <div className="Test-case-container">{this.props.children}</div>
                 <div className="Arrows">
                     <div />
                     <span className="Up arrow" onClick={this.handleUp} />
                     <span className="Down arrow" onClick={this.handleDown} />
                     <div />
+                    <div className="Row-id">
+                    {this.state.rowId}
                 </div>
-                <div className="Test-case-container">{this.props.children}</div>
+                </div>
             </div>
         )
     }

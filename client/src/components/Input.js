@@ -16,15 +16,17 @@ export class Input extends Component {
     }
     render() { 
         return (
-            <div className="Input-row">
+            <div>
                 <div>
-                    <input 
-                        type="text"
-                        className={this.state.entryType}
-                        value={this.state.userInput}
-                        onChange={this.handleUserInput}
-                        onKeyPress={this.handleKeyPress}
-                    />
+                    <div className="input-row">
+                        <input 
+                            type="text"
+                            className={this.state.entryType}
+                            value={this.state.userInput}
+                            onChange={this.handleUserInput}
+                            onKeyPress={this.handleKeyPress}
+                        />
+                    </div>
                     <h3>User input: <span>{this.state.userInput}</span></h3>
                     <h3>Current entry type: <span>{this.state.entryType}</span></h3>
                     <h3>Current depth: <span>{this.state.currentDepth}</span></h3>

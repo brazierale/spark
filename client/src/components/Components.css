@@ -13,18 +13,47 @@ h3 span {
     font-weight: 300;
 }
 
-input {
-    width: 90%;
+.input-row {
+    width: 100%;
     min-width: 500px;
     margin: auto;
+    margin-top: 1px;
     display: block;
-    border: 2px solid #233232;
     border-radius: 4px;
+    height: 22px;
+    background: white;
+    box-sizing: border-box;
+}
+
+.Row {
+    width: 100%;
+    display: grid;
+    margin: auto;
+    margin-top: 1px;
+
+}
+
+input {
+    margin-left: 4px;
+    width: 100%;
+    border: none;
     line-height: 22px;
+    padding: 0px;
+    padding-left: 20px;
+    box-sizing: border-box;
+}
+
+input:hover {
+    box-shadow: -4px 0px 0px rgba(75, 109, 233, 0.4);
 }
 
 input:focus {
-    border: 2px solid #06B8E0;
+    box-shadow: -4px 0px 0px #4B6DE9;
+    outline: none;
+}
+
+input .Test-case-header, input .Test-case, input .Comment {
+    margin: auto;
 }
 
 .Test-case-header, .Test-case, .Comment, .Tag {
@@ -34,25 +63,22 @@ input:focus {
 }
 
 .Test-case-header {
+    padding-left: 20px;
     font-weight: bold;
 }
 
 .Test-case {
-    margin-left: 20px;
-    text-align: left;
+    padding-left: 40px;
 }
 
 .Comment {
+    padding-left: 40px;
     color: grey;
-    margin-left: 20px;
 }
 
 .Tag {
+    padding-right: 40px;
     text-transform: uppercase;
     text-align: right;
-}
-
-input .Test-case-header, input .Test-case, input .Comment {
-    margin: auto;
 }
 

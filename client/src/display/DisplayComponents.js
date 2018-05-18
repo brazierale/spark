@@ -19,7 +19,7 @@ export class DisplayComponents extends Component {
     }
     render() {
         return (
-            <div>
+            <div className="Test-cases">
                 {this.state.rows}
                 <Input addComponent={this.addComponent}/>
             </div>

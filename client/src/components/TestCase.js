@@ -2,8 +2,10 @@ import React from 'react';
 
 export function TestCase(props) {
     return (
-        <div className="Test-case" depth={props.depth}>
-            {props.text}
-        </div>
+        <input className="Test-case"
+            type="text"
+            value={props.text}
+            depth={props.depth}
+        />
     )
 }

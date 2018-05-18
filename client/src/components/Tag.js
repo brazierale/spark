@@ -2,8 +2,10 @@ import React from 'react';
 
 export function Tag(props) {
     return (
-        <div className="Tag" testCase={props.testCaseId}>
-            {props.text}
-        </div>
+        <input className="Tag"
+            type="text"
+            value={props.text}
+            testCase={props.testCaseId}
+        />
     )
 }
