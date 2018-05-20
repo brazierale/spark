@@ -20,7 +20,7 @@ export class Row extends Component {
                     <span className="Up arrow" onClick={this.handleUp} />
                     <span className="Down arrow" onClick={this.handleDown} />
                     <div />
-                    <div className="Row-id">
+                <div className="Row-id">
                     {this.state.rowId}
                 </div>
                 </div>
@@ -29,11 +29,11 @@ export class Row extends Component {
     }
 
     handleUp(e) {
-        this.props.swapRows(this.props.rowid, 'up');
+        console.log('move row up');
     }
 
     handleDown(e) {
-        this.props.swapRows(this.props.rowid, 'down');
+        console.log('move row down');
     }
 }
 

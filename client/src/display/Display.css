@@ -46,3 +46,51 @@
     -webkit-transform: rotate(45deg);
     align-self: center;
 }
+
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+* {
+    font-family: Nunito;
+    font-size: 1rem;
+}
+
+.Row {
+    width: 100%;
+    display: grid;
+    margin: auto;
+    margin-top: 1px;
+}
+
+input {
+    margin-left: 4px;
+    width: 100%;
+    border: none;
+    line-height: 22px;
+    padding: 0px;
+    padding-left: 20px;
+    box-sizing: border-box;
+    font-size: 1rem;
+    line-height: 22px;
+    text-align: left;
+}
+
+input::placeholder {
+    color: #CCCCCC;
+    font-style: italic;
+}
+
+input:hover {
+    box-shadow: -4px 0px 0px #4B6DE9;
+}
+
+input:focus {
+    height:22px;
+    outline: none;
+    box-sizing: border-box;
+    box-shadow: -4px 0px 0px #071F79;
+    border-right: solid 1px #071F79;
+    border-top: solid 1px #071F79;
+    border-bottom: solid 1px #071F79;
+    background-color: #F6F7FE;
+}
+

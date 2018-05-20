@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { TestCase } from './TestCase';
+import { Row } from './Row';
 
 export class TestCaseList extends Component {
     constructor(props) {
@@ -9,12 +11,12 @@ export class TestCaseList extends Component {
         testCases: [],
     };
 
-        this.processData = this.processData.bind(this);
+        this.processResponse = this.processResponse.bind(this);
     }
 
     componentDidMount() {
         this.callApi ()
-        .then(res => this.processData(res.express))
+        .then(res => this.processResponse(res.express))
         .catch(err => console.log(err));
     }
 
@@ -30,17 +32,24 @@ export class TestCaseList extends Component {
     render() {
         console.log('current state: ' + this.state.testCases);
         return(
-            <div>{this.state.testCases}</div>
+            <div className="Test-cases">
+                <div>{this.state.testCases}</div>
+            </div>
         );
     }
 
-    processData(response) {
-        console.log('response to process: ' + response);
-        response = JSON.parse(response);
-        response.forEach( row => {
+    processResponse(response) {
+        var res = JSON.parse(response);
+
+        res.forEach( row => {
             var newArray = this.state.testCases.slice();
-            console.log('row: ' + row);
-            newArray.push(<div>Id: {row.Id}, Text: {row.Summary}</div>);
+            var newRow = (
+                <Row key={row.Id}>
+                    <TestCase summary={row.Summary}/>
+                </Row>
+            );
+
+            newArray.push(newRow);
             this.setState({ testCases: newArray });
         });
     }

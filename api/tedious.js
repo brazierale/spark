@@ -14,7 +14,8 @@ var config = {
 // I'm pretty sure this needs to be split out into multiple functions
 function executeStatement(sql, callback) {
     var connection = new Connection(config);
-    console.log('CONNECTING...')
+    console.log('Connecting to database...')
+
     connection.on('connect', function(err) {
         if (err) {
             console.log('error')
@@ -24,18 +25,19 @@ function executeStatement(sql, callback) {
             request = new Request(sql, function(err, rowCount) {
                 if (err) {
                 console.log(err);
-            }
-            console.log('Closing connction');
-            connection.close();
-            callback(result);
-        });
+                }
+            
+                connection.close();
+                console.log('Connection closed');
+                callback(result);
+            });
 
-        request.on('row', function(columns) {
-            result.push(columns[0].value);
-        });
+            request.on('row', function(columns) {
+                result.push(columns[0].value);
+            });
 
-        connection.execSql(request);
-            }
+            connection.execSql(request);
+        }
     });
     
 }

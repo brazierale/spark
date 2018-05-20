@@ -4,8 +4,7 @@ export function TestCase(props) {
     return (
         <input className="Test-case"
             type="text"
-            value={props.text}
-            depth={props.depth}
+            value={props.summary}
         />
     )
 }
