@@ -11,34 +11,33 @@ var config = {
         instanceName: 'SQLEXPRESS'
     }
 }
-
-var connection = new Connection(config);
-console.log('CONNECTING...');
-connection.on('connect', function(err) {
-    if (err) {
-        console.log('error')
-        console.log(err);
-    } else {
-        
-    }
-});
-
+// I'm pretty sure this needs to be split out into multiple functions
 function executeStatement(sql, callback) {
-    let result = [];
-    request = new Request(sql, function(err, rowCount) {
+    var connection = new Connection(config);
+    console.log('CONNECTING...')
+    connection.on('connect', function(err) {
         if (err) {
+            console.log('error')
             console.log(err);
-        }
-        console.log('Closing connction');
-        connection.close();
-        callback(result);
-    });
+        } else {
+            let result = [];
+            request = new Request(sql, function(err, rowCount) {
+                if (err) {
+                console.log(err);
+            }
+            console.log('Closing connction');
+            connection.close();
+            callback(result);
+        });
 
-    request.on('row', function(columns) {
-        result.push(columns[0].value);
-    });
+        request.on('row', function(columns) {
+            result.push(columns[0].value);
+        });
 
-    connection.execSql(request);
+        connection.execSql(request);
+            }
+    });
+    
 }
 
 module.exports = executeStatement;
