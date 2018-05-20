@@ -11,6 +11,8 @@
     grid-template: 22px / auto 22px 22px;
     background: white;
     box-sizing: border-box;
+    box-shadow: 2px 2px 5px #CCCCCC;
+    border-radius: 2px;
 }
 
 .Row-id {

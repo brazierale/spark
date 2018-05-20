@@ -37,12 +37,18 @@ input::placeholder {
 }
 
 input:hover {
-    box-shadow: -4px 0px 0px rgba(75, 109, 233, 0.4);
+    box-shadow: -4px 0px 0px #4B6DE9;
 }
 
 input:focus {
-    box-shadow: -4px 0px 0px #4B6DE9;
+    height:22px;
     outline: none;
+    box-sizing: border-box;
+    box-shadow: -4px 0px 0px #071F79;
+    border-right: solid 1px #071F79;
+    border-top: solid 1px #071F79;
+    border-bottom: solid 1px #071F79;
+    background-color: #F6F7FE;
 }
 
 input .Test-case-header, input .Test-case, input .Comment {
@@ -57,7 +63,7 @@ input .Test-case-header, input .Test-case, input .Comment {
 
 .Test-case-header {
     padding-left: 20px;
-    font-weight: bold;
+    font-family: Nunito semibold;
 }
 
 .Test-case {
