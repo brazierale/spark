@@ -19,7 +19,7 @@ export class TestCaseList extends Component {
     }
 
     callApi = async () => {
-        const response = await fetch('/api/getTestCases');
+        const response = await fetch('/api/testCases/1');
         const body = await response.json();
         
         if (response.status !== 200) throw Error(body.message);

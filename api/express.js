@@ -2,16 +2,33 @@ const express = require('express')
 const app = express()
 const executeSql = require('./tedious')
 
-app.get('/api/test', (req, res) =>  {
-    res.send({ express: 'Hello World!' });
-});
+const testCase = 'spark.spark.TestCase';
 
-app.get('/api/getTestCases', (req, res) =>  {
-    let sql = 'SELECT * FROM spark.spark.TestCase FOR JSON AUTO' 
+app.get('/api/testCases', (req, res) =>  {
+    let sql = `SELECT * FROM ${testCase} FOR JSON AUTO`;
 
     executeSql(sql, function(result) {
         console.log('Returned test cases: ' + result);
         res.send({ express: result });
+    });
+});
+
+app.get('/api/testCases/:id', (req, res) => {
+    let sql = `SELECT * FROM ${testCase} WHERE ID = ${req.params.id} FOR JSON AUTO`;
+
+    executeSql(sql, function(result) {
+        console.log('Returned test case: ' + result);
+        res.send({ express: result });
+    });
+})
+
+app.post('api/testCases', (req, res) => {
+    let summary = res.params.summary;
+    let sql = `INSERT INTO ${testCase} VALUES ('${res.params.summary}')`;
+
+    executeSql(sql, function(result) {
+        console.log('Added test case: ' + result);
+        res.send();
     });
 });
 

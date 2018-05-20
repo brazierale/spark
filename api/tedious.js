@@ -13,6 +13,7 @@ var config = {
 }
 
 var connection = new Connection(config);
+console.log('CONNECTING...');
 connection.on('connect', function(err) {
     if (err) {
         console.log('error')
