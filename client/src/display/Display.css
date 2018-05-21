@@ -53,13 +53,6 @@
     font-size: 1rem;
 }
 
-.Row {
-    width: 100%;
-    display: grid;
-    margin: auto;
-    margin-top: 1px;
-}
-
 input {
     margin-left: 4px;
     width: 100%;
@@ -71,6 +64,7 @@ input {
     font-size: 1rem;
     line-height: 22px;
     text-align: left;
+    border-radius: 0px 2px 2px 0px;
 }
 
 input::placeholder {
@@ -86,10 +80,9 @@ input:focus {
     height:22px;
     outline: none;
     box-sizing: border-box;
-    box-shadow: -4px 0px 0px #071F79;
-    border-right: solid 1px #071F79;
-    border-top: solid 1px #071F79;
-    border-bottom: solid 1px #071F79;
+    box-shadow: -4px 0px 0px #071F79, 2px 2px 5px #cccccc;
     background-color: #F6F7FE;
+    position: relative;
+    z-index: 1;
 }
 
