@@ -1,8 +1,12 @@
 const express = require('express')
+const bodyParser = require('body-parser');
 const app = express()
 const executeSql = require('./tedious')
 
 const testCase = 'spark.spark.TestCase';
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/api/testCases', (req, res) =>  {
     let sql = `SELECT * FROM ${testCase} FOR JSON AUTO`;
@@ -22,12 +26,12 @@ app.get('/api/testCases/:id', (req, res) => {
     });
 })
 
-app.post('api/testCases', (req, res) => {
-    let summary = res.params.summary;
-    let sql = `INSERT INTO ${testCase} VALUES ('${res.params.summary}')`;
+app.post('/api/testCases', (req, res) => {
+    let summary = req.body.summary;
+    let sql = `INSERT INTO ${testCase} VALUES ('${summary}')`;
 
     executeSql(sql, function(result) {
-        console.log('Added test case: ' + result);
+        console.log('Added test case: ' + summary);
         res.send();
     });
 });
