@@ -23,9 +23,6 @@ function Header(props) {
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
         </header>
-        <p className="App-intro">
-          To get started, enter your first test case below
-        </p>
       </div>
   );
 }
