@@ -31,5 +31,7 @@ export class DeleteRow extends Component {
             )
 
         })();
+        // should only do this only if the row is actually deleted
+        this.props.rebuildList();
     }
 }

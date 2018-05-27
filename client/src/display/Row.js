@@ -16,7 +16,7 @@ export class Row extends Component {
         return (
             <div className="Row" rowid={this.state.rowId}>
                 <div className="Test-case-container">{this.props.children}</div>
-                <DeleteRow rowid={this.state.rowId}/>
+                <DeleteRow rowid={this.state.rowId} rebuildList={this.props.rebuildList}/>
                 <div className="Arrows">
                     <div />
                     <span className="Up arrow" onClick={this.handleUp} />

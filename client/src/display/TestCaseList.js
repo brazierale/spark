@@ -12,9 +12,14 @@ export class TestCaseList extends Component {
     };
 
         this.processResponse = this.processResponse.bind(this);
+        this.rebuildList = this.rebuildList.bind(this);
     }
 
     componentDidMount() {
+        this.rebuildList();
+    }
+
+    rebuildList() {
         this.callApi ()
         .then(res => this.processResponse(res.express))
         .catch(err => console.log(err));
@@ -40,11 +45,12 @@ export class TestCaseList extends Component {
     processResponse(response) {
         var res = JSON.parse(response);
         var key = 0;
+        this.setState({ testCases: [] });
 
         res.forEach( row => {
             var newArray = this.state.testCases.slice();
             var newRow = (
-                <Row key={key} id={row.Id}>
+                <Row key={key} id={row.Id} rebuildList={this.rebuildList}>
                     <TestCase summary={row.Summary}/>
                 </Row>
             );
