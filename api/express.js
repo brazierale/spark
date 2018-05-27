@@ -12,6 +12,7 @@ app.get('/api/testCases', (req, res) =>  {
     let sql = `SELECT * FROM ${testCase} FOR JSON AUTO`;
 
     executeSql(sql, function(result) {
+        // should only log this when any actual result is returned
         console.log('Returned test cases: ' + result);
         res.send({ express: result });
     });
@@ -21,17 +22,29 @@ app.get('/api/testCases/:id', (req, res) => {
     let sql = `SELECT * FROM ${testCase} WHERE ID = ${req.params.id} FOR JSON AUTO`;
 
     executeSql(sql, function(result) {
+        // should only log this when any actual result is returned
         console.log('Returned test case: ' + result);
         res.send({ express: result });
     });
-})
+});
 
 app.post('/api/testCases', (req, res) => {
     let summary = req.body.summary;
     let sql = `INSERT INTO ${testCase} VALUES ('${summary}')`;
 
     executeSql(sql, function(result) {
+        // need to only return the message when successfully added
         console.log('Added test case: ' + summary);
+        res.send();
+    });
+});
+
+app.delete('/api/testCases/:id', (req, res) => {
+    let sql = `DELETE FROM ${testCase} WHERE ID = ${req.params.id}`;
+
+    executeSql(sql, function(result) {
+        // need to only return the message when successfully deleted
+        console.log('Deleted test case: ' + req.params.id);
         res.send();
     });
 });

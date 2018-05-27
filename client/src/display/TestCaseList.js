@@ -39,16 +39,18 @@ export class TestCaseList extends Component {
 
     processResponse(response) {
         var res = JSON.parse(response);
+        var key = 0;
 
         res.forEach( row => {
             var newArray = this.state.testCases.slice();
             var newRow = (
-                <Row id={row.Id}>
+                <Row key={key} id={row.Id}>
                     <TestCase summary={row.Summary}/>
                 </Row>
             );
 
             newArray.push(newRow);
+            key++;
             this.setState({ testCases: newArray });
         });
     }
