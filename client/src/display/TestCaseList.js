@@ -52,7 +52,7 @@ export class TestCaseList extends Component {
         res.forEach( row => {
             var newArray = this.state.testCases.slice();
             var newRow = (
-                <Row key={key} id={row.Id} rebuildList={this.rebuildList}>
+                <Row key={key} testCaseId={row.Id} rebuildList={this.rebuildList}>
                     <TestCase testCaseId={row.Id} summary={row.Summary} rebuildList={this.rebuildList}/>
                 </Row>
             );

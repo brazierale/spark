@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { DeleteRow } from  './DeleteRow';
+import { DeleteTestCase } from  './DeleteTestCase';
 
 export class Row extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            rowId: props.id,
+            testCaseId: props.testCaseId,
         };
 
         this.handleUp = this.handleUp.bind(this);
@@ -14,9 +14,9 @@ export class Row extends Component {
 
     render() {
         return (
-            <div className="Row" rowid={this.state.rowId}>
+            <div className="Row">
                 <div className="Test-case-container">{this.props.children}</div>
-                <DeleteRow rowid={this.state.rowId} rebuildList={this.props.rebuildList}/>
+                <DeleteTestCase testCaseId={this.state.testCaseId} rebuildList={this.props.rebuildList}/>
                 <div className="Arrows">
                     <div />
                     <span className="Up arrow" onClick={this.handleUp} />
@@ -24,7 +24,7 @@ export class Row extends Component {
                     <div />
                 </div>
                 <div className="Row-id">
-                    {this.state.rowId}
+                    {this.state.testCaseId}
                 </div>
             </div>
         )

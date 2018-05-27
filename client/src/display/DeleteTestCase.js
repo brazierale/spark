@@ -1,27 +1,27 @@
 import React, { Component } from 'react';
 
-export class DeleteRow extends Component {
+export class DeleteTestCase extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            id: props.rowid,
+            id: props.testCaseId,
         }
         
-        this.deleteRow = this.deleteRow.bind(this);
+        this.deleteTestCase = this.deleteTestCase.bind(this);
     }
 
     render() {
         return (
             <div className="Delete-row"
                 type="text"
-                onClick={this.deleteRow}
+                onClick={this.deleteTestCase}
             >
             x
             </div>
         );
     }
 
-    deleteRow() {
+    deleteTestCase() {
         console.log(`Trying to delete row ${this.state.id}`);
 
         (async () => {
