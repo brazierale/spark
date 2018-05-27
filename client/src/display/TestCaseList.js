@@ -53,7 +53,7 @@ export class TestCaseList extends Component {
             var newArray = this.state.testCases.slice();
             var newRow = (
                 <Row key={key} id={row.Id} rebuildList={this.rebuildList}>
-                    <TestCase summary={row.Summary}/>
+                    <TestCase testCaseId={row.Id} summary={row.Summary} rebuildList={this.rebuildList}/>
                 </Row>
             );
 
