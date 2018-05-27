@@ -90,3 +90,17 @@ input:focus {
     background-color: #F6F7FE;
 }
 
+.Delete-row {
+    text-align: center;
+    visibility: hidden;
+    cursor: default;
+}
+
+.Row:hover .Delete-row {
+    visibility: visible;
+}
+
+.Delete-row:hover {
+    font-size: 120%;
+    font-weight: bold;
+}
