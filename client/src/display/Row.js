@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { DeleteRow } from  './DeleteRow';
 
 export class Row extends Component {
     constructor(props) {
@@ -13,8 +14,9 @@ export class Row extends Component {
 
     render() {
         return (
-            <div className="Row" rowid={this.props.rowid}>
+            <div className="Row" rowid={this.state.rowId}>
                 <div className="Test-case-container">{this.props.children}</div>
+                <DeleteRow rowid={this.state.rowId}/>
                 <div className="Arrows">
                     <div />
                     <span className="Up arrow" onClick={this.handleUp} />

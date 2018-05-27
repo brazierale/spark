@@ -41,6 +41,7 @@ app.post('/api/testCases', (req, res) => {
 
 app.delete('/api/testCases/:id', (req, res) => {
     let sql = `DELETE FROM ${testCase} WHERE ID = ${req.params.id}`;
+    console.log(`Deleting... ${sql}`);
 
     executeSql(sql, function(result) {
         // need to only return the message when successfully deleted
