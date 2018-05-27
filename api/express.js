@@ -23,8 +23,19 @@ app.get('/api/testCases/:id', (req, res) => {
 
     executeSql(sql, function(result) {
         // should only log this when any actual result is returned
-        console.log('Returned test case: ' + result);
+        console.log(`Returned test case:  ${result}`);
         res.send({ express: result });
+    });
+});
+
+app.put('/api/testCases/:id', (req, res) => {
+    let newSummary = req.body.summary;
+    let sql = `UPDATE ${testCase} SET Summary='${newSummary}' WHERE ID = ${req.params.id}`;
+
+    executeSql(sql, function(result) {
+        // should only log this when any actual result is returned
+        console.log(`Updated test case:  ${req.params.id}: ${newSummary}`);
+        res.send();
     });
 });
 
@@ -34,7 +45,7 @@ app.post('/api/testCases', (req, res) => {
 
     executeSql(sql, function(result) {
         // need to only return the message when successfully added
-        console.log('Added test case: ' + summary);
+        console.log(`Added test case:  ${summary}`);
         res.send();
     });
 });
@@ -45,7 +56,7 @@ app.delete('/api/testCases/:id', (req, res) => {
 
     executeSql(sql, function(result) {
         // need to only return the message when successfully deleted
-        console.log('Deleted test case: ' + req.params.id);
+        console.log(`Deleted test case: ${req.params.id}`);
         res.send();
     });
 });
