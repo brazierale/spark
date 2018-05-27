@@ -30,7 +30,6 @@ export class TestCaseList extends Component {
     };
 
     render() {
-        console.log('current state: ' + this.state.testCases);
         return(
             <div className="Test-cases">
                 <div>{this.state.testCases}</div>
@@ -44,7 +43,7 @@ export class TestCaseList extends Component {
         res.forEach( row => {
             var newArray = this.state.testCases.slice();
             var newRow = (
-                <Row key={row.Id}>
+                <Row id={row.Id}>
                     <TestCase summary={row.Summary}/>
                 </Row>
             );

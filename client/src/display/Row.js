@@ -4,7 +4,7 @@ export class Row extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            rowId: props.rowid,
+            rowId: props.id,
         };
 
         this.handleUp = this.handleUp.bind(this);
@@ -13,16 +13,16 @@ export class Row extends Component {
 
     render() {
         return (
-            <div className="Row" rowid={this.props.rowId}>
+            <div className="Row" rowid={this.props.rowid}>
                 <div className="Test-case-container">{this.props.children}</div>
                 <div className="Arrows">
                     <div />
                     <span className="Up arrow" onClick={this.handleUp} />
                     <span className="Down arrow" onClick={this.handleDown} />
                     <div />
+                </div>
                 <div className="Row-id">
                     {this.state.rowId}
-                </div>
                 </div>
             </div>
         )
