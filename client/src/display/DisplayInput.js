@@ -15,9 +15,9 @@ export class DisplayInput extends Component {
     }
     render() {
         return (
-            <div className="Test-cases">
+            <div className="Display-input">
                 {this.state.rows}
-                <Input addComponent={this.addComponent}/>
+                <Input addComponent={this.addComponent} rebuildList={this.props.rebuildList}/>
             </div>
         )
     }

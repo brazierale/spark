@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { DisplayInput } from './display/DisplayInput';
 import { TestCaseList } from './display/TestCaseList';
 import logo from './small-header.svg';
 import './App.css';
@@ -10,9 +9,7 @@ class App extends Component {
       <div className="App">
         <Header />
         <TestCaseList />
-        
-        <DisplayInput />
-      </div>
+        </div>
     );
   }
 }

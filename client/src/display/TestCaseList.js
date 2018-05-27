@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { DisplayInput } from './DisplayInput';
 import { TestCase } from './TestCase';
 import { Row } from './Row';
 
@@ -38,6 +39,7 @@ export class TestCaseList extends Component {
         return(
             <div className="Test-cases">
                 <div>{this.state.testCases}</div>
+                <DisplayInput rebuildList={this.rebuildList}/>
             </div>
         );
     }

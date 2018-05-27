@@ -59,6 +59,7 @@ export class Input extends Component {
 
             })();
 
+            this.props.rebuildList();
             this.setState({ entryType: 'Empty', userInput: ''});
         }
     }
