@@ -1,6 +1,7 @@
-DROP TABLE TestCase
-DROP TABLE Tag
-DROP TABLE TestCaseTag
+DROP TABLE dbo.Comment
+DROP TABLE dbo.TestCaseTag
+DROP TABLE dbo.Tag
+DROP TABLE dbo.TestCase
 
 CREATE TABLE TestCase (
 	Id int IDENTITY(1,1) PRIMARY KEY,

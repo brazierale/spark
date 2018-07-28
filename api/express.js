@@ -3,12 +3,17 @@ const bodyParser = require('body-parser');
 const app = express()
 const executeSql = require('./tedious')
 
-const testCase = 'spark.spark.TestCase';
+const testCase = 'spark.dbo.TestCase';
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get('/api/testCases', (req, res) =>  {
+app.use((req, res, next) => {
+    console.log('Request received by express');
+    next();
+});
+
+app.get('/api/testCases', (req, res) => {
     let sql = `SELECT * FROM ${testCase} FOR JSON AUTO`;
 
     executeSql(sql, function(result) {
@@ -63,12 +68,3 @@ app.delete('/api/testCases/:id', (req, res) => {
 
 
 app.listen(5000, () => console.log('Example app listening on port 5000!'));
-
-//app.post('/', (req, res) => res.send(req.)
-
-// (req, res) => indicates passing variables 'req' and res' into a function that comes after =>
-// req = request, res = response
-// this is shorthand for function(req, res) {}
-// passed into get as get requires an address and a function to execute
-
-// use tedious to connect to mssql
