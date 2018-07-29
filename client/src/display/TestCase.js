@@ -43,7 +43,7 @@ export class TestCase extends Component {
                         method: 'DELETE'
                         }
                     )
-        
+                    await this.props.rebuildList();
                 })();
             }
             else {
@@ -58,12 +58,9 @@ export class TestCase extends Component {
                         },
                         body: toSend
                     })
-
+                    await this.props.rebuildList();
                 })();
             }
-
-            // should only run once previous request is successful
-            this.props.rebuildList();
         }
     }
 }

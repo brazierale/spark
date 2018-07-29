@@ -24,7 +24,8 @@ function executeStatement(sql, callback) {
             let result = [];
             request = new Request(sql, function(err, rowCount) {
                 if (err) {
-                console.log(err);
+                    console.log(`Error: ${err}`);
+                    result = err;
                 }
             
                 connection.close();

@@ -29,9 +29,7 @@ export class DeleteTestCase extends Component {
                 method: 'DELETE'
                 }
             )
-
+            await this.props.rebuildList();
         })();
-        // should only do this only if the row is actually deleted
-        this.props.rebuildList();
     }
 }
