@@ -22,14 +22,6 @@ export class DeleteTestCase extends Component {
     }
 
     deleteTestCase() {
-        console.log(`Trying to delete row ${this.state.id}`);
-
-        (async () => {
-            const response = await fetch(`/api/testCases/${this.state.id}`, {
-                method: 'DELETE'
-                }
-            )
-            await this.props.rebuildList();
-        })();
+        this.props.deleteTestCase(this.state.id);
     }
 }

@@ -33,33 +33,13 @@ export class TestCase extends Component {
         this.setState({ entryType: t, summary: v})
     }
 
-    // when the user presses Enter, updates the test case, or deletes it if it is empty
     handleKeyPress(e) {
         if (e.key === 'Enter') {
-
             if(e.target.value === '') {
-                (async () => {
-                    const response = await fetch(`/api/testCases/${this.props.testCaseId}`, {
-                        method: 'DELETE'
-                        }
-                    )
-                    await this.props.rebuildList();
-                })();
+                this.props.deleteTestCase(this.props.testCaseId);
             }
             else {
-                var toSend = JSON.stringify({summary: this.state.summary});
-
-                (async () => {
-                    const response = await fetch(`/api/testCases/${this.props.testCaseId}`, {
-                        method: 'PUT',
-                        headers: {
-                            'Accept': 'application/json',
-                            'Content-Type': 'application/json'
-                        },
-                        body: toSend
-                    })
-                    await this.props.rebuildList();
-                })();
+                this.props.updateTestCase(this.props.testCaseId, this.state.summary);
             }
         }
     }

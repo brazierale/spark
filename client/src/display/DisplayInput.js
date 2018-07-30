@@ -17,7 +17,7 @@ export class DisplayInput extends Component {
         return (
             <div className="Display-input">
                 {this.state.rows}
-                <Input addComponent={this.addComponent} rebuildList={this.props.rebuildList}/>
+                <Input addComponent={this.addComponent} createTestCase={this.props.createTestCase}/>
             </div>
         )
     }

@@ -14,6 +14,9 @@ export class TestCaseList extends Component {
 
         this.processResponse = this.processResponse.bind(this);
         this.rebuildList = this.rebuildList.bind(this);
+        this.deleteTestCase = this.deleteTestCase.bind(this);
+        this.updateTestCase = this.updateTestCase.bind(this);
+        this.createTestCase = this.createTestCase.bind(this);
     }
 
     componentDidMount() {
@@ -39,7 +42,7 @@ export class TestCaseList extends Component {
         return(
             <div className="Test-cases">
                 <div>{this.state.testCases}</div>
-                <DisplayInput rebuildList={this.rebuildList}/>
+                <DisplayInput createTestCase={this.createTestCase}/>
             </div>
         );
     }
@@ -52,8 +55,13 @@ export class TestCaseList extends Component {
         res.forEach( row => {
             var newArray = this.state.testCases.slice();
             var newRow = (
-                <Row key={key} testCaseId={row.Id} rebuildList={this.rebuildList}>
-                    <TestCase testCaseId={row.Id} summary={row.Summary} rebuildList={this.rebuildList}/>
+                <Row key={key} testCaseId={row.Id} deleteTestCase={this.deleteTestCase}>
+                    <TestCase
+                        testCaseId={row.Id}
+                        summary={row.Summary}
+                        deleteTestCase={this.deleteTestCase}
+                        updateTestCase={this.updateTestCase}
+                    />
                 </Row>
             );
 
@@ -61,5 +69,50 @@ export class TestCaseList extends Component {
             key++;
             this.setState({ testCases: newArray });
         });
+    }
+
+    deleteTestCase(id) {
+        console.log(`Deleting row ${id}`);
+        (async () => {
+            const response = await fetch(`/api/testCases/${id}`, {
+                method: 'DELETE'
+                }
+            )
+            await this.rebuildList();
+        })();
+    }
+
+    updateTestCase(id, summary) {
+        console.log(`Updating row ${id} to ${summary}`);
+        var toSend = JSON.stringify({summary: summary});
+        
+        (async () => {
+            const response = await fetch(`/api/testCases/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: toSend
+            })
+            await this.rebuildList();
+        })();
+    }
+
+    createTestCase(summary) {
+        console.log(`Creating new test case ${summary}`)
+        var toSend = JSON.stringify({summary: summary});
+
+        (async () => {
+            const response = await fetch('/api/testCases', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: toSend
+            })
+            await this.rebuildList();
+        })();
     }
 }

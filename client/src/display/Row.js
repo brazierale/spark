@@ -16,7 +16,7 @@ export class Row extends Component {
         return (
             <div className="Row">
                 <div className="Test-case-container">{this.props.children}</div>
-                <DeleteTestCase testCaseId={this.state.testCaseId} rebuildList={this.props.rebuildList}/>
+                <DeleteTestCase testCaseId={this.state.testCaseId} deleteTestCase={this.props.deleteTestCase}/>
                 <div className="Arrows">
                     <div />
                     <span className="Up arrow" onClick={this.handleUp} />
@@ -30,10 +30,12 @@ export class Row extends Component {
         )
     }
 
+    //not implemented - will move row up but need to consider missing ids and parents
     handleUp(e) {
         console.log('move row up');
     }
 
+    //not implemented - will move row down but need to consider missing ids and parents
     handleDown(e) {
         console.log('move row down');
     }

@@ -44,23 +44,9 @@ export class Input extends Component {
 
     // when the user presses Enter, create the item and clear the input field
     handleKeyPress(e) {
-        if (e.key === 'Enter' || e.key === 'Tab') {
-            var toSend = JSON.stringify({summary: this.state.userInput});
-
-            if(e.target.value !== '') {
-                (async () => {
-                    const response = await fetch('/api/testCases', {
-                        method: 'POST',
-                        headers: {
-                            'Accept': 'application/json',
-                            'Content-Type': 'application/json'
-                        },
-                        body: toSend
-                    })
-                    await this.props.rebuildList();
-                })();
-                this.setState({ entryType: 'Empty', userInput: ''});
-            }
+        if (e.key === 'Enter' && e.target.value !== '') {
+            this.props.createTestCase(this.state.userInput)
+            this.setState({ entryType: 'Empty', userInput: ''});
         }
     }
 }
