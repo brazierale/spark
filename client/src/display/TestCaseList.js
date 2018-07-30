@@ -11,32 +11,17 @@ export class TestCaseList extends Component {
         response: '',
         testCases: [],
     };
-
-        this.processResponse = this.processResponse.bind(this);
         this.rebuildList = this.rebuildList.bind(this);
-        this.deleteTestCase = this.deleteTestCase.bind(this);
-        this.updateTestCase = this.updateTestCase.bind(this);
+        this.processGetRequest = this.processGetRequest.bind(this);
+        this.getTestCases = this.getTestCases.bind(this);
         this.createTestCase = this.createTestCase.bind(this);
+        this.updateTestCase = this.updateTestCase.bind(this);
+        this.deleteTestCase = this.deleteTestCase.bind(this);
     }
 
     componentDidMount() {
         this.rebuildList();
     }
-
-    rebuildList() {
-        this.callApi ()
-        .then(res => this.processResponse(res.express))
-        .catch(err => console.log(err));
-    }
-
-    callApi = async () => {
-        const response = await fetch('/api/testCases');
-        const body = await response.json();
-        
-        if (response.status !== 200) throw Error(body.message);
-
-        return body;
-    };
 
     render() {
         return(
@@ -47,7 +32,13 @@ export class TestCaseList extends Component {
         );
     }
 
-    processResponse(response) {
+    rebuildList() {
+        this.getTestCases ()
+        .then(res => this.processGetRequest(res.express))
+        .catch(err => console.log(err));
+    }
+
+    processGetRequest(response) {
         var res = JSON.parse(response);
         var key = 0;
         this.setState({ testCases: [] });
@@ -55,12 +46,14 @@ export class TestCaseList extends Component {
         res.forEach( row => {
             var newArray = this.state.testCases.slice();
             var newRow = (
-                <Row key={key} testCaseId={row.Id} deleteTestCase={this.deleteTestCase}>
+                <Row key={key}
+                    testCaseId={row.Id}
+                    deleteTestCase={this.deleteTestCase}>
                     <TestCase
                         testCaseId={row.Id}
                         summary={row.Summary}
-                        deleteTestCase={this.deleteTestCase}
                         updateTestCase={this.updateTestCase}
+                        deleteTestCase={this.deleteTestCase}                       
                     />
                 </Row>
             );
@@ -71,13 +64,28 @@ export class TestCaseList extends Component {
         });
     }
 
-    deleteTestCase(id) {
-        console.log(`Deleting row ${id}`);
+    getTestCases = async () => {
+        const response = await fetch('/api/testCases');
+        const body = await response.json();
+        
+        if (response.status !== 200) throw Error(body.message);
+
+        return body;
+    };    
+
+    createTestCase(summary) {
+        console.log(`Creating new test case ${summary}`)
+        var toSend = JSON.stringify({summary: summary});
+
         (async () => {
-            const response = await fetch(`/api/testCases/${id}`, {
-                method: 'DELETE'
-                }
-            )
+            const response = await fetch('/api/testCases', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: toSend
+            })
             this.rebuildList();
         })();
     }
@@ -99,19 +107,13 @@ export class TestCaseList extends Component {
         })();
     }
 
-    createTestCase(summary) {
-        console.log(`Creating new test case ${summary}`)
-        var toSend = JSON.stringify({summary: summary});
-
+    deleteTestCase(id) {
+        console.log(`Deleting row ${id}`);
         (async () => {
-            const response = await fetch('/api/testCases', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: toSend
-            })
+            const response = await fetch(`/api/testCases/${id}`, {
+                method: 'DELETE'
+                }
+            )
             this.rebuildList();
         })();
     }

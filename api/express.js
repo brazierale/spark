@@ -1,9 +1,10 @@
-const express = require('express')
+const express = require('express');
 const bodyParser = require('body-parser');
-const app = express()
-const executeSql = require('./tedious')
+const app = express();
+const executeSql = require('./tedious');
+const TYPES = require('tedious').TYPES;
 
-const testCase = 'spark.dbo.TestCase';
+const TESTCASE = 'spark.dbo.TestCase';
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -14,7 +15,7 @@ app.use((req, res, next) => {
 });
 
 app.get('/api/testCases', (req, res) => {
-    let sql = `SELECT * FROM ${testCase} FOR JSON AUTO`;
+    let sql = `SELECT * FROM ${TESTCASE} FOR JSON AUTO`;
 
     executeSql(sql, function(result) {
         // should only log this when any actual result is returned
@@ -24,7 +25,7 @@ app.get('/api/testCases', (req, res) => {
 });
 
 app.get('/api/testCases/:id', (req, res) => {
-    let sql = `SELECT * FROM ${testCase} WHERE ID = ${req.params.id} FOR JSON AUTO`;
+    let sql = `SELECT * FROM ${TESTCASE} WHERE ID = ${req.params.id} FOR JSON AUTO`;
 
     executeSql(sql, function(result) {
         // should only log this when any actual result is returned
@@ -35,7 +36,7 @@ app.get('/api/testCases/:id', (req, res) => {
 
 app.put('/api/testCases/:id', (req, res) => {
     let newSummary = req.body.summary;
-    let sql = `UPDATE ${testCase} SET Summary='${newSummary}' WHERE ID = ${req.params.id}`;
+    let sql = `UPDATE ${TESTCASE} SET Summary='${newSummary}' WHERE ID = ${req.params.id}`;
 
     executeSql(sql, function(result) {
         // should only log this when any actual result is returned
@@ -46,7 +47,7 @@ app.put('/api/testCases/:id', (req, res) => {
 
 app.post('/api/testCases', (req, res) => {
     let summary = req.body.summary;
-    let sql = `INSERT INTO ${testCase} VALUES ('${summary}')`;
+    let sql = `INSERT INTO ${TESTCASE} VALUES ('${summary}')`;
 
     executeSql(sql, function(result) {
         // need to only return the message when successfully added
@@ -56,7 +57,7 @@ app.post('/api/testCases', (req, res) => {
 });
 
 app.delete('/api/testCases/:id', (req, res) => {
-    let sql = `DELETE FROM ${testCase} WHERE ID = ${req.params.id}`;
+    let sql = `DELETE FROM ${TESTCASE} WHERE ID = ${req.params.id}`;
     console.log(`Deleting... ${sql}`);
 
     executeSql(sql, function(result) {
