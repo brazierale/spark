@@ -78,7 +78,7 @@ export class TestCaseList extends Component {
                 method: 'DELETE'
                 }
             )
-            await this.rebuildList();
+            this.rebuildList();
         })();
     }
 
@@ -95,7 +95,7 @@ export class TestCaseList extends Component {
                 },
                 body: toSend
             })
-            await this.rebuildList();
+            this.rebuildList();
         })();
     }
 
@@ -112,7 +112,7 @@ export class TestCaseList extends Component {
                 },
                 body: toSend
             })
-            await this.rebuildList();
+            this.rebuildList();
         })();
     }
 }
