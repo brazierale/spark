@@ -17,7 +17,7 @@ app.use((req, res, next) => {
 app.get('/api/testCases', (req, res) => {
     let sql = `SELECT * FROM ${TESTCASE} FOR JSON AUTO`;
 
-    executeSql(sql, function(result) {
+    executeSql(sql, (result) => {
         // should only log this when any actual result is returned
         console.log('Returned test cases: ' + result);
         res.send({ express: result });
@@ -27,7 +27,7 @@ app.get('/api/testCases', (req, res) => {
 app.get('/api/testCases/:id', (req, res) => {
     let sql = `SELECT * FROM ${TESTCASE} WHERE ID = ${req.params.id} FOR JSON AUTO`;
 
-    executeSql(sql, function(result) {
+    executeSql(sql, (result) => {
         // should only log this when any actual result is returned
         console.log(`Returned test case:  ${result}`);
         res.send({ express: result });
@@ -38,10 +38,10 @@ app.put('/api/testCases/:id', (req, res) => {
     let newSummary = req.body.summary;
     let sql = `UPDATE ${TESTCASE} SET Summary='${newSummary}' WHERE ID = ${req.params.id}`;
 
-    executeSql(sql, function(result) {
+    executeSql(sql, (result) => {
         // should only log this when any actual result is returned
         console.log(`Updated test case:  ${req.params.id}: ${newSummary}`);
-        res.send();
+        res.send({ express: result });
     });
 });
 
@@ -49,10 +49,10 @@ app.post('/api/testCases', (req, res) => {
     let summary = req.body.summary;
     let sql = `INSERT INTO ${TESTCASE} VALUES ('${summary}')`;
 
-    executeSql(sql, function(result) {
+    executeSql(sql, (result) => {
         // need to only return the message when successfully added
         console.log(`Added test case:  ${summary}`);
-        res.send();
+        res.send({ express: result });
     });
 });
 
@@ -60,10 +60,10 @@ app.delete('/api/testCases/:id', (req, res) => {
     let sql = `DELETE FROM ${TESTCASE} WHERE ID = ${req.params.id}`;
     console.log(`Deleting... ${sql}`);
 
-    executeSql(sql, function(result) {
+    executeSql(sql, (result) => {
         // need to only return the message when successfully deleted
         console.log(`Deleted test case: ${req.params.id}`);
-        res.send();
+        res.send({ express: result });
     });
 });
 

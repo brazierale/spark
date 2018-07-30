@@ -73,48 +73,50 @@ export class TestCaseList extends Component {
         return body;
     };    
 
-    createTestCase(summary) {
+    createTestCase = async (summary) => {
         console.log(`Creating new test case ${summary}`)
         var toSend = JSON.stringify({summary: summary});
 
-        (async () => {
-            const response = await fetch('/api/testCases', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: toSend
-            })
-            this.rebuildList();
-        })();
+        const response = await fetch('/api/testCases', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: toSend
+        })
+        this.rebuildList();
+
+        if (response.status !== 200) console.log(`Create test case ${summary} failed`);
     }
 
-    updateTestCase(id, summary) {
+    updateTestCase = async (id, summary) => {
         console.log(`Updating row ${id} to ${summary}`);
         var toSend = JSON.stringify({summary: summary});
         
-        (async () => {
-            const response = await fetch(`/api/testCases/${id}`, {
-                method: 'PUT',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: toSend
-            })
-            this.rebuildList();
-        })();
+        const response = await fetch(`/api/testCases/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: toSend
+        })
+        this.rebuildList();
+
+        if (response.status !== 200) console.log(`Update test case ${id} failed`);
+
     }
 
-    deleteTestCase(id) {
+    deleteTestCase = async (id) => {
         console.log(`Deleting row ${id}`);
-        (async () => {
-            const response = await fetch(`/api/testCases/${id}`, {
-                method: 'DELETE'
-                }
-            )
-            this.rebuildList();
-        })();
+
+        const response = await fetch(`/api/testCases/${id}`, {
+            method: 'DELETE'
+            }
+        )
+        this.rebuildList();
+
+        if (response.status !== 200) console.log(`Delete test case ${id} failed`);
     }
 }

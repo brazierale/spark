@@ -16,13 +16,13 @@ function executeStatement(sql, callback) {
     var connection = new Connection(config);
     console.log('Connecting to database...')
 
-    connection.on('connect', function(err) {
+    connection.on('connect', (err) => {
         if (err) {
             console.log('error')
             console.log(err);
         } else {
             let result = [];
-            request = new Request(sql, function(err, rowCount) {
+            request = new Request(sql, (err, rowCount) => {
                 if (err) {
                     console.log(`Error: ${err}`);
                     result = err;
@@ -33,7 +33,7 @@ function executeStatement(sql, callback) {
                 callback(result);
             });
 
-            request.on('row', function(columns) {
+            request.on('row', (columns) => {
                 result.push(columns[0].value);
             });
 
