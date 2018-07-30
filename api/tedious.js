@@ -12,29 +12,29 @@ var config = {
     }
 }
 // I'm pretty sure this needs to be split out into multiple functions
-function executeStatement(sql, callback) {
+function executeStatement(request, callback) {
     var connection = new Connection(config);
     console.log('Connecting to database...')
+
+    console.log(request);
 
     connection.on('connect', (err) => {
         if (err) {
             console.log('error')
             console.log(err);
         } else {
+
             let result = [];
-            request = new Request(sql, (err, rowCount) => {
-                if (err) {
-                    console.log(`Error: ${err}`);
-                    result = err;
-                }
-            
-                connection.close();
-                console.log('Connection closed');
-                callback(result);
-            });
 
             request.on('row', (columns) => {
                 result.push(columns[0].value);
+            });
+
+            request.on('requestCompleted', () => {
+                connection.close();
+                console.log('Connection closed');
+
+                callback(result);
             });
 
             connection.execSql(request);

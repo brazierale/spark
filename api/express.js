@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
+const Request = require('tedious').Request;
 const executeSql = require('./tedious');
 const TYPES = require('tedious').TYPES;
 
@@ -25,9 +26,18 @@ app.get('/api/testCases', (req, res) => {
 });
 
 app.get('/api/testCases/:id', (req, res) => {
-    let sql = `SELECT * FROM ${TESTCASE} WHERE ID = ${req.params.id} FOR JSON AUTO`;
+    let sql = `SELECT * FROM ${TESTCASE} WHERE ID = @id FOR JSON AUTO`;
 
-    executeSql(sql, (result) => {
+    let request = new Request(sql, (err) => {
+        if (err) {
+            console.log(`Error: ${err}`);
+            result = err;
+        }
+    });
+
+    request.addParameter('id', TYPES.VarChar, req.params.id);
+
+    executeSql(request, (result) => {
         // should only log this when any actual result is returned
         console.log(`Returned test case:  ${result}`);
         res.send({ express: result });
