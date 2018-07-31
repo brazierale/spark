@@ -54,6 +54,6 @@ export class TestCase extends Component {
     }
 
     handleBlur() {
-        //this.props.setSelectedTestCase(false);
+        this.props.setSelectedTestCase(false);
     }
 }
