@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { DisplayInput } from './DisplayInput';
+import { DetailPane } from './DetailPane';
 import { TestCase } from './TestCase';
 import { Row } from './Row';
 
@@ -9,9 +10,12 @@ export class TestCaseList extends Component {
         
     this.state = {
         response: '',
+        testCasesToRender: [],
         testCases: [],
+        selectedTestCase: false,
     };
         this.rebuildList = this.rebuildList.bind(this);
+        this.setSelectedTestCase = this.setSelectedTestCase.bind(this);
         this.processGetRequest = this.processGetRequest.bind(this);
         this.getTestCases = this.getTestCases.bind(this);
         this.createTestCase = this.createTestCase.bind(this);
@@ -24,10 +28,16 @@ export class TestCaseList extends Component {
     }
 
     render() {
+        console.log(`rendering with selected test case ${this.state.selectedTestCase}`);
         return(
-            <div className="Test-cases">
-                <div>{this.state.testCases}</div>
-                <DisplayInput createTestCase={this.createTestCase}/>
+            <div className="Main-container">
+                <div className="Test-case-list-container">
+                    <div>{this.state.testCasesToRender}</div>
+                    <DisplayInput createTestCase={this.createTestCase}/>
+                </div>
+                <div className="Detail-pane-container">
+                    <DetailPane details={this.state.selectedTestCase}/>
+                </div>
             </div>
         );
     }
@@ -38,13 +48,20 @@ export class TestCaseList extends Component {
         .catch(err => console.log(err));
     }
 
+    setSelectedTestCase(id) {
+        let tc = this.state.testCases.find( (t) => { return t.Id === id; });
+        this.setState({ selectedTestCase: tc });
+    }
+
     processGetRequest(response) {
         var res = JSON.parse(response);
         var key = 0;
-        this.setState({ testCases: [] });
+        this.setState({ testCases: res });
+        this.setState({ testCasesToRender: [] });
 
-        res.forEach( row => {
-            var newArray = this.state.testCases.slice();
+        res.forEach( (row) => {
+            var newArray = this.state.testCasesToRender.slice();
+
             var newRow = (
                 <Row key={key}
                     testCaseId={row.Id}
@@ -53,14 +70,15 @@ export class TestCaseList extends Component {
                         testCaseId={row.Id}
                         summary={row.Summary}
                         updateTestCase={this.updateTestCase}
-                        deleteTestCase={this.deleteTestCase}                       
+                        deleteTestCase={this.deleteTestCase}
+                        setSelectedTestCase={this.setSelectedTestCase}
                     />
                 </Row>
             );
 
             newArray.push(newRow);
             key++;
-            this.setState({ testCases: newArray });
+            this.setState({ testCasesToRender: newArray });
         });
     }
 

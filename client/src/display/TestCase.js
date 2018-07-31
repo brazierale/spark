@@ -10,6 +10,8 @@ export class TestCase extends Component {
 
         this.handleUserInput = this.handleUserInput.bind(this);
         this.handleKeyPress = this.handleKeyPress.bind(this);
+        this.handleFocus = this.handleFocus.bind(this);
+        this.handleBlur = this.handleBlur.bind(this);
     }
     render() {
         return (
@@ -20,6 +22,8 @@ export class TestCase extends Component {
                 value={this.state.summary}
                 onChange={this.handleUserInput}
                 onKeyPress={this.handleKeyPress}
+                onFocus={this.handleFocus}
+                onBlur={this.handleBlur}
             />
         )
     }
@@ -42,5 +46,14 @@ export class TestCase extends Component {
                 this.props.updateTestCase(this.props.testCaseId, this.state.summary);
             }
         }
+    }
+
+    handleFocus() {
+        console.log(`Focus on ${this.props.testCaseId}`);
+        this.props.setSelectedTestCase(this.props.testCaseId);
+    }
+
+    handleBlur() {
+        //this.props.setSelectedTestCase(false);
     }
 }
