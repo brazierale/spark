@@ -9,6 +9,7 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "express": "^4.16.2",
+    "prop-types": "^15.6.2",
     "tedious": "^2.6.2"
   },
   "devDependencies": {
