@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export class DetailPane extends Component {
 
@@ -18,3 +19,7 @@ export class DetailPane extends Component {
     }
 }
 
+DetailPane.propTypes = {
+    //currently this will be a boolean (false) or object (test case from api) this should be updated to a new TestCase object
+    details: PropTypes.object,
+}

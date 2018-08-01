@@ -28,7 +28,8 @@ export class TestCaseList extends Component {
     }
 
     render() {
-        console.log(`rendering with selected test case ${this.state.selectedTestCase}`);
+        console.log(`Rendering with selected test case`);
+        console.log(this.state.selectedTestCase)
         return(
             <div className="Main-container">
                 <div className="Test-case-list-container">

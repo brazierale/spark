@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { DeleteTestCase } from  './DeleteTestCase';
 
 export class Row extends Component {
@@ -41,3 +42,8 @@ export class Row extends Component {
     }
 }
 
+Row.propTypes = {
+    testCaseId: PropTypes.number.isRequired,
+
+    deleteTestCase: PropTypes.func.isRequired,
+}

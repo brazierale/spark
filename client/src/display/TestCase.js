@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export class TestCase extends Component {
     constructor(props) {
@@ -56,4 +57,13 @@ export class TestCase extends Component {
     handleBlur() {
         this.props.setSelectedTestCase(false);
     }
+}
+
+TestCase.propTypes = {
+        testCaseId: PropTypes.number.isRequired,
+        summary: PropTypes.string.isRequired,
+
+        setSelectedTestCase: PropTypes.func.isRequired,
+        updateTestCase: PropTypes.func.isRequired,
+        deleteTestCase: PropTypes.func.isRequired,
 }

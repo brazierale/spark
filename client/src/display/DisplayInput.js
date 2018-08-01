@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Row } from './Row';
 import { Input } from './Input';
 import { TestCase } from './TestCase';
@@ -36,4 +37,8 @@ export class DisplayInput extends Component {
         newArray.push(row);
         this.setState({ rows: newArray });
     }
+}
+
+DisplayInput.propTypes = {
+    createTestCase: PropTypes.func.isRequired,
 }

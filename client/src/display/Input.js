@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Row } from './Row';
 import './Display.css';
 
@@ -49,4 +50,8 @@ export class Input extends Component {
             this.setState({ entryType: 'Empty', userInput: ''});
         }
     }
+}
+
+Input.propTypes = {
+    createTestCase: PropTypes.func.isRequired,
 }

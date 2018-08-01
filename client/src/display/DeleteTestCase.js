@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export class DeleteTestCase extends Component {
     constructor(props) {
@@ -24,4 +25,10 @@ export class DeleteTestCase extends Component {
     deleteTestCase() {
         this.props.deleteTestCase(this.state.id);
     }
+}
+
+DeleteTestCase.propTypes = {
+    testCaseId: PropTypes.number.isRequired,
+    
+    deleteTestCase: PropTypes.func.isRequired,
 }
