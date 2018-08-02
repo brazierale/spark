@@ -21,6 +21,7 @@ export class Input extends Component {
                     <Row>
                         <input 
                             type="text"
+                            maxLength="255"
                             placeholder="Enter your test case here..."
                             className={this.state.entryType}
                             value={this.state.userInput}

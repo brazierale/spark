@@ -18,6 +18,7 @@ export class TestCaseInput extends Component {
         return (
             <input 
                 type="text"
+                maxLength="255"
                 placeholder="Enter your test case here..."
                 className={this.state.entryType}
                 value={this.state.summary}
