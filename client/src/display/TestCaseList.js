@@ -4,7 +4,7 @@ import { TestCaseInput } from './TestCaseInput';
 import { Row } from './Row';
 import './Display.css'
 
-const entryRow = { id: 0, sumary: '' }
+const entryRow = { id: 0, summary: '' }
 
 export class TestCaseList extends Component {
     constructor(props) {

@@ -47,7 +47,7 @@ export class TestCaseInput extends Component {
     handleKeyPress(e) {
         if (e.key === 'Enter') {
             if(this.props.testCaseId === 0 && e.target.value !== '') {
-                this.props.createTestCase(this.props.state.summary);
+                this.props.createTestCase(this.state.summary);
             }
             else if (e.target.value === '') {
                 this.props.deleteTestCase(this.props.testCaseId);
