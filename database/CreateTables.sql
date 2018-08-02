@@ -4,22 +4,22 @@ DROP TABLE dbo.Tag
 DROP TABLE dbo.TestCase
 
 CREATE TABLE TestCase (
-	Id int IDENTITY(1,1) PRIMARY KEY,
-	Summary varchar(255) NOT NULL,
+	id int IDENTITY(1,1) PRIMARY KEY,
+	summary varchar(255) NOT NULL,
 )
 
 CREATE TABLE Comment (
-	Id int IDENTITY(1,1) PRIMARY KEY,
-	TestCaseId int FOREIGN KEY REFERENCES TestCase(Id),
-	Comment varchar(255) NOT NULL,
+	id int IDENTITY(1,1) PRIMARY KEY,
+	testCaseId int FOREIGN KEY REFERENCES TestCase(Id),
+	comment varchar(255) NOT NULL,
 )
 
 CREATE TABLE Tag (
-	Id int IDENTITY(1,1) PRIMARY KEY,
-	TagText varchar(64),
+	id int IDENTITY(1,1) PRIMARY KEY,
+	tagText varchar(64),
 )
 
 CREATE TABLE TestCaseTag (
-	TestCaseId int FOREIGN KEY REFERENCES TestCase(Id),
-	TagId int FOREIGN KEY REFERENCES Tag(Id),
+	testCaseId int FOREIGN KEY REFERENCES TestCase(Id),
+	tagId int FOREIGN KEY REFERENCES Tag(Id),
 )

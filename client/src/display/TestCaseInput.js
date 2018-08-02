@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-export class TestCase extends Component {
+export class TestCaseInput extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -59,7 +59,7 @@ export class TestCase extends Component {
     }
 }
 
-TestCase.propTypes = {
+TestCaseInput.propTypes = {
         testCaseId: PropTypes.number.isRequired,
         summary: PropTypes.string.isRequired,
 

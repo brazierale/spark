@@ -8,7 +8,7 @@ export class DetailPane extends Component {
             return (
                 <div className="Detail-pane">
                     <div className="Detail-pane-header">
-                        <h1>{this.props.details.Summary}</h1>
+                        <h1>{this.props.details.summary}</h1>
                     </div>
                 </div>
             )            

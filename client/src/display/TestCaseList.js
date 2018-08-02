@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { DisplayInput } from './DisplayInput';
 import { DetailPane } from './DetailPane';
-import { TestCase } from './TestCase';
+import { TestCaseInput } from './TestCaseInput';
 import { Row } from './Row';
 
 export class TestCaseList extends Component {
@@ -50,7 +50,7 @@ export class TestCaseList extends Component {
     }
 
     setSelectedTestCase(id) {
-        let tc = this.state.testCases.find( (t) => { return t.Id === id; });
+        let tc = this.state.testCases.find( (t) => { return t.id === id; });
         this.setState({ selectedTestCase: tc });
     }
 
@@ -65,11 +65,11 @@ export class TestCaseList extends Component {
 
             var newRow = (
                 <Row key={key}
-                    testCaseId={row.Id}
+                    testCaseId={row.id}
                     deleteTestCase={this.deleteTestCase}>
-                    <TestCase
-                        testCaseId={row.Id}
-                        summary={row.Summary}
+                    <TestCaseInput
+                        testCaseId={row.id}
+                        summary={row.summary}
                         updateTestCase={this.updateTestCase}
                         deleteTestCase={this.deleteTestCase}
                         setSelectedTestCase={this.setSelectedTestCase}

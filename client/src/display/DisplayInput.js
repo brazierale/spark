@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Row } from './Row';
 import { Input } from './Input';
-import { TestCase } from './TestCase';
+import { TestCaseInput } from './TestCaseInput';
 import './Display.css'
 
 export class DisplayInput extends Component {
@@ -30,7 +30,7 @@ export class DisplayInput extends Component {
 
         row = (
             <Row key={id}>
-                <TestCase summary={text}/>
+                <TestCaseInput summary={text}/>
             </Row>
         );
 
@@ -40,5 +40,5 @@ export class DisplayInput extends Component {
 }
 
 DisplayInput.propTypes = {
-    createTestCase: PropTypes.func.isRequired,
+    createTestCase: PropTypes.func.isRequired
 }

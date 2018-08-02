@@ -1,18 +1,18 @@
-INSERT INTO TestCase VALUES
+INSERT INTO testCase VALUES
 	('First Test Case')
 	
-INSERT INTO Tag VALUES
+INSERT INTO tag VALUES
 	('TestTag'),
 	('Second')
 
-INSERT INTO TestCaseTag VALUES
+INSERT INTO testCaseTag VALUES
 	(1, 1),
 	(1, 2)
 
-SELECT * FROM TestCase
-SELECT * FROM Tag
-SELECT * FROM TestCaseTag
-SELECT * FROM Comment
+SELECT * FROM testCase
+SELECT * FROM tag
+SELECT * FROM testCaseTag
+SELECT * FROM comment
 
 select * from testcase tc
 inner join TestCaseTag tct on tc.id = tct.TestCaseId
