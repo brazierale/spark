@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import { DisplayInput } from './DisplayInput';
 import { DetailPane } from './DetailPane';
 import { TestCaseInput } from './TestCaseInput';
 import { Row } from './Row';
+import './Display.css'
+
+const entryRow = { id: 0, sumary: '' }
 
 export class TestCaseList extends Component {
     constructor(props) {
@@ -12,7 +14,7 @@ export class TestCaseList extends Component {
         response: '',
         testCasesToRender: [],
         testCases: [],
-        selectedTestCase: false,
+        selectedTestCase: entryRow,
         key: 0,
     };
         this.rebuildList = this.rebuildList.bind(this);
@@ -29,13 +31,10 @@ export class TestCaseList extends Component {
     }
 
     render() {
-        console.log(`Rendering with selected test case`);
-        console.log(this.state.selectedTestCase)
         return(
             <div className="Main-container">
                 <div className="Test-case-list-container">
                     <div>{this.state.testCasesToRender}</div>
-                    <DisplayInput createTestCase={this.createTestCase}/>
                 </div>
                 <div className="Detail-pane-container">
                     <DetailPane details={this.state.selectedTestCase}/>
@@ -51,7 +50,10 @@ export class TestCaseList extends Component {
     }
 
     setSelectedTestCase(id) {
-        let tc = this.state.testCases.find( (t) => { return t.id === id; });
+        let tc = entryRow;
+        if(id !== 0) {
+            tc = this.state.testCases.find( (t) => { return t.id === id; });
+        }
         this.setState({ selectedTestCase: tc });
     }
 
@@ -62,6 +64,8 @@ export class TestCaseList extends Component {
         res.forEach( (row) => {
             this.addRowToRender(row);
         });
+
+        this.addRowToRender(entryRow);
     }
 
     addRowToRender(row) {
@@ -75,9 +79,11 @@ export class TestCaseList extends Component {
                 <TestCaseInput
                     testCaseId={row.id}
                     summary={row.summary}
+                    createTestCase={this.createTestCase}
                     updateTestCase={this.updateTestCase}
                     deleteTestCase={this.deleteTestCase}
                     setSelectedTestCase={this.setSelectedTestCase}
+                    selectedTestCaseId={this.state.selectedTestCase.id}
                 />
             </Row>
         );

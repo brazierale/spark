@@ -12,11 +12,18 @@ export class TestCaseInput extends Component {
         this.handleUserInput = this.handleUserInput.bind(this);
         this.handleKeyPress = this.handleKeyPress.bind(this);
         this.handleFocus = this.handleFocus.bind(this);
-        this.handleBlur = this.handleBlur.bind(this);
     }
+
+    componentDidMount() {
+        if (this.props.testCaseId === this.props.selectedTestCaseId) {
+            this.nameInput.focus(); 
+        }
+    }
+
     render() {
         return (
-            <input 
+            <input
+                ref={(input) => { this.nameInput = input; }}
                 type="text"
                 maxLength="255"
                 placeholder="Enter your test case here..."
@@ -24,9 +31,7 @@ export class TestCaseInput extends Component {
                 value={this.state.summary}
                 onChange={this.handleUserInput}
                 onKeyPress={this.handleKeyPress}
-                onFocus={this.handleFocus}
-                onBlur={this.handleBlur}
-            />
+                onFocus={this.handleFocus}            />
         )
     }
     // update entry field type based on first character(s)
@@ -41,7 +46,10 @@ export class TestCaseInput extends Component {
 
     handleKeyPress(e) {
         if (e.key === 'Enter') {
-            if(e.target.value === '') {
+            if(this.props.testCaseId === 0 && e.target.value !== '') {
+                this.props.createTestCase(this.props.state.summary);
+            }
+            else if (e.target.value === '') {
                 this.props.deleteTestCase(this.props.testCaseId);
             }
             else {
@@ -54,17 +62,15 @@ export class TestCaseInput extends Component {
         console.log(`Focus on ${this.props.testCaseId}`);
         this.props.setSelectedTestCase(this.props.testCaseId);
     }
-
-    handleBlur() {
-        this.props.setSelectedTestCase(false);
-    }
 }
 
 TestCaseInput.propTypes = {
         testCaseId: PropTypes.number.isRequired,
         summary: PropTypes.string.isRequired,
+        selectedTestCaseId: PropTypes.number.isRequired,
 
         setSelectedTestCase: PropTypes.func.isRequired,
+        createTestCase: PropTypes.func.isRequired,
         updateTestCase: PropTypes.func.isRequired,
         deleteTestCase: PropTypes.func.isRequired,
 }
