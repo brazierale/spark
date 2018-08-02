@@ -5,7 +5,7 @@ export class TestCaseInput extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            summary: props.summary,
+            summary: props.testCaseSummary,
             entryType: 'Test-case',
         };
 
@@ -66,7 +66,7 @@ export class TestCaseInput extends Component {
 
 TestCaseInput.propTypes = {
         testCaseId: PropTypes.number.isRequired,
-        summary: PropTypes.string.isRequired,
+        testCaseSummary: PropTypes.string.isRequired,
         selectedTestCaseId: PropTypes.number.isRequired,
 
         setSelectedTestCase: PropTypes.func.isRequired,

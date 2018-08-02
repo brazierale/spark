@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { TestCaseInput } from './TestCaseInput'
 import { DeleteTestCase } from  './DeleteTestCase';
 
 export class Row extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            testCaseId: props.testCaseId,
+            testCaseId: this.props.testCaseId,
         };
 
         this.handleUp = this.handleUp.bind(this);
@@ -16,8 +17,21 @@ export class Row extends Component {
     render() {
         return (
             <div className="Row">
-                <div className="Test-case-container">{this.props.children}</div>
-                <DeleteTestCase testCaseId={this.state.testCaseId} deleteTestCase={this.props.deleteTestCase}/>
+                <div className="Test-case-container">
+                    <TestCaseInput
+                        testCaseId={this.props.testCaseId}
+                        testCaseSummary={this.props.testCaseSummary}
+                        createTestCase={this.props.createTestCase}
+                        updateTestCase={this.props.updateTestCase}
+                        deleteTestCase={this.props.deleteTestCase}
+                        setSelectedTestCase={this.props.setSelectedTestCase}
+                        selectedTestCaseId={this.props.selectedTestCaseId}
+                    />
+                </div>
+                <DeleteTestCase 
+                    testCaseId={this.props.testCaseId}
+                    deleteTestCase={this.props.deleteTestCase}
+                />
                 <div className="Arrows">
                     <div />
                     <span className="Up arrow" onClick={this.handleUp} />

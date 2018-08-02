@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 export class DetailPane extends Component {
 
     render() {
-        if (this.props.details){
+        if (this.props.selectedTestCase){
             return (
                 <div className="Detail-pane">
                     <div className="Detail-pane-header">
-                        <h1>{this.props.details.summary}</h1>
+                        <h1>{this.props.selectedTestCase.summary}</h1>
                     </div>
                 </div>
             )            
@@ -20,6 +20,5 @@ export class DetailPane extends Component {
 }
 
 DetailPane.propTypes = {
-    //currently this will be a boolean (false) or object (test case from api) this should be updated to a new TestCase object
-    details: PropTypes.object,
+    selectedTestCase: PropTypes.object,
 }
