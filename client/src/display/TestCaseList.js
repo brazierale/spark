@@ -13,6 +13,7 @@ export class TestCaseList extends Component {
         testCasesToRender: [],
         testCases: [],
         selectedTestCase: false,
+        key: 0,
     };
         this.rebuildList = this.rebuildList.bind(this);
         this.setSelectedTestCase = this.setSelectedTestCase.bind(this);
@@ -56,31 +57,33 @@ export class TestCaseList extends Component {
 
     processGetRequest(response) {
         var res = JSON.parse(response);
-        var key = 0;
-        this.setState({ testCases: res });
-        this.setState({ testCasesToRender: [] });
+        this.setState({ testCases: res, testCasesToRender: [], key: 0 });
 
         res.forEach( (row) => {
-            var newArray = this.state.testCasesToRender.slice();
-
-            var newRow = (
-                <Row key={key}
-                    testCaseId={row.id}
-                    deleteTestCase={this.deleteTestCase}>
-                    <TestCaseInput
-                        testCaseId={row.id}
-                        summary={row.summary}
-                        updateTestCase={this.updateTestCase}
-                        deleteTestCase={this.deleteTestCase}
-                        setSelectedTestCase={this.setSelectedTestCase}
-                    />
-                </Row>
-            );
-
-            newArray.push(newRow);
-            key++;
-            this.setState({ testCasesToRender: newArray });
+            this.addRowToRender(row);
         });
+    }
+
+    addRowToRender(row) {
+        var newArray = this.state.testCasesToRender.slice();
+        var key = this.state.key + 1;
+
+        var newRow = (
+            <Row key={key}
+                testCaseId={row.id}
+                deleteTestCase={this.deleteTestCase}>
+                <TestCaseInput
+                    testCaseId={row.id}
+                    summary={row.summary}
+                    updateTestCase={this.updateTestCase}
+                    deleteTestCase={this.deleteTestCase}
+                    setSelectedTestCase={this.setSelectedTestCase}
+                />
+            </Row>
+        );
+
+        newArray.push(newRow);
+        this.setState({ testCasesToRender: newArray, key: key });
     }
 
     getTestCases = async () => {
