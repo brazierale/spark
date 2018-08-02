@@ -6,36 +6,40 @@ export class TestCaseList extends Component {
         super(props);
         
     this.state = {
-        testCases: this.props.testCases,
+        testCases: [],
         testCasesToRender: [],
         key: 0,
     };
         this.rebuildList = this.rebuildList.bind(this);
     }
 
-    componentDidMount() {
+    componentWillReceiveProps () {
+        //console.log(this.props.testCases);
         this.rebuildList();
     }
 
     render() {
+        //console.log(`rendering...`);
+        //console.log(this.props.testCases);
+        //console.log(this.state.testCasesToRender);
         return(
                 <div>{this.state.testCasesToRender}</div>
         );
     }
 
-    rebuildList = async () => {
+    rebuildList() {
         this.setState({ testCasesToRender: [], key: 0 })
-        let toBuild = this.state.testCases
+        let toBuild = this.props.testCases
         console.log(`to build...`);
-        console.log(this.state.testCases);
+        console.log(this.props.testCases);
         toBuild.forEach( (testCase) => {
+            //console.log(`Adding row to render...`)
+            //console.log(testCase);
             this.addRowToRender(testCase);
         });
     }
 
     addRowToRender(row) {
-        console.log(`adding row...`)
-        console.log(row);
         var newArray = this.state.testCasesToRender.slice();
         var key = this.state.key + 1;
 
@@ -52,6 +56,8 @@ export class TestCaseList extends Component {
         );
 
         newArray.push(newRow);
+        //console.log(`setting state to...`);
+        //console.log(newArray);
         this.setState({ testCasesToRender: newArray, key: key });
     }
 }

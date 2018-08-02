@@ -27,6 +27,8 @@ export class MainContainer extends Component {
     }
 
     render() {
+        console.log(`main container:`);
+        console.log(this.state.testCases);
         return(
             <div className="Main-container">
                 <div className="Test-case-list-container">
@@ -59,6 +61,7 @@ export class MainContainer extends Component {
 
         newArray.push(testCase);
         this.setState({ testCases: newArray })
+        //console.log(this.state.testCases);
     }    
 
     callGetTestCases = async () => {
@@ -79,6 +82,9 @@ export class MainContainer extends Component {
             var newTestCase = new TestCase(row.id, row.summary);
             this.addTestCase(newTestCase);
         })
+        this.addTestCase(entryRow);
+        //console.log(`Get request processed:`);
+        //console.log(this.state.testCases);
     }
 
     createTestCase = async (summary) => {
