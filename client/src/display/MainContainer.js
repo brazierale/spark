@@ -15,7 +15,6 @@ export class MainContainer extends Component {
         selectedTestCase: entryRow,
     };
         this.setSelectedTestCase = this.setSelectedTestCase.bind(this);
-        this.processGetRequest = this.processGetRequest.bind(this);
         this.callGetTestCases = this.callGetTestCases.bind(this);
         this.createTestCase = this.createTestCase.bind(this);
         this.updateTestCase = this.updateTestCase.bind(this);
@@ -70,24 +69,10 @@ export class MainContainer extends Component {
         
         if (response.status !== 200) throw Error(body.message);
 
-
-        await this.processGetRequest(body);
+        const express = JSON.parse(body.express);
+        const testCases = express.map((testCase) => new TestCase(testCase.id, testCase.summary));
+        this.setState({ testCases: testCases });
     };
-
-    processGetRequest(response) {
-        var res = JSON.parse(response.express);
-        this.setState({ testCases: [] });
-        let newArray = [];
-
-        res.forEach( (row) => {
-            var newTestCase = new TestCase(row.id, row.summary);
-            newArray.push(newTestCase);
-        })
-        newArray.push(entryRow);
-        //console.log(`Get request processed:`);
-        //console.log(this.state.testCases);
-        this.setState({ testCases: newArray });
-    }
 
     createTestCase = async (summary) => {
         console.log(`Creating new test case ${summary}`)

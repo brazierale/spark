@@ -2,54 +2,22 @@ import React, { Component } from 'react';
 import { Row } from './Row';
 
 export class TestCaseList extends Component {
-    constructor(props) {
-        super(props);
         
-        this.state = {
-            testCases: [],
-            testCasesToRender: [],
-            key: 0,
-        };
-        this.rebuildList = this.rebuildList.bind(this);
-    }
-
     componentWillReceiveProps(nextProps) {
         console.log(`Props:`);
+        console.log(this.props.testCases);
         console.log(nextProps.testCases);
-        this.setState({ testCases: nextProps.testCases });
-        console.log(this.state.testCases);
-        this.rebuildList();
     }
 
     render() {
         //console.log(`rendering...`);
         //console.log(this.props.testCases);
         //console.log(this.state.testCasesToRender);
-        return(
-                <div>{this.state.testCasesToRender}</div>
-        );
-    }
-
-    rebuildList() {
-        // this.setState({ testCasesToRender: [], key: 0 })
-        let toBuild = this.state.testCases
-        console.log(`to build...`);
-        console.log(this.state.testCases);
-        toBuild.forEach( (testCase) => {
-            //console.log(`Adding row to render...`)
-            //console.log(testCase);
-            this.addRowToRender(testCase);
-        });
-    }
-
-    addRowToRender(row) {
-        var newArray = this.state.testCasesToRender.slice();
-        var key = this.state.key + 1;
-
-        var newRow = (
-            <Row key={key}
-                testCaseId={row.id}
-                testCaseSummary={row.summary}
+        let k = 0;
+        const testCasesToRender = this.props.testCases.map((testCase) => 
+            <Row key={k++}
+                testCaseId={testCase.id}
+                testCaseSummary={testCase.summary}
                 createTestCase={this.props.createTestCase}
                 updateTestCase={this.props.updateTestCase}
                 deleteTestCase={this.props.deleteTestCase}
@@ -58,9 +26,8 @@ export class TestCaseList extends Component {
             </Row>
         );
 
-        newArray.push(newRow);
-        //console.log(`setting state to...`);
-        //console.log(newArray);
-        this.setState({ testCasesToRender: newArray, key: key });
+        return(
+                <div>{testCasesToRender}</div>
+        );
     }
 }
