@@ -6,9 +6,6 @@ import { DeleteTestCase } from  './DeleteTestCase';
 export class Row extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            testCaseId: this.props.testCaseId,
-        };
 
         this.handleUp = this.handleUp.bind(this);
         this.handleDown = this.handleDown.bind(this);
@@ -39,7 +36,7 @@ export class Row extends Component {
                     <div />
                 </div>
                 <div className="Row-id">
-                    {this.state.testCaseId}
+                    {this.props.testCaseId}
                 </div>
             </div>
         )

@@ -4,9 +4,6 @@ import PropTypes from 'prop-types';
 export class DeleteTestCase extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            id: props.testCaseId,
-        }
         
         this.deleteTestCase = this.deleteTestCase.bind(this);
     }
@@ -23,7 +20,7 @@ export class DeleteTestCase extends Component {
     }
 
     deleteTestCase() {
-        this.props.deleteTestCase(this.state.id);
+        this.props.deleteTestCase(this.props.testCaseId);
     }
 }
 

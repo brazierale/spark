@@ -4,14 +4,14 @@ import { DetailPane } from './DetailPane';
 import { TestCase } from '../modules/TestCase';
 import './Display.css'
 
-const entryRow = new TestCase(0, '');
+var entryRow = new TestCase(0, '');
 
 export class MainContainer extends Component {
     constructor(props) {
         super(props);
         
     this.state = {
-        testCases: [entryRow],
+        testCases: [],
         selectedTestCase: entryRow,
     };
         this.setSelectedTestCase = this.setSelectedTestCase.bind(this);
@@ -26,8 +26,6 @@ export class MainContainer extends Component {
     }
 
     render() {
-        console.log(`main container:`);
-        console.log(this.state.testCases);
         return(
             <div className="Main-container">
                 <div className="Test-case-list-container">
@@ -50,18 +48,31 @@ export class MainContainer extends Component {
     setSelectedTestCase(id) {
         let tc = entryRow;
         if(id !== 0) {
-            tc = this.state.testCases.find( (t) => { return t.id === id; });
+            tc = this.state.testCases.find( (t) => { return t.id === id });
         }
         this.setState({ selectedTestCase: tc });
     }
 
     addTestCase(testCase) {
-        var newArray = this.state.testCases.slice();
-
+        let newArray = this.state.testCases.slice(0, this.state.testCases.length - 1);
         newArray.push(testCase);
-        this.setState({ testCases: newArray })
-        //console.log(this.state.testCases);
-    }    
+        newArray.push(entryRow);
+        
+        this.setState({ testCases: newArray });
+    }
+// investigate what is going wrong here as immediate reaction is entryrow is removed
+    removeTestCase(testCase) {
+        let newArray = this.state.testCases.filter(tc => tc !== testCase);
+        this.setState({ testCases: newArray });
+    }
+
+    editTestCase(testCase, summary) {
+        let newArray = this.state.testCases;
+        let tcId = newArray.findIndex( (t) => { return t.id === testCase.id });
+
+        newArray[tcId].summary = summary;
+        this.setState({ testCases: newArray });
+    }
 
     callGetTestCases = async () => {
         const response = await fetch('/api/testCases');
@@ -69,13 +80,19 @@ export class MainContainer extends Component {
         
         if (response.status !== 200) throw Error(body.message);
 
+        // need to fix this not working when there are no test cases
         const express = JSON.parse(body.express);
         const testCases = express.map((testCase) => new TestCase(testCase.id, testCase.summary));
+
+        testCases.push(entryRow);
+
         this.setState({ testCases: testCases });
     };
 
     createTestCase = async (summary) => {
         console.log(`Creating new test case ${summary}`)
+        let mockTestCase = new TestCase(0, summary);
+        this.addTestCase(mockTestCase);
         var toSend = JSON.stringify({summary: summary});
 
         const response = await fetch('/api/testCases', {
@@ -92,7 +109,9 @@ export class MainContainer extends Component {
     }
 
     updateTestCase = async (id, summary) => {
-        console.log(`Updating row ${id} to ${summary}`);
+        console.log(`Updating test case ${id} to ${summary}`);
+        let mockTestCase = this.state.testCases.find( (t) => { return t.id === id });
+        this.editTestCase(mockTestCase, summary);
         var toSend = JSON.stringify({summary: summary});
         
         const response = await fetch(`/api/testCases/${id}`, {
@@ -110,8 +129,10 @@ export class MainContainer extends Component {
     }
 
     deleteTestCase = async (id) => {
-        console.log(`Deleting row ${id}`);
-
+        console.log(`Deleting test case ${id}`);
+        let mockTestCase = this.state.testCases.find( (t) => { return t.id === id });
+        this.removeTestCase(mockTestCase);
+        
         const response = await fetch(`/api/testCases/${id}`, {
             method: 'DELETE'
             }

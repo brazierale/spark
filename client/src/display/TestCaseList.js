@@ -3,16 +3,7 @@ import { Row } from './Row';
 
 export class TestCaseList extends Component {
         
-    componentWillReceiveProps(nextProps) {
-        console.log(`Props:`);
-        console.log(this.props.testCases);
-        console.log(nextProps.testCases);
-    }
-
     render() {
-        //console.log(`rendering...`);
-        //console.log(this.props.testCases);
-        //console.log(this.state.testCasesToRender);
         let k = 0;
         const testCasesToRender = this.props.testCases.map((testCase) => 
             <Row key={k++}

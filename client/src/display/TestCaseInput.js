@@ -14,6 +14,10 @@ export class TestCaseInput extends Component {
         this.handleFocus = this.handleFocus.bind(this);
     }
 
+    componentWillReceiveProps() {
+        this.setState({ summary: this.props.testCaseSummary });
+    }
+
     componentDidMount() {
         if (this.props.testCaseId === this.props.selectedTestCaseId) {
             this.nameInput.focus(); 
@@ -31,7 +35,8 @@ export class TestCaseInput extends Component {
                 value={this.state.summary}
                 onChange={this.handleUserInput}
                 onKeyPress={this.handleKeyPress}
-                onFocus={this.handleFocus}            />
+                onFocus={this.handleFocus}
+            />
         )
     }
     // update entry field type based on first character(s)
@@ -50,6 +55,7 @@ export class TestCaseInput extends Component {
                 this.props.createTestCase(this.state.summary);
             }
             else if (e.target.value === '') {
+                this.nameInput.blur();
                 this.props.deleteTestCase(this.props.testCaseId);
             }
             else {
