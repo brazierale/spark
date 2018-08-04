@@ -77,14 +77,16 @@ export class MainContainer extends Component {
     processGetRequest(response) {
         var res = JSON.parse(response.express);
         this.setState({ testCases: [] });
+        let newArray = [];
 
         res.forEach( (row) => {
             var newTestCase = new TestCase(row.id, row.summary);
-            this.addTestCase(newTestCase);
+            newArray.push(newTestCase);
         })
-        this.addTestCase(entryRow);
+        newArray.push(entryRow);
         //console.log(`Get request processed:`);
         //console.log(this.state.testCases);
+        this.setState({ testCases: newArray });
     }
 
     createTestCase = async (summary) => {

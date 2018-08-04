@@ -5,16 +5,19 @@ export class TestCaseList extends Component {
     constructor(props) {
         super(props);
         
-    this.state = {
-        testCases: [],
-        testCasesToRender: [],
-        key: 0,
-    };
+        this.state = {
+            testCases: [],
+            testCasesToRender: [],
+            key: 0,
+        };
         this.rebuildList = this.rebuildList.bind(this);
     }
 
-    componentWillReceiveProps () {
-        //console.log(this.props.testCases);
+    componentWillReceiveProps(nextProps) {
+        console.log(`Props:`);
+        console.log(nextProps.testCases);
+        this.setState({ testCases: nextProps.testCases });
+        console.log(this.state.testCases);
         this.rebuildList();
     }
 
@@ -28,10 +31,10 @@ export class TestCaseList extends Component {
     }
 
     rebuildList() {
-        this.setState({ testCasesToRender: [], key: 0 })
-        let toBuild = this.props.testCases
+        // this.setState({ testCasesToRender: [], key: 0 })
+        let toBuild = this.state.testCases
         console.log(`to build...`);
-        console.log(this.props.testCases);
+        console.log(this.state.testCases);
         toBuild.forEach( (testCase) => {
             //console.log(`Adding row to render...`)
             //console.log(testCase);
