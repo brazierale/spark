@@ -4,9 +4,8 @@ import { Row } from './Row';
 export class TestCaseList extends Component {
         
     render() {
-        let k = 0;
         const testCasesToRender = this.props.testCases.map((testCase) => 
-            <Row key={k++}
+            <Row key={testCase.id}
                 testCaseId={testCase.id}
                 testCaseSummary={testCase.summary}
                 createTestCase={this.props.createTestCase}
