@@ -60,7 +60,7 @@ export class MainContainer extends Component {
         
         this.setState({ testCases: newArray });
     }
-// investigate what is going wrong here as immediate reaction is entryrow is removed
+
     removeTestCase(testCase) {
         let newArray = this.state.testCases.filter(tc => tc !== testCase);
         this.setState({ testCases: newArray });
@@ -77,13 +77,14 @@ export class MainContainer extends Component {
     callGetTestCases = async () => {
         const response = await fetch('/api/testCases');
         const body = await response.json();
+        let testCases = [];
         
         if (response.status !== 200) throw Error(body.message);
 
-        // need to fix this not working when there are no test cases
-        const express = JSON.parse(body.express);
-        const testCases = express.map((testCase) => new TestCase(testCase.id, testCase.summary));
-
+        if (body.express.length > 0) {
+            const express = JSON.parse(body.express);
+            testCases = express.map((testCase) => new TestCase(testCase.id, testCase.summary));
+        }
         testCases.push(entryRow);
 
         this.setState({ testCases: testCases });
