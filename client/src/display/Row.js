@@ -60,5 +60,4 @@ Row.propTypes = {
     updateTestCase: PropTypes.func.isRequired,
     deleteTestCase: PropTypes.func.isRequired,
     setSelectedTestCase: PropTypes.func.isRequired,
-    editTestCaseSummary: PropTypes.func.isRequired,
 }

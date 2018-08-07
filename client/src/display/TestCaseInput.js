@@ -12,6 +12,8 @@ export class TestCaseInput extends Component {
         this.handleUserInput = this.handleUserInput.bind(this);
         this.handleKeyPress = this.handleKeyPress.bind(this);
         this.handleFocus = this.handleFocus.bind(this);
+        this.handleBlur = this.handleBlur.bind(this);
+        this.sendUpdate = this.sendUpdate.bind(this);
     }
 
     componentWillReceiveProps() {
@@ -36,6 +38,7 @@ export class TestCaseInput extends Component {
                 onChange={this.handleUserInput}
                 onKeyPress={this.handleKeyPress}
                 onFocus={this.handleFocus}
+                onBlur={this.handleBlur}
             />
         )
     }
@@ -51,23 +54,31 @@ export class TestCaseInput extends Component {
 
     handleKeyPress(e) {
         if (e.key === 'Enter') {
-            if(this.props.testCaseId === 0 && e.target.value !== '') {
-                this.props.createTestCase(this.state.summary);
-            }
-            else if (e.target.value === '') {
-                this.nameInput.blur();
-                this.props.deleteTestCase(this.props.testCaseId);
-                this.props.setSelectedTestCase(0);
-            }
-            else {
-                this.props.updateTestCase(this.props.testCaseId, this.state.summary);
-            }
+            this.sendUpdate(e.target.value);
         }
     }
 
     handleFocus() {
         console.log(`Focus on ${this.props.testCaseId}`);
         this.props.setSelectedTestCase(this.props.testCaseId);
+    }
+
+    handleBlur() {
+        this.sendUpdate(this.state.summary);
+    }
+
+    sendUpdate(summary) {
+        if(this.props.testCaseId === 0 && summary !== '') {
+            this.props.createTestCase(this.state.summary);
+        }
+        else if (summary === '' && this.props.testCaseId !== 0) {
+            this.nameInput.blur();
+            this.props.deleteTestCase(this.props.testCaseId);
+            this.props.setSelectedTestCase(0);
+        }
+        else if (this.props.testCaseId !==0) {
+            this.props.updateTestCase(this.props.testCaseId, this.state.summary);
+        }
     }
 }
 
