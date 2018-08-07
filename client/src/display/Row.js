@@ -56,5 +56,9 @@ export class Row extends Component {
 Row.propTypes = {
     testCaseId: PropTypes.number.isRequired,
 
+    createTestCase: PropTypes.func.isRequired,
+    updateTestCase: PropTypes.func.isRequired,
     deleteTestCase: PropTypes.func.isRequired,
+    setSelectedTestCase: PropTypes.func.isRequired,
+    editTestCaseSummary: PropTypes.func.isRequired,
 }

@@ -57,6 +57,7 @@ export class TestCaseInput extends Component {
             else if (e.target.value === '') {
                 this.nameInput.blur();
                 this.props.deleteTestCase(this.props.testCaseId);
+                this.props.setSelectedTestCase(0);
             }
             else {
                 this.props.updateTestCase(this.props.testCaseId, this.state.summary);

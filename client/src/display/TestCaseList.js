@@ -12,7 +12,8 @@ export class TestCaseList extends Component {
                 updateTestCase={this.props.updateTestCase}
                 deleteTestCase={this.props.deleteTestCase}
                 setSelectedTestCase={this.props.setSelectedTestCase}
-                selectedTestCaseId={this.props.selectedTestCase.id}>
+                selectedTestCaseId={this.props.selectedTestCase.id}
+            >
             </Row>
         );
 

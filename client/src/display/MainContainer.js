@@ -19,6 +19,8 @@ export class MainContainer extends Component {
         this.createTestCase = this.createTestCase.bind(this);
         this.updateTestCase = this.updateTestCase.bind(this);
         this.deleteTestCase = this.deleteTestCase.bind(this);
+        this.updateTestCase = this.updateTestCase.bind(this);
+        this.editTestCaseSummary = this.editTestCaseSummary.bind(this);
     }
 
     componentDidMount() {
@@ -54,6 +56,7 @@ export class MainContainer extends Component {
     }
 
     addTestCase(testCase) {
+        //remove the entry row first as it needs to remain at the end
         let newArray = this.state.testCases.slice(0, this.state.testCases.length - 1);
         newArray.push(testCase);
         newArray.push(entryRow);
@@ -66,11 +69,11 @@ export class MainContainer extends Component {
         this.setState({ testCases: newArray });
     }
 
-    editTestCase(testCase, summary) {
+    editTestCaseSummary(id, summary) {
         let newArray = this.state.testCases;
-        let tcId = newArray.findIndex( (t) => { return t.id === testCase.id });
+        let index = newArray.findIndex( (t) => { return t.id === id });
 
-        newArray[tcId].summary = summary;
+        newArray[index].summary = summary;
         this.setState({ testCases: newArray });
     }
 
@@ -92,7 +95,8 @@ export class MainContainer extends Component {
 
     createTestCase = async (summary) => {
         console.log(`Creating new test case ${summary}`)
-        let mockTestCase = new TestCase(0, summary);
+        let nextId = this.state.testCases[this.state.testCases.length-2].id + 1;
+        let mockTestCase = new TestCase(nextId, summary);
         this.addTestCase(mockTestCase);
         var toSend = JSON.stringify({summary: summary});
 
@@ -111,8 +115,7 @@ export class MainContainer extends Component {
 
     updateTestCase = async (id, summary) => {
         console.log(`Updating test case ${id} to ${summary}`);
-        let mockTestCase = this.state.testCases.find( (t) => { return t.id === id });
-        this.editTestCase(mockTestCase, summary);
+        this.editTestCaseSummary(id, summary);
         var toSend = JSON.stringify({summary: summary});
         
         const response = await fetch(`/api/testCases/${id}`, {
