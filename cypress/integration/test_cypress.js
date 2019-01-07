@@ -1,4 +1,4 @@
-describe('cypress test', function() {
+describe('Smoke test', function() {
 
     beforeEach(function() {
         // reset data to 1 new item
@@ -33,6 +33,21 @@ describe('cypress test', function() {
             .contains('Hello World!')
 
         // get the detail pane summary and check it matches the entered text
+
+    })
+
+    it('Detail pane displays updated text after updating a test', () => {
+        
+        cy.get('.Test-case[value="Hello World!"')
+            .click()
+            .type(' Updated')
+            .type('{Enter}')
+
+        cy.get('.Test-case[value="Hello World! Updated')
+            .click()
+        
+        cy.get('.Detail-pane-header h1')
+            .contains('Hello World! Updated')
 
     })
 
