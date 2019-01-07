@@ -78,21 +78,6 @@ export class MainContainer extends Component {
         this.setState({ testCases: newArray });
     }
 
-    // callGetTestCases = async () => {
-    //     const response = await fetch('/api/testCases');
-    //     const body = await response.json();
-    //     let testCases = [];
-        
-    //     if (body.success !== true) throw Error(body.message);
-
-    //     if (body.data.length > 0) {
-    //         testCases = body.data.map((testCase) => new TestCase(testCase.id, testCase.summary));
-    //     }
-    //     testCases.push(entryRow);
-
-    //     this.setState({ testCases: testCases });
-    // };
-
     callGetTestCases = async () => {
         let testCases = [];
 
@@ -109,55 +94,46 @@ export class MainContainer extends Component {
 
     createTestCase = async (summary) => {
         console.log(`Creating new test case ${summary}`)
+        //default to 1 for when there are no test cases
         let nextId = 1;
-        if (this.state.testCases.length > 1) { nextId = this.state.testCases[this.state.testCases.length-2].id + 1; }
+        if (this.state.testCases.length >1) { nextId = this.state.testCases[this.state.testCases.length-2].id + 1; }
+        
+        //create mock test case so UI is immediately updated
         let mockTestCase = new TestCase(nextId, summary);
         this.addTestCase(mockTestCase);
-        var toSend = JSON.stringify({ id: nextId, summary: summary});
-
-        const response = await fetch('/api/testCases', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: toSend
+        
+        axios.post("/api/testCases", {
+            id: nextId,
+            summary: summary
         })
-        this.callGetTestCases();
-
-        if (response.status !== 200) console.log(`Create test case ${summary} failed`);
+        .then(res => {
+            this.callGetTestCases();
+        })
+        .catch(err => console.log(err));
     }
 
     updateTestCase = async (id, summary) => {
         console.log(`Updating test case ${id} to ${summary}`);
         this.editTestCaseSummary(id, summary);
-        var toSend = JSON.stringify({ update: {summary: summary} });
-        
-        const response = await fetch(`/api/testCases/${id}`, {
-            method: 'PUT',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: toSend
+
+        axios.put(`/api/testCases/${id}`, {
+            update: {summary: summary}
         })
-        this.callGetTestCases();
-
-        if (response.status !== 200) console.log(`Update test case ${id} failed`);
-
+        .then(res => {
+            this.callGetTestCases();
+        })
+        .catch(err => console.log(err));
     }
 
     deleteTestCase = async (id) => {
         console.log(`Deleting test case ${id}`);
-        let mockTestCase = this.state.testCases.find( (t) => { return t.id === id });
+        let mockTestCase = this.state.testCases.find( t => { return t.id === id });
         this.removeTestCase(mockTestCase);
-        
-        const response = await fetch(`/api/testCases/${id}`, {
-            method: 'DELETE'
-            }
-        )
-        this.callGetTestCases();
 
-        if (response.status !== 200) console.log(`Delete test case ${id} failed`);
+        axios.delete(`/api/testCases/${id}`)
+            .then(res => {
+                this.callGetTestCases();
+            })
+            .catch(err => console.log(err));
     }
 }
