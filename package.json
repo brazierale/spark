@@ -9,6 +9,8 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "express": "^4.16.2",
+    "mongoose": "^5.4.2",
+    "morgan": "^1.9.1",
     "prop-types": "^15.6.2",
     "tedious": "^2.6.2"
   },
