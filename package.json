@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "scripts": {
     "client": "cd client && yarn start",
-    "server": "cd api && nodemon express.js",
+    "server": "cd api && nodemon server.js",
     "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
   },
   "dependencies": {
@@ -15,6 +15,6 @@
   },
   "devDependencies": {
     "concurrently": "^3.5.0",
-    "cypress": "^3.1.0"
+    "cypress": "^3.1.4"
   }
 }

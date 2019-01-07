@@ -2,7 +2,7 @@ describe('Smoke test', function() {
 
     beforeEach(function() {
         // reset data to 1 new item
-        cy.exec('node api/drop-data.js')
+        cy.exec('node api/support/dropData.js')
 
         cy.visit('/')
         
