@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+// x button to delete a test case
 export class DeleteTestCase extends Component {
     constructor(props) {
         super(props);

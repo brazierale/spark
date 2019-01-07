@@ -42,7 +42,7 @@ export class TestCaseInput extends Component {
             />
         )
     }
-    // update entry field type based on first character(s)
+    // update entry field type based on whether its empty or not
     handleUserInput(e) {
         let v = e.target.value;
         let t = 'Test-case-header';
@@ -68,9 +68,11 @@ export class TestCaseInput extends Component {
     }
 
     sendUpdate(summary) {
+        // create new test case if this is the entryRow
         if(this.props.testCaseId === 0 && summary !== '') {
             this.props.createTestCase(this.state.summary);
         }
+        // delete the test case if it is empty
         else if (summary === '' && this.props.testCaseId !== 0) {
             this.nameInput.blur();
             this.props.deleteTestCase(this.props.testCaseId);

@@ -5,6 +5,7 @@ import { TestCase } from '../modules/TestCase';
 import axios from "axios";
 import './Display.css'
 
+// the final row should always be the entryRow which is a placeholder test case to be edited
 var entryRow = new TestCase(0, '');
 
 export class MainContainer extends Component {
@@ -57,7 +58,7 @@ export class MainContainer extends Component {
     }
 
     addTestCase(testCase) {
-        //remove the entry row first as it needs to remain at the end
+        //remove the entry row first as it needs to remain at the end, then add it back at the end
         let newArray = this.state.testCases.slice(0, this.state.testCases.length - 1);
         newArray.push(testCase);
         newArray.push(entryRow);
@@ -114,6 +115,7 @@ export class MainContainer extends Component {
 
     updateTestCase = async (id, summary) => {
         console.log(`Updating test case ${id} to ${summary}`);
+        // mock the edit so UI is immediately updated
         this.editTestCaseSummary(id, summary);
 
         axios.put(`/api/testCases/${id}`, {
@@ -127,6 +129,7 @@ export class MainContainer extends Component {
 
     deleteTestCase = async (id) => {
         console.log(`Deleting test case ${id}`);
+        // mock the deletion so UI is immediately updated
         let mockTestCase = this.state.testCases.find( t => { return t.id === id });
         this.removeTestCase(mockTestCase);
 
