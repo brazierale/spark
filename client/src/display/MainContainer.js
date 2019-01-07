@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { TestCaseList } from './TestCaseList';
 import { DetailPane } from './DetailPane';
 import { TestCase } from '../modules/TestCase';
+import axios from "axios";
 import './Display.css'
 
 var entryRow = new TestCase(0, '');
@@ -77,20 +78,34 @@ export class MainContainer extends Component {
         this.setState({ testCases: newArray });
     }
 
-    callGetTestCases = async () => {
-        const response = await fetch('/api/testCases');
-        const body = await response.json();
-        let testCases = [];
+    // callGetTestCases = async () => {
+    //     const response = await fetch('/api/testCases');
+    //     const body = await response.json();
+    //     let testCases = [];
         
-        if (body.success !== true) throw Error(body.message);
+    //     if (body.success !== true) throw Error(body.message);
 
-        if (body.data.length > 0) {
-            testCases = body.data.map((testCase) => new TestCase(testCase.id, testCase.summary));
-        }
-        testCases.push(entryRow);
+    //     if (body.data.length > 0) {
+    //         testCases = body.data.map((testCase) => new TestCase(testCase.id, testCase.summary));
+    //     }
+    //     testCases.push(entryRow);
 
-        this.setState({ testCases: testCases });
-    };
+    //     this.setState({ testCases: testCases });
+    // };
+
+    callGetTestCases = async () => {
+        let testCases = [];
+
+        axios.get("/api/testCases")
+            .then(res => {
+                if (res.data.data.length > 0) {
+                    testCases = res.data.data.map((testCase) => new TestCase(testCase.id, testCase.summary));
+                }
+                testCases.push(entryRow);
+
+                this.setState({ testCases: testCases })
+            })
+    }
 
     createTestCase = async (summary) => {
         console.log(`Creating new test case ${summary}`)
