@@ -1,115 +1,82 @@
+const mongoose = require("mongoose");
 const express = require('express');
 const bodyParser = require('body-parser');
-const app = express();
-const Request = require('tedious').Request;
-const executeSql = require('./tedious');
-const TYPES = require('tedious').TYPES;
+const logger = require("morgan");
+const Data = require("./data");
 
-const TESTCASE = 'spark.dbo.TestCase';
+const app = express();
+const router = express.Router();
+
+// mongoDB connection to spark database
+const dbRoute = 'mongodb+srv://alex:dpAFhp9Or8o0ZKKQ@mongo-mvqti.mongodb.net/spark?retryWrites=true';
+mongoose.connect(
+  dbRoute,
+  { useNewUrlParser: true }
+);
+
+let db = mongoose.connection;
+
+db.once("open", () => {
+    console.log("Connected to database")
+});
+
+db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(logger("dev"));
 
 app.use((req, res, next) => {
     console.log('Request received by express');
     next();
 });
 
-app.get('/api/testCases', (req, res) => {
-    let sql = `SELECT * FROM ${TESTCASE} FOR JSON AUTO`;
 
-    let request = new Request(sql, (err) => {
-        if (err) {
-            console.log(`Error: ${err}`);
-            result = err;
-        }
-    });
-
-    executeSql(request, (result) => {
-        // should only log this when any actual result is returned
-        console.log('Returned test cases: ' + result);
-        res.send({ express: result });
+// for now GET gets all data, should be updated to only look in testcase collection?
+router.get("/testCases", (req,res) => {
+    Data.find((err, data) => {
+        if (err) return res.json( {success: false, error: err });
+        return res.json({ success:true, data: data });
     });
 });
 
-app.get('/api/testCases/:id', (req, res) => {
-    let sql = `SELECT * FROM ${TESTCASE} WHERE ID = @id FOR JSON AUTO`;
-
-    let request = new Request(sql, (err) => {
-        if (err) {
-            console.log(`Error: ${err}`);
-            result = err;
-        }
-    });
-
-    request.addParameter('id', TYPES.VarChar, req.params.id);
-
-    executeSql(request, (result) => {
-        // should only log this when any actual result is returned
-        console.log(`Returned test case:  ${result}`);
-        res.send({ express: result });
+// get details for a single test case
+router.get("/testCases/:id", (req, res) => {
+    Data.findOne( {id: req.params.id}, (err, data) => {
+        if (err) return res.json ( {success:false, error: err });
+        return res.json( {success:true, data: data });
     });
 });
 
-app.post('/api/testCases', (req, res) => {
-    let summary = req.body.summary;
-    let sql = `INSERT INTO ${TESTCASE} VALUES (@summary)`;
+// create a new test case
+router.post("/testCases", (req, res) => {
+    let data = new Data();
+    data.id = req.body.id;
+    data.summary = req.body.summary;
 
-    let request = new Request(sql, (err) => {
-        if (err) {
-            console.log(`Error: ${err}`);
-            result = err;
-        }
-    });
-
-    request.addParameter('summary', TYPES.VarChar, req.body.summary);
-    
-    executeSql(request, (result) => {
-        // need to only return the message when successfully added
-        console.log(`Added test case:  ${summary}`);
-        res.send({ express: result });
+    data.save(err => {
+        if (err) return res.json({success:false, error: err });
+        return res.json({ success: true });
     });
 });
 
-app.put('/api/testCases/:id', (req, res) => {
-    let newSummary = req.body.summary;
-    let sql = `UPDATE ${TESTCASE} SET Summary = @summary WHERE ID = @id`;
-
-    let request = new Request(sql, (err) => {
-        if (err) {
-            console.log(`Error: ${err}`);
-            result = err;
-        }
-    });
-
-    request.addParameter('id', TYPES.VarChar, req.params.id);
-    request.addParameter('summary', TYPES.VarChar, req.body.summary);
-
-    executeSql(request, (result) => {
-        // should only log this when any actual result is returned
-        console.log(`Updated test case:  ${req.params.id}: ${newSummary}`);
-        res.send({ express: result });
+// update an existing test case
+router.put("/testCases/:id", (req, res) => {
+    Data.findOneAndUpdate( {id: req.params.id}, req.body.update, err => {
+        if (err) return res.json({ success: false, error: err });
+        return res.json({ success: true });
     });
 });
 
-app.delete('/api/testCases/:id', (req, res) => {
-    let sql = `DELETE FROM ${TESTCASE} WHERE ID = @id`;
-
-    let request = new Request(sql, (err) => {
-        if (err) {
-            console.log(`Error: ${err}`);
-            result = err;
-        }
-    });
-
-    request.addParameter('id', TYPES.VarChar, req.params.id);
-    
-    executeSql(request, (result) => {
-        // need to only return the message when successfully deleted
-        console.log(`Deleted test case: ${req.params.id}`);
-        res.send({ express: result });
+// delete a test case
+router.delete("/testCases/:id", (req, res) => {
+    Data.findOneAndDelete( {id: req.params.id}, err => {
+        if (err) return res.send(err);
+        return res.json({ success: true });
     });
 });
 
+// append /api to http requests
+app.use("/api", router);
 
 app.listen(5000, () => console.log('Example app listening on port 5000!'));

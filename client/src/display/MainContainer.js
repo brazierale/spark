@@ -82,11 +82,10 @@ export class MainContainer extends Component {
         const body = await response.json();
         let testCases = [];
         
-        if (response.status !== 200) throw Error(body.message);
+        if (body.success !== true) throw Error(body.message);
 
-        if (body.express.length > 0) {
-            const express = JSON.parse(body.express);
-            testCases = express.map((testCase) => new TestCase(testCase.id, testCase.summary));
+        if (body.data.length > 0) {
+            testCases = body.data.map((testCase) => new TestCase(testCase.id, testCase.summary));
         }
         testCases.push(entryRow);
 
@@ -95,10 +94,11 @@ export class MainContainer extends Component {
 
     createTestCase = async (summary) => {
         console.log(`Creating new test case ${summary}`)
-        let nextId = this.state.testCases[this.state.testCases.length-2].id + 1;
+        let nextId = 1;
+        if (this.state.testCases.length > 1) { nextId = this.state.testCases[this.state.testCases.length-2].id + 1; }
         let mockTestCase = new TestCase(nextId, summary);
         this.addTestCase(mockTestCase);
-        var toSend = JSON.stringify({summary: summary});
+        var toSend = JSON.stringify({ id: nextId, summary: summary});
 
         const response = await fetch('/api/testCases', {
             method: 'POST',
@@ -116,7 +116,7 @@ export class MainContainer extends Component {
     updateTestCase = async (id, summary) => {
         console.log(`Updating test case ${id} to ${summary}`);
         this.editTestCaseSummary(id, summary);
-        var toSend = JSON.stringify({summary: summary});
+        var toSend = JSON.stringify({ update: {summary: summary} });
         
         const response = await fetch(`/api/testCases/${id}`, {
             method: 'PUT',
