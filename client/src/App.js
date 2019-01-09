@@ -14,12 +14,13 @@ class App extends Component {
     }
 
     onAddTestCase(e) {
-        
+
     }
 
     render() {
+        let i = 0;
         const testCasesToRender = this.props.testCases.map(testCase => 
-            <div>{testCase.id}:{testCase.summary}</div>
+            <div key={testCase.id}>{i++}  :  {testCase.summary}</div>
         );
         return (
             <div>

@@ -36,7 +36,7 @@ export function getTestCases() {
         axios.get("/api/testCases")
             .then(res => {
                 if (res.data.data.length > 0) {
-                    testCases = res.data.data.map((testCase) => new TestCase(testCase.id, testCase.summary));
+                    testCases = res.data.data.map((testCase) => new TestCase(testCase._id, testCase.summary));
                 }
                 testCases.push(blankTestCase);
             })
