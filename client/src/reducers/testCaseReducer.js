@@ -22,9 +22,9 @@ export default function testCaseReducer(state = blankState, action) {
             return {
                 ...state,
                 testCases: [
-                    ...state.testCases.slice(0, state.testCases.length-2),
+                    ...state.testCases.slice(0, state.testCases.length-1),
                     action.payload.testCase,
-                    ...state.testCases.slice(state.testCases.length-2)
+                    ...state.testCases.slice(state.testCases.length-1)
                 ]
             };
         case ADD_TEST_CASE_FAILURE:
