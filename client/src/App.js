@@ -1,27 +1,47 @@
 import React, { Component } from 'react';
-import { MainContainer } from './display/MainContainer';
-import logo from './small-header.svg';
-import './App.css';
+import { connect } from 'react-redux';
+import { addTestCase, getTestCases } from './actions/testcase-actions';
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <Header />
-        <MainContainer />
-        </div>
-    );
-  }
+    constructor(props) {
+        super(props);
+
+        this.onAddTestCase = this.onAddTestCase.bind(this);
+    }
+
+    componentDidMount() {
+        this.props.onGetTestCases();
+    }
+
+    onAddTestCase(e) {
+        
+    }
+
+    render() {
+        const testCasesToRender = this.props.testCases.map(testCase => 
+            <div>{testCase.id}:{testCase.summary}</div>
+        );
+        return (
+            <div>
+                <h1>Test</h1>
+                <input onKeyPress={this.onAddTestCase}/>
+                <div>{testCasesToRender}</div>
+            </div>
+        )
+    }
 }
 
-function Header(props) {
-  return (
-    <div className="Header">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-        </header>
-      </div>
-  );
-}
+const mapStateToProps = state => {    
+    return {
+        testCases: state.testCases,
+        loading: state.loading,
+        error: state.error
+    }
+};
 
-export default App;
+const mapActionsToProps = {
+    onAddTestCase: addTestCase,
+    onGetTestCases: getTestCases
+};
+
+export default connect(mapStateToProps, mapActionsToProps)(App);

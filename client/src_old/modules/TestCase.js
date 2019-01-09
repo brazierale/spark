@@ -4,5 +4,3 @@ export class TestCase {
         this.summary = summary;
     }
 }
-
-export const blankTestCase = new TestCase(0, '');
