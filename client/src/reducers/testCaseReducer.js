@@ -1,8 +1,10 @@
 import {
-    ADD_TEST_CASE,
     GET_TESTCASES_BEGIN,
     GET_TESTCASES_SUCCESS,
-    GET_TESTCASES_FAILURE
+    GET_TESTCASES_FAILURE,
+    ADD_TEST_CASE_BEGIN,
+    ADD_TEST_CASE_SUCCESS,
+    ADD_TEST_CASE_FAILURE
 } from '../actions/testcase-actions';
 import { blankTestCase } from '../modules/TestCase';
 
@@ -12,10 +14,21 @@ const blankState = {
     error: null
 }
 
-export default function userReducer(state = blankState, action) {
+export default function testCaseReducer(state = blankState, action) {
     switch (action.type) {
-        case ADD_TEST_CASE:
-            return action.testCase.id;
+        case ADD_TEST_CASE_BEGIN:
+            return state;
+        case ADD_TEST_CASE_SUCCESS:
+            return {
+                ...state,
+                testCases: [
+                    ...state.testCases.slice(0, state.testCases.length-2),
+                    action.payload.testCase,
+                    ...state.testCases.slice(state.testCases.length-2)
+                ]
+            };
+        case ADD_TEST_CASE_FAILURE:
+            return state;
         case GET_TESTCASES_BEGIN:
             return {
                 ...state,

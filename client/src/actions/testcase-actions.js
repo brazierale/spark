@@ -1,7 +1,9 @@
 import { TestCase, blankTestCase } from '../modules/TestCase';
 import axios from 'axios';
 
-export const ADD_TEST_CASE = 'addTestCase';
+export const ADD_TEST_CASE_BEGIN = 'ADD_TESTCASE_BEGIN';
+export const ADD_TEST_CASE_SUCCESS = 'ADD_TESTCASE_SUCCESS';
+export const ADD_TEST_CASE_FAILURE = 'ADD_TESTCASE_FAILURE';
 export const GET_TESTCASES_BEGIN = 'GET_TESTCASES_BEGIN';
 export const GET_TESTCASES_SUCCESS = 'GET_TESTCASES_SUCCESS';
 export const GET_TESTCASES_FAILURE = 'GET_TESTCASES_FAILURE';
@@ -17,14 +19,30 @@ export const getTestCasesFailure = err => ({
     type: GET_TESTCASES_FAILURE,
     payload: { err }
 });
+export const addTestCasesBegin = () => ({
+    type: ADD_TEST_CASE_BEGIN
+});
+export const addTestCaseSuccess = (testCase) => ({
+    type: ADD_TEST_CASE_SUCCESS,
+    payload: { testCase }
+});
+export const addTestCaseFailure = (err) => ({
+    type: ADD_TEST_CASE_FAILURE,
+    payload: { err }
+})
 
 export function addTestCase(testCase) {
-    return {
-        type: ADD_TEST_CASE,
-        testCase: {
-            id: testCase.id,
+    return dispatch => {
+        dispatch(addTestCasesBegin());
+
+        axios.post("/api/testCases", {
             summary: testCase.summary
-        }
+        })
+        .then(res => {
+            dispatch(addTestCaseSuccess(testCase));
+            dispatch(getTestCases());
+        })
+        .catch(err => dispatch(addTestCaseFailure(err)));
     }
 }
 

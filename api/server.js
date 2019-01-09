@@ -42,7 +42,7 @@ router.get("/testCases", (req,res) => {
 
 // get details for a single test case
 router.get("/testCases/:id", (req, res) => {
-    Data.findOne( {id: req.params.id}, (err, data) => {
+    Data.findById( {id: req.params.id}, (err, data) => {
         if (err) return res.json ( {success:false, error: err });
         return res.json( {success:true, data: data });
     });
@@ -51,8 +51,7 @@ router.get("/testCases/:id", (req, res) => {
 // create a new test case
 router.post("/testCases", (req, res) => {
     let data = new Data();
-    const { id, summary } = req.body;
-    data.id = id;
+    const { summary } = req.body;
     data.summary = summary;
 
     data.save(err => {
@@ -63,7 +62,7 @@ router.post("/testCases", (req, res) => {
 
 // update an existing test case
 router.put("/testCases/:id", (req, res) => {
-    Data.findOneAndUpdate( {id: req.params.id}, req.body.update, err => {
+    Data.findByIdAndUpdate( {id: req.params.id}, req.body.update, err => {
         if (err) return res.json({ success: false, error: err });
         return res.json({ success: true });
     });
@@ -71,7 +70,7 @@ router.put("/testCases/:id", (req, res) => {
 
 // delete a test case
 router.delete("/testCases/:id", (req, res) => {
-    Data.findOneAndDelete( {id: req.params.id}, err => {
+    Data.findByIdAndDelete( {id: req.params.id}, err => {
         if (err) return res.send(err);
         return res.json({ success: true });
     });

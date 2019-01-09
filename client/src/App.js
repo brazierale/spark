@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addTestCase, getTestCases } from './actions/testcase-actions';
+import { TestCase } from './modules/TestCase';
 
 class App extends Component {
     constructor(props) {
@@ -13,8 +14,9 @@ class App extends Component {
         this.props.onGetTestCases();
     }
 
-    onAddTestCase(e) {
-
+    onAddTestCase() {
+        const newTestCase = new TestCase('10', 'adding this using redux');
+        this.props.onAddTestCase(newTestCase);
     }
 
     render() {
@@ -25,7 +27,7 @@ class App extends Component {
         return (
             <div>
                 <h1>Test</h1>
-                <input onKeyPress={this.onAddTestCase}/>
+                <button onClick={this.onAddTestCase}>ADD TESTCASE</button>
                 <div>{testCasesToRender}</div>
             </div>
         )
