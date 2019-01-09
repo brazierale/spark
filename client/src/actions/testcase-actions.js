@@ -1,6 +1,7 @@
 import { TestCase, blankTestCase } from '../modules/TestCase';
 import axios from 'axios';
 
+export const SET_SELECTED_TESTCASE = 'SET_SELECTED_TESTCASE'
 export const ADD_TEST_CASE_BEGIN = 'ADD_TESTCASE_BEGIN';
 export const ADD_TEST_CASE_SUCCESS = 'ADD_TESTCASE_SUCCESS';
 export const ADD_TEST_CASE_FAILURE = 'ADD_TESTCASE_FAILURE';
@@ -8,6 +9,10 @@ export const GET_TESTCASES_BEGIN = 'GET_TESTCASES_BEGIN';
 export const GET_TESTCASES_SUCCESS = 'GET_TESTCASES_SUCCESS';
 export const GET_TESTCASES_FAILURE = 'GET_TESTCASES_FAILURE';
 
+export const setSelectedTestCase = testCaseId => ({
+    type: SET_SELECTED_TESTCASE,
+    payload: { testCaseId }
+})
 export const getTestCasesBegin = () => ({
     type: GET_TESTCASES_BEGIN
 });
@@ -30,6 +35,12 @@ export const addTestCaseFailure = (err) => ({
     type: ADD_TEST_CASE_FAILURE,
     payload: { err }
 })
+
+export function setSelectedTestCaseById(testCaseId) {
+    return dispatch => {
+        dispatch(setSelectedTestCase(testCaseId));
+    }
+}
 
 export function addTestCase(testCase) {
     return dispatch => {

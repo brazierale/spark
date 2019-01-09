@@ -1,4 +1,5 @@
 import {
+    SET_SELECTED_TESTCASE,
     GET_TESTCASES_BEGIN,
     GET_TESTCASES_SUCCESS,
     GET_TESTCASES_FAILURE,
@@ -10,14 +11,24 @@ import { blankTestCase } from '../modules/TestCase';
 
 const blankState = {
     testCases: [blankTestCase],
+    selectedTestCase: blankTestCase,
     loading: false,
     error: null
 }
 
 export default function testCaseReducer(state = blankState, action) {
     switch (action.type) {
+        case SET_SELECTED_TESTCASE:
+            return {
+                ...state,
+                selectedTestCase: state.testCases.find(x => x.id === action.payload.testCaseId)
+            }
         case ADD_TEST_CASE_BEGIN:
-            return state;
+        return {
+            ...state,
+            loading: true,
+            error: null
+        }
         case ADD_TEST_CASE_SUCCESS:
             return {
                 ...state,
@@ -28,7 +39,11 @@ export default function testCaseReducer(state = blankState, action) {
                 ]
             };
         case ADD_TEST_CASE_FAILURE:
-            return state;
+        return {
+            ...state,
+            loading: false,
+            error: action.payload.error
+        }
         case GET_TESTCASES_BEGIN:
             return {
                 ...state,
