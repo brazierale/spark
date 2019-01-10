@@ -15,6 +15,7 @@ export class Row extends Component {
                     <TestCaseInput
                         testCaseId={this.props.testCaseId}
                         testCaseSummary={this.props.testCaseSummary}
+                        setSelectedTestCaseById={this.props.setSelectedTestCaseById}
                     />
                 </div>
                 <DeleteTestCase 

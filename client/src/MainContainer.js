@@ -29,10 +29,11 @@ class MainContainer extends Component {
                     <h1>Test</h1>
                     <TestCaseList
                         testCases={this.props.testCases}
+                        setSelectedTestCaseById={this.props.onSetSelectedTestCaseById}
                     />
                 </div>
                 <div className="Detail-pane-container">
-                    <DetailPane selectedTestCaseId={this.props.selectedTestCase.id} />
+                    <DetailPane selectedTestCase={this.props.selectedTestCase} />
                 </div>
             </div>
         );
@@ -42,16 +43,16 @@ class MainContainer extends Component {
 const mapStateToProps = state => {    
     return {
         testCases: state.testCases,
-        selectedTestCase: state.selectedTestCase.id,
+        selectedTestCase: state.selectedTestCase,
         loading: state.loading,
         error: state.error
     }
 };
 
-const mapActionsToProps = {
+const mapDispatchToProps = {
     onAddTestCase: addTestCase,
     onGetTestCases: getTestCases,
-
+    onSetSelectedTestCaseById: setSelectedTestCaseById,
 };
 
-export default connect(mapStateToProps, mapActionsToProps)(MainContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(MainContainer);

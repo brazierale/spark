@@ -21,7 +21,7 @@ export default function testCaseReducer(state = blankState, action) {
         case SET_SELECTED_TESTCASE:
             return {
                 ...state,
-                selectedTestCase: state.testCases.find(x => x.id === action.payload.testCaseId)
+                selectedTestCase: state.testCases.find(x => x.id === action.payload.id)
             }
         case ADD_TEST_CASE_BEGIN:
         return {

@@ -9,9 +9,9 @@ export const GET_TESTCASES_BEGIN = 'GET_TESTCASES_BEGIN';
 export const GET_TESTCASES_SUCCESS = 'GET_TESTCASES_SUCCESS';
 export const GET_TESTCASES_FAILURE = 'GET_TESTCASES_FAILURE';
 
-export const setSelectedTestCase = testCaseId => ({
+export const setSelectedTestCase = id => ({
     type: SET_SELECTED_TESTCASE,
-    payload: { testCaseId }
+    payload: { id }
 })
 export const getTestCasesBegin = () => ({
     type: GET_TESTCASES_BEGIN
@@ -36,9 +36,9 @@ export const addTestCaseFailure = (err) => ({
     payload: { err }
 })
 
-export function setSelectedTestCaseById(testCaseId) {
+export function setSelectedTestCaseById(id) {
     return dispatch => {
-        dispatch(setSelectedTestCase(testCaseId));
+        dispatch(setSelectedTestCase(id));
     }
 }
 

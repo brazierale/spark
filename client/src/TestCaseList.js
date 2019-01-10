@@ -8,6 +8,7 @@ export class TestCaseList extends Component {
             <Row key={testCase.id}
                 testCaseId={testCase.id}
                 testCaseSummary={testCase.summary}
+                setSelectedTestCaseById={this.props.setSelectedTestCaseById}
             >
             </Row>
         );

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { setSelectedTestCaseById } from './actions/testcase-actions';
 
 export class TestCaseInput extends Component {
     constructor(props) {
@@ -60,7 +59,7 @@ export class TestCaseInput extends Component {
 
     handleFocus() {
         console.log(`Focus on ${this.props.testCaseId}`);
-        setSelectedTestCaseById(this.props.testCaseId);
+        this.props.setSelectedTestCaseById(this.props.testCaseId);
     }
 
     handleBlur() {
