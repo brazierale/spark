@@ -15,15 +15,6 @@ describe('Smoke test', function() {
         })
     })
 
-    it('Last row is the new row', () => {
-
-        cy.get('@lastRow').within(() => {
-            cy.get('.Row-id')
-                .contains(0)
-        })
-       
-    })
-
     it('Detail pane displays entered text after creating a new test', () => {
 
         cy.get('.Test-case[value="Hello World!"]')

@@ -19,34 +19,34 @@ export const setSelectedTestCase = id => ({
     type: SET_SELECTED_TESTCASE,
     payload: { id }
 });
-export const addTestCasesBegin = () => ({
-    type: ADD_TEST_CASE_BEGIN
-});
-export const addTestCaseSuccess = testCase => ({
-    type: ADD_TEST_CASE_SUCCESS,
+export const addTestCasesBegin = testCase => ({
+    type: ADD_TEST_CASE_BEGIN,
     payload: { testCase }
+});
+export const addTestCaseSuccess = () => ({
+    type: ADD_TEST_CASE_SUCCESS,
 });
 export const addTestCaseFailure = err => ({
     type: ADD_TEST_CASE_FAILURE,
     payload: { err }
 });
-export const deleteTestCasesBegin = () => ({
-    type: DELETE_TEST_CASE_BEGIN
-});
-export const deleteTestCaseSuccess = id => ({
-    type: DELETE_TEST_CASE_SUCCESS,
+export const deleteTestCasesBegin = id => ({
+    type: DELETE_TEST_CASE_BEGIN,
     payload: { id }
+});
+export const deleteTestCaseSuccess = () => ({
+    type: DELETE_TEST_CASE_SUCCESS
 });
 export const deleteTestCaseFailure = err => ({
     type: DELETE_TEST_CASE_FAILURE,
     payload: { err }
 });
-export const updateTestCasesBegin = () => ({
-    type: UPDATE_TEST_CASE_BEGIN
-});
-export const updateTestCaseSuccess = testCase => ({
-    type: UPDATE_TEST_CASE_SUCCESS,
+export const updateTestCasesBegin = testCase => ({
+    type: UPDATE_TEST_CASE_BEGIN,
     payload: { testCase }
+});
+export const updateTestCaseSuccess = () => ({
+    type: UPDATE_TEST_CASE_SUCCESS
 });
 export const updateTestCaseFailure = err => ({
     type: UPDATE_TEST_CASE_FAILURE,
@@ -72,13 +72,13 @@ export function setSelectedTestCaseById(id) {
 
 export function addTestCase(testCase) {
     return dispatch => {
-        dispatch(addTestCasesBegin());
+        dispatch(addTestCasesBegin(testCase));
 
         axios.post("/api/testCases", {
             summary: testCase.summary
         })
         .then(res => {
-            dispatch(addTestCaseSuccess(testCase));
+            dispatch(addTestCaseSuccess());
             dispatch(getTestCases());
         })
         .catch(err => dispatch(addTestCaseFailure(err)));
@@ -87,10 +87,10 @@ export function addTestCase(testCase) {
 
 export function deleteTestCaseById(id) {
     return dispatch => {
-        dispatch(deleteTestCasesBegin());
+        dispatch(deleteTestCasesBegin(id));
         axios.delete(`/api/testCases/${id}`)
         .then(res => {
-            dispatch(deleteTestCaseSuccess(id));
+            dispatch(deleteTestCaseSuccess());
             dispatch(getTestCases());
         })
         .catch(err => dispatch(deleteTestCaseFailure(err)));
@@ -99,14 +99,14 @@ export function deleteTestCaseById(id) {
 
 export function updateTestCase(testCase) {
     return dispatch => {
-        dispatch(updateTestCasesBegin());
+        const updatedTestCase = new TestCase(testCase.id, testCase.summary);
+        dispatch(updateTestCasesBegin(updatedTestCase));
 
         axios.put(`/api/testCases/${testCase.id}`, {
             update: {summary: testCase.summary}
         })
         .then(res => {
-            const updatedTestCase = new TestCase(testCase.id, testCase.summary);
-            dispatch(updateTestCaseSuccess(updatedTestCase));
+            dispatch(updateTestCaseSuccess());
             dispatch(getTestCases());
         })
     }

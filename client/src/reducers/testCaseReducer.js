@@ -33,17 +33,17 @@ export default function testCaseReducer(state = blankState, action) {
         case ADD_TEST_CASE_BEGIN:
             return {
                 ...state,
+                testCases: [
+                    ...state.testCases.slice(0, state.testCases.length-1),
+                    action.payload.testCase,
+                    blankTestCase
+                ],
                 saving: true,
                 error: null
             }
         case ADD_TEST_CASE_SUCCESS:
             return {
                 ...state,
-                testCases: [
-                    ...state.testCases.slice(0, state.testCases.length-1),
-                    action.payload.testCase,
-                    blankTestCase
-                ],
                 saving: false
             };
         case ADD_TEST_CASE_FAILURE:
@@ -55,15 +55,15 @@ export default function testCaseReducer(state = blankState, action) {
         case DELETE_TEST_CASE_BEGIN:
             return {
                 ...state,
+                testCases: [
+                    ...state.testCases.filter(tc => tc.id !== action.payload.id)
+                ],
                 saving: true,
                 error: null
             }
         case DELETE_TEST_CASE_SUCCESS:
             return {
                 ...state,
-                testCases: [
-                    ...state.testCases.filter(tc => tc.id !== action.payload.id)
-                ],
                 saving: false
             };
         case DELETE_TEST_CASE_FAILURE:
@@ -73,12 +73,6 @@ export default function testCaseReducer(state = blankState, action) {
                 error: action.payload.error
             }
         case UPDATE_TEST_CASE_BEGIN:
-            return {
-                ...state,
-                saving: true,
-                error: null
-            }
-        case UPDATE_TEST_CASE_SUCCESS:
             let newArray = state.testCases;
             let index = newArray.findIndex( tc => {return tc.id === action.payload.testCase.id });
 
@@ -87,6 +81,12 @@ export default function testCaseReducer(state = blankState, action) {
             return {
                 ...state,
                 testCases: newArray,
+                saving: true,
+                error: null
+            }
+        case UPDATE_TEST_CASE_SUCCESS:
+            return {
+                ...state,
                 saving: false
             };
         case UPDATE_TEST_CASE_FAILURE:

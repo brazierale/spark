@@ -71,7 +71,7 @@ export class TestCaseInput extends Component {
 
     handleBlur() {
         if(this.props.testCaseId === 0 && this.state.summary !== '') {
-            this.sendUpdate(this.state.summary);
+            //this.sendUpdate(this.state.summary);
         }
     }
     
@@ -80,7 +80,7 @@ export class TestCaseInput extends Component {
         if(this.props.testCaseId === 0 && summary !== '') {
             const newTestCase = new TestCase(999, summary);
             this.props.addTestCase(newTestCase);
-            this.setState({ summary: '' })
+            this.setState({ summary: '' });
         }
         // delete the test case if it is empty
         else if (summary === '' && this.props.testCaseId !== 0) {

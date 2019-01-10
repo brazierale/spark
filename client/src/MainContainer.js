@@ -26,7 +26,6 @@ class MainContainer extends Component {
         return(
             <div className="Main-container">
                 <div className="Test-case-list-container">
-                    <h1>Test</h1>
                     <TestCaseList
                         testCases={this.props.testCases}
                     />

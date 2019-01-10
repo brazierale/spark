@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 
 // right-hand pane displaying details of selected test case
 export class DetailPane extends Component {
@@ -19,8 +18,4 @@ export class DetailPane extends Component {
             return null
         }
     }
-}
-
-DetailPane.propTypes = {
-    selectedTestCase: PropTypes.object,
 }
