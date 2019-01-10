@@ -62,7 +62,7 @@ router.post("/testCases", (req, res) => {
 
 // update an existing test case
 router.put("/testCases/:id", (req, res) => {
-    Data.findByIdAndUpdate( {id: req.params.id}, req.body.update, err => {
+    Data.findByIdAndUpdate( req.params.id, req.body.update, err => {
         if (err) return res.json({ success: false, error: err });
         return res.json({ success: true });
     });

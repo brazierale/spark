@@ -103,12 +103,13 @@ export function updateTestCase(testCase) {
         dispatch(updateTestCasesBegin(updatedTestCase));
 
         axios.put(`/api/testCases/${testCase.id}`, {
-            update: {summary: testCase.summary}
+            update: {summary: updatedTestCase.summary}
         })
         .then(res => {
             dispatch(updateTestCaseSuccess());
             dispatch(getTestCases());
         })
+        .catch(err => dispatch(deleteTestCaseFailure(err)));
     }
 }
 

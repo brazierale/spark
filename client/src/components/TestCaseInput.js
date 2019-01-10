@@ -22,12 +22,6 @@ export class TestCaseInput extends Component {
         this.setState({ summary: this.props.testCaseSummary });
     }
 
-    componentDidMount() {
-        //if (this.props.testCaseId === this.props.selectedTestCaseId) {
-        //    this.nameInput.focus(); 
-        //}
-    }
-
     render() {
         let classes = classNames(
             this.state.entryType,
@@ -71,9 +65,7 @@ export class TestCaseInput extends Component {
     }
 
     handleBlur() {
-        if(this.props.testCaseId === 0 && this.state.summary !== '') {
-            //this.sendUpdate(this.state.summary);
-        }
+        this.sendUpdate(this.state.summary);
     }
     
     sendUpdate(summary) {
@@ -90,8 +82,8 @@ export class TestCaseInput extends Component {
             this.props.setSelectedTestCaseById(0);
         }
         else if (this.props.testCaseId !==0) {
-            const toUpdate = new TestCase(this.props.testCaseId, this.state.summary);
-            this.props.updateTestCase(toUpdate);
+            const updatedTestCase = new TestCase(this.props.testCaseId, summary);
+            this.props.updateTestCase(updatedTestCase);
         }
     }
 }
