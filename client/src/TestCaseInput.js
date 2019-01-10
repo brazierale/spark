@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import classNames from 'classnames';
 
 export class TestCaseInput extends Component {
     constructor(props) {
@@ -26,13 +27,19 @@ export class TestCaseInput extends Component {
     }
 
     render() {
+        let classes = classNames(
+            this.state.entryType,
+            {
+                'Selected-input': this.props.isSelected
+            }
+        )
         return (
             <input
                 ref={(input) => { this.nameInput = input; }}
                 type="text"
                 maxLength="255"
                 placeholder="Enter your test case here..."
-                className={this.state.entryType}
+                className={classes}
                 value={this.state.summary}
                 onChange={this.handleUserInput}
                 onKeyPress={this.handleKeyPress}
@@ -65,8 +72,10 @@ export class TestCaseInput extends Component {
     handleBlur() {
         //this.sendUpdate(this.state.summary);
     }
-
+    
     sendUpdate(summary) {
-        //needs updating
+        if(this.props.testCaseId === 0 && summary !== '') {
+            this.props.createTestCase(this.state.summary);
+        }
     }
 }

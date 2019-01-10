@@ -10,6 +10,7 @@ export class DetailPane extends Component {
                 <div className="Detail-pane">
                     <div className="Detail-pane-header">
                         <h1>{this.props.selectedTestCase.summary}</h1>
+                        <p>{this.props.selectedTestCase.id}</p>
                     </div>
                 </div>
             )            

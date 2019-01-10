@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addTestCase, getTestCases, setSelectedTestCaseById } from './actions/testcase-actions';
+import { addTestCase, getTestCases } from './actions/testcase-actions';
 import { TestCase } from './modules/TestCase';
 import { TestCaseList } from './TestCaseList';
 import { DetailPane } from './DetailPane'
@@ -29,7 +29,6 @@ class MainContainer extends Component {
                     <h1>Test</h1>
                     <TestCaseList
                         testCases={this.props.testCases}
-                        setSelectedTestCaseById={this.props.onSetSelectedTestCaseById}
                     />
                 </div>
                 <div className="Detail-pane-container">
@@ -52,7 +51,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = {
     onAddTestCase: addTestCase,
     onGetTestCases: getTestCases,
-    onSetSelectedTestCaseById: setSelectedTestCaseById,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainContainer);
