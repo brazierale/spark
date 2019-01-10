@@ -20,7 +20,6 @@ export class DeleteTestCase extends Component {
     }
 
     deleteTestCase() {
-        //TODO - create delete test case action and implement in reducer
-        //onDeleteTestCase();
+        this.props.deleteTestCaseById(this.props.testCaseId)
     }
 }

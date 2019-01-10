@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
-import { addTestCase, setSelectedTestCaseById } from './actions/testcase-actions';
+import { addTestCase, deleteTestCaseById, updateTestCase, setSelectedTestCaseById } from './actions/testcase-actions';
 import { TestCaseInput } from './TestCaseInput'
 import { DeleteTestCase } from  './DeleteTestCase';
 
@@ -22,13 +22,16 @@ class Row extends Component {
                     <TestCaseInput
                         testCaseId={this.props.testCaseId}
                         testCaseSummary={this.props.testCaseSummary}
-                        addTestCase={ testCase => this.props.onAddTestCase(testCase) }
-                        isSelected={ isSelected }
+                        addTestCase={testCase => this.props.onAddTestCase(testCase)}
+                        deleteTestCaseById={id => this.props.onDeleteTestCaseById(id)}
+                        updateTestCase={testCase => this.props.onUpdateTestCase(testCase)}
+                        isSelected={isSelected}
                         setSelectedTestCaseById={id => this.props.onSetSelectedTestCaseById(id)}
                     />
                 </div>
                 <DeleteTestCase 
                     testCaseId={this.props.testCaseId}
+                    deleteTestCaseById={id => this.props.onDeleteTestCaseById(id)}
                 />
                 <div className="Arrows">
                     <div />
@@ -51,6 +54,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
     onAddTestCase: addTestCase,
+    onDeleteTestCaseById: deleteTestCaseById,
+    onUpdateTestCase: updateTestCase,
     onSetSelectedTestCaseById: setSelectedTestCaseById,
 };
 

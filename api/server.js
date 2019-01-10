@@ -70,7 +70,7 @@ router.put("/testCases/:id", (req, res) => {
 
 // delete a test case
 router.delete("/testCases/:id", (req, res) => {
-    Data.findByIdAndDelete( {id: req.params.id}, err => {
+    Data.findByIdAndDelete( req.params.id, err => {
         if (err) return res.send(err);
         return res.json({ success: true });
     });

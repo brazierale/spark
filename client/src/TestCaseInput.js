@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
+import { TestCase } from './modules/TestCase';
 
 export class TestCaseInput extends Component {
     constructor(props) {
@@ -65,17 +66,31 @@ export class TestCaseInput extends Component {
     }
 
     handleFocus() {
-        console.log(`Focus on ${this.props.testCaseId}`);
         this.props.setSelectedTestCaseById(this.props.testCaseId);
     }
 
     handleBlur() {
-        //this.sendUpdate(this.state.summary);
+        if(this.props.testCaseId === 0 && this.state.summary !== '') {
+            this.sendUpdate(this.state.summary);
+        }
     }
     
     sendUpdate(summary) {
+        // create new test case if this is the entryRow
         if(this.props.testCaseId === 0 && summary !== '') {
-            this.props.createTestCase(this.state.summary);
+            const newTestCase = new TestCase(999, summary);
+            this.props.addTestCase(newTestCase);
+            this.setState({ summary: '' })
+        }
+        // delete the test case if it is empty
+        else if (summary === '' && this.props.testCaseId !== 0) {
+            this.nameInput.blur();
+            this.props.deleteTestCaseById(this.props.testCaseId);
+            this.props.setSelectedTestCaseById(0);
+        }
+        else if (this.props.testCaseId !==0) {
+            const toUpdate = new TestCase(this.props.testCaseId, this.state.summary);
+            this.props.updateTestCase(toUpdate);
         }
     }
 }
