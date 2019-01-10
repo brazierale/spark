@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
-import { addTestCase, deleteTestCaseById, updateTestCase, setSelectedTestCaseById } from './actions/testcase-actions';
-import { TestCaseInput } from './TestCaseInput'
-import { DeleteTestCase } from  './DeleteTestCase';
+
+import { addTestCase, deleteTestCaseById, updateTestCase, setSelectedTestCaseById } from '../actions/testcase-actions';
+import { TestCaseInput } from '../components/TestCaseInput'
+import { DeleteTestCase } from  '../components/DeleteTestCase';
 
 class Row extends Component {
 

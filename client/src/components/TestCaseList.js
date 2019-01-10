@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import Row from './Row';
+
+import Row from '../connected-components/Row';
 
 export class TestCaseList extends Component {
         

@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addTestCase, getTestCases } from './actions/testcase-actions';
-import { TestCase } from './modules/TestCase';
-import { TestCaseList } from './TestCaseList';
-import { DetailPane } from './DetailPane'
-import './Display.css'
+
+import { addTestCase, getTestCases } from '../actions/testcase-actions';
+import { TestCase } from '../modules/TestCase';
+import { TestCaseList } from '../components/TestCaseList';
+import { DetailPane } from '../components/DetailPane'
+import '../support/Display.css'
 
 class MainContainer extends Component {
     constructor(props) {

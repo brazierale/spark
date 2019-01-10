@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import { TestCase } from './modules/TestCase';
+
+import { TestCase } from '../modules/TestCase';
 
 export class TestCaseInput extends Component {
     constructor(props) {
