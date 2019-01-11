@@ -32,6 +32,8 @@ class Row extends Component {
                 </div>
                 <DeleteTestCase 
                     testCaseId={this.props.testCaseId}
+                    isSelected={isSelected}
+                    setSelectedTestCaseById={id => this.props.onSetSelectedTestCaseById(id)}
                     deleteTestCaseById={id => this.props.onDeleteTestCaseById(id)}
                 />
                 <div className="Arrows">

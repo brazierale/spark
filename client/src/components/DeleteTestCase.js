@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { setSelectedTestCaseById } from '../actions/testcase-actions';
 
 // x button to delete a test case
 export class DeleteTestCase extends Component {
@@ -20,6 +21,10 @@ export class DeleteTestCase extends Component {
     }
 
     deleteTestCase() {
-        this.props.deleteTestCaseById(this.props.testCaseId)
+        // if the currently selected test case is being deleted, set the selected test case to entry row
+        if(this.props.isSelected) {
+            this.props.setSelectedTestCaseById(0);
+        }
+        this.props.deleteTestCaseById(this.props.testCaseId);
     }
 }

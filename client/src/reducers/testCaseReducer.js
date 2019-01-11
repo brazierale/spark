@@ -81,6 +81,7 @@ export default function testCaseReducer(state = blankState, action) {
             return {
                 ...state,
                 testCases: newArray,
+                selectedTestCase: newArray.find(x => x.id === state.selectedTestCase.id),
                 saving: true,
                 error: null
             }
@@ -105,6 +106,7 @@ export default function testCaseReducer(state = blankState, action) {
             return {
                 ...state,
                 testCases: action.payload.testCases,
+                selectedTestCase: action.payload.testCases.find(x => x.id === state.selectedTestCase.id),
                 loading: false,
                 error: null
             }

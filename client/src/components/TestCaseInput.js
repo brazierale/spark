@@ -29,20 +29,21 @@ export class TestCaseInput extends Component {
                 'Selected-input': this.props.isSelected
             }
         )
+        console.log('value: ' + this.state.summary)
         return (
             <input
-                ref={(input) => { this.nameInput = input; }}
-                type="text"
-                maxLength="255"
-                placeholder="Enter your test case here..."
-                className={classes}
-                value={this.state.summary}
-                onChange={this.handleUserInput}
-                onKeyPress={this.handleKeyPress}
-                onFocus={this.handleFocus}
-                onBlur={this.handleBlur}
+            ref={(input) => { this.nameInput = input; }}
+            type="text"
+            maxLength="255"
+            placeholder="Enter your test case here..."
+            className={classes}
+            value={this.state.summary}
+            onChange={this.handleUserInput}
+            onKeyPress={this.handleKeyPress}
+            onFocus={this.handleFocus}
+            onBlur={this.handleBlur}
             />
-        )
+            )
     }
     // update entry field type based on whether its empty or not
     handleUserInput(e) {
@@ -51,12 +52,14 @@ export class TestCaseInput extends Component {
 
         v === '' ? t = 'Empty' : t = 'Test-case';
 
-        this.setState({ entryType: t, summary: v})
+        if(e.key !== 'Enter') {
+            this.setState({ entryType: t, summary: v})
+        }
     }
 
     handleKeyPress(e) {
         if (e.key === 'Enter') {
-            this.sendUpdate(e.target.value);
+            this.sendUpdate(e.target.value, e.target);
         }
     }
 
@@ -65,6 +68,8 @@ export class TestCaseInput extends Component {
     }
 
     handleBlur() {
+        //try to only trigger on change
+        console.log(this.state.summary);
         this.sendUpdate(this.state.summary);
     }
     
@@ -77,9 +82,8 @@ export class TestCaseInput extends Component {
         }
         // delete the test case if it is empty
         else if (summary === '' && this.props.testCaseId !== 0) {
-            this.nameInput.blur();
-            this.props.deleteTestCaseById(this.props.testCaseId);
             this.props.setSelectedTestCaseById(0);
+            this.props.deleteTestCaseById(this.props.testCaseId);
         }
         else if (this.props.testCaseId !==0) {
             const updatedTestCase = new TestCase(this.props.testCaseId, summary);

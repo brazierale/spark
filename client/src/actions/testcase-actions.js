@@ -127,7 +127,6 @@ export function getTestCases() {
             })
             .then(() => {
                 dispatch(getTestCasesSuccess(testCases));
-                return testCases;
             })
             .catch(err => dispatch(getTestCasesFailure(err)));
     }
