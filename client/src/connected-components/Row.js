@@ -2,11 +2,22 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
 
-import { addTestCase, deleteTestCaseById, updateTestCase, setSelectedTestCaseById } from '../actions/testcase-actions';
+import { 
+    addTestCase,
+    deleteTestCaseById,
+    updateTestCase,
+    setSelectedTestCaseById,
+    updateSelectedTestCaseSummary
+} from '../actions/testcase-actions';
 import { TestCaseInput } from '../components/TestCaseInput'
 import { DeleteTestCase } from  '../components/DeleteTestCase';
 
 class Row extends Component {
+    constructor(props) {
+        super(props);
+
+        this.onUpdateSelectedTestCaseSummary = this.onUpdateSelectedTestCaseSummary.bind(this);
+    }
 
     render() {
         let isSelected = false;
@@ -26,8 +37,9 @@ class Row extends Component {
                         addTestCase={testCase => this.props.onAddTestCase(testCase)}
                         deleteTestCaseById={id => this.props.onDeleteTestCaseById(id)}
                         updateTestCase={testCase => this.props.onUpdateTestCase(testCase)}
-                        isSelected={isSelected}
                         setSelectedTestCaseById={id => this.props.onSetSelectedTestCaseById(id)}
+                        updateSelectedTestCaseSummary={summary => this.props.onUpdateSelectedTestCaseSummary(summary)}
+                        isSelected={isSelected}
                     />
                 </div>
                 <DeleteTestCase 
@@ -47,6 +59,9 @@ class Row extends Component {
             </div>
         )
     }
+    onUpdateSelectedTestCaseSummary(summary) {
+        this.props.onUpdateSelectedTestCaseSummary(summary);
+    };
 }
 
 const mapStateToProps = state => {    
@@ -60,6 +75,7 @@ const mapDispatchToProps = {
     onDeleteTestCaseById: deleteTestCaseById,
     onUpdateTestCase: updateTestCase,
     onSetSelectedTestCaseById: setSelectedTestCaseById,
+    onUpdateSelectedTestCaseSummary: updateSelectedTestCaseSummary
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Row);

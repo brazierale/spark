@@ -51,12 +51,13 @@ export class TestCaseInput extends Component {
 
         if(e.key !== 'Enter') {
             this.setState({ entryType: t, summary: v})
+            this.props.updateSelectedTestCaseSummary(e.target.value);
         }
     }
 
     handleKeyPress(e) {
         if (e.key === 'Enter') {
-            this.sendUpdate(e.target.value, e.target);
+            this.sendUpdate(e.target.value);
         }
     }
 

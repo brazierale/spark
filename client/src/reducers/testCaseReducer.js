@@ -1,5 +1,6 @@
 import {
     SET_SELECTED_TESTCASE,
+    UPDATE_SELECTED_TESTCASE_SUMMARY,
     GET_TESTCASES_BEGIN,
     GET_TESTCASES_SUCCESS,
     GET_TESTCASES_FAILURE,
@@ -13,7 +14,7 @@ import {
     UPDATE_TEST_CASE_SUCCESS,
     UPDATE_TEST_CASE_FAILURE
 } from '../actions/testcase-actions';
-import { blankTestCase } from '../modules/TestCase';
+import { blankTestCase, TestCase } from '../modules/TestCase';
 
 const blankState = {
     testCases: [blankTestCase],
@@ -29,6 +30,12 @@ export default function testCaseReducer(state = blankState, action) {
             return {
                 ...state,
                 selectedTestCase: state.testCases.find(x => x.id === action.payload.id)
+            }
+        case UPDATE_SELECTED_TESTCASE_SUMMARY:
+            let updatedTestCase = new TestCase(state.selectedTestCase.id, action.payload.summary);
+            return {
+                ...state,
+                selectedTestCase: updatedTestCase
             }
         case ADD_TEST_CASE_BEGIN:
             return {
