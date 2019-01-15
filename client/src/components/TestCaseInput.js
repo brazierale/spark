@@ -18,10 +18,6 @@ export class TestCaseInput extends Component {
         this.sendUpdate = this.sendUpdate.bind(this);
     }
 
-    componentWillReceiveProps() {
-        this.setState({ summary: this.props.testCaseSummary });
-    }
-
     render() {
         let classes = classNames(
             this.state.entryType,
@@ -48,6 +44,7 @@ export class TestCaseInput extends Component {
     // update entry field type based on whether its empty or not
     handleUserInput(e) {
         let v = e.target.value;
+        console.log('target value: ' + this.state.summary)
         let t = 'Test-case-header';
 
         v === '' ? t = 'Empty' : t = 'Test-case';
@@ -69,7 +66,6 @@ export class TestCaseInput extends Component {
 
     handleBlur() {
         //try to only trigger on change
-        console.log(this.state.summary);
         this.sendUpdate(this.state.summary);
     }
     

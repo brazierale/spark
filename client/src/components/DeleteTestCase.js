@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { setSelectedTestCaseById } from '../actions/testcase-actions';
 
 // x button to delete a test case
 export class DeleteTestCase extends Component {
