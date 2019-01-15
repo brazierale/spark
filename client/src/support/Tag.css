@@ -1,0 +1,13 @@
+.Tag-list {
+    padding: 0px 30px;
+}
+
+.Tag {
+    padding: 0px 5px;
+    margin: 0px 5px;
+    border: 1px solid blue;
+    border-radius: 2px;
+    background: lightblue;
+    font-weight: bold;
+    color: blue;
+}

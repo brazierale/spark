@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import DetailPane from './DetailPane'
 import { addTestCase, getTestCases } from '../actions/testcase-actions';
 import { TestCase } from '../modules/TestCase';
 import { TestCaseList } from '../components/TestCaseList';
-import { DetailPane } from '../components/DetailPane'
 import '../support/Display.css'
 
 class MainContainer extends Component {
@@ -27,12 +27,10 @@ class MainContainer extends Component {
         return(
             <div className="Main-container">
                 <div className="Test-case-list-container">
-                    <TestCaseList
-                        testCases={this.props.testCases}
-                    />
+                    <TestCaseList testCases={this.props.testCases} />
                 </div>
                 <div className="Detail-pane-container">
-                    <DetailPane selectedTestCase={this.props.selectedTestCase} />
+                    <DetailPane />
                 </div>
             </div>
         );
