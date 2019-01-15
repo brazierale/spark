@@ -100,7 +100,7 @@
     font-size: 1rem;
 }
 
-input {
+.Test-case-input {
     margin-left: 4px;
     width: 100%;
     border: none;
@@ -113,16 +113,16 @@ input {
     border-radius: 0px 2px 2px 0px;
 }
 
-input::placeholder {
+.Test-case-input::placeholder {
     color: #CCCCCC;
     font-style: italic;
 }
 
-input:hover{
+.Test-case-input:hover{
     box-shadow: -4px 0px 0px rgba(75, 109, 233, 0.5);
 }
 
-input:focus, .Selected-input{
+.Test-case-input:focus, .Selected-input{
     height:24px;
     outline: none;
     box-sizing: border-box;

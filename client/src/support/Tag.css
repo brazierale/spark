@@ -1,8 +1,21 @@
+.Tag-list-container {
+    margin: 0px 30px;
+    display: flex;
+    text-align: center;
+}
+
 .Tag-list {
-    padding: 0px 30px;
+    height: 20px;
+    margin-left: 10px;
+    padding: 5px;
+    background: white;
+    border-radius: 5px;
+    display: flex;
 }
 
 .Tag {
+    font-size: 0.8rem;
+    height: 18px;
     padding: 0px 5px;
     margin: 0px 5px;
     border: 1px solid blue;
@@ -10,4 +23,46 @@
     background: lightblue;
     font-weight: bold;
     color: blue;
+    cursor: default;
+}
+
+.Delete-tag {
+    font-size: 0.8rem;
+    color: rgba(0, 0, 255, 0.3);
+    padding: 0px 0px 0px 5px;
+    cursor: default;
+}
+
+.Delete-tag:hover {
+    color: blue;
+}
+
+.Tag-input {
+    margin: 0px;
+    padding: 0px;
+    padding-left:0px;
+    border: none;
+    height: 20px;
+    color: blue;
+    font-size: 0.8rem;
+}
+
+.Tag-input::placeholder {
+    color: #CCCCCC;
+    font-size: 0.8rem;
+    font-style: italic;
+}
+
+.Tag-input:focus {
+    outline: none;
+}
+
+
+
+.Test-case-input:focus, .Selected-input{
+    height:24px;
+    outline: none;
+    box-sizing: border-box;
+    box-shadow: -4px 0px 0px rgb(75, 109, 233);
+    background-color: #F6F7FE;
 }

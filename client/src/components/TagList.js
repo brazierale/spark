@@ -13,7 +13,16 @@ export class TagList extends Component {
         );
 
         return(
-                <div className="Tag-list">Tags: {tagsToRender}</div>
+            <div className="Tag-list-container">
+                <span>Tags: </span>
+                <span className="Tag-list">
+                    {tagsToRender}
+                    <input
+                        className="Tag-input"
+                        placeholder="Enter new tag..."
+                    />
+                </span>
+            </div>
         );
     }
 }

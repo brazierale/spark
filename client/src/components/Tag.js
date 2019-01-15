@@ -5,7 +5,10 @@ export class Tag extends Component {
 
     render() {
         return(
-                <span className="Tag">{this.props.tagName}</span>
+                <span className="Tag">
+                    {this.props.tagName}
+                    <span className="Delete-tag">x</span>
+                </span>
         );
     }
 }

@@ -22,6 +22,7 @@ export class TestCaseInput extends Component {
         let classes = classNames(
             this.state.entryType,
             {
+                'Test-case-input': true,
                 'Selected-input': this.props.isSelected
             }
         )
