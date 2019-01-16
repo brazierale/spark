@@ -61,7 +61,7 @@ class Row extends Component {
         )
     }
     onUpdateSelectedTestCaseSummary(summary) {
-        let updatedTestCase = new TestCase(this.props.selectedTestCase.id, summary)
+        let updatedTestCase = new TestCase(this.props.selectedTestCase.id, summary, this.props.selectedTestCase.tags)
         this.props.onUpdateSelectedTestCase(updatedTestCase);
     };
 }

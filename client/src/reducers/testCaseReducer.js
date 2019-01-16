@@ -14,7 +14,7 @@ import {
     UPDATE_TEST_CASE_SUCCESS,
     UPDATE_TEST_CASE_FAILURE
 } from '../actions/testcase-actions';
-import { blankTestCase, TestCase } from '../modules/TestCase';
+import { blankTestCase } from '../modules/TestCase';
 
 const blankState = {
     testCases: [blankTestCase],

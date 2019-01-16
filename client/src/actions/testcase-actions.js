@@ -86,7 +86,8 @@ export function addTestCase(testCase) {
         dispatch(addTestCasesBegin(testCase));
 
         axios.post("/api/testCases", {
-            summary: testCase.summary
+            summary: testCase.summary,
+            tags: testCase.tags
         })
         .then(res => {
             dispatch(addTestCaseSuccess());
@@ -110,11 +111,13 @@ export function deleteTestCaseById(id) {
 
 export function updateTestCase(testCase) {
     return dispatch => {
-        const updatedTestCase = new TestCase(testCase.id, testCase.summary);
-        dispatch(updateTestCasesBegin(updatedTestCase));
+        dispatch(updateTestCasesBegin(testCase));
 
         axios.put(`/api/testCases/${testCase.id}`, {
-            update: {summary: updatedTestCase.summary}
+            update: {
+                summary: testCase.summary,
+                tags: testCase.tags
+            }
         })
         .then(res => {
             dispatch(updateTestCaseSuccess());
@@ -132,7 +135,7 @@ export function getTestCases() {
         axios.get("/api/testCases")
             .then(res => {
                 if (res.data.data.length > 0) {
-                    testCases = res.data.data.map((testCase) => new TestCase(testCase._id, testCase.summary));
+                    testCases = res.data.data.map((testCase) => new TestCase(testCase._id, testCase.summary, testCase.tags));
                 }
                 testCases.push(blankTestCase);
             })

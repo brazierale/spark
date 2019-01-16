@@ -51,8 +51,9 @@ router.get("/testCases/:id", (req, res) => {
 // create a new test case
 router.post("/testCases", (req, res) => {
     let data = new Data();
-    const { summary } = req.body;
+    const { summary, tags } = req.body;
     data.summary = summary;
+    data.tags = tags;
 
     data.save(err => {
         if (err) return res.json({success:false, error: err });
