@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 
 import { TestCase } from '../modules/TestCase';
+import { generateId } from '../modules/IdGen';
 
 export class TestCaseInput extends Component {
     constructor(props) {
@@ -19,6 +20,7 @@ export class TestCaseInput extends Component {
     }
 
     render() {
+        console.log(this.props.testCaseId);
         let classes = classNames(
             this.state.entryType,
             {
@@ -71,7 +73,7 @@ export class TestCaseInput extends Component {
     sendUpdate(summary) {
         // create new test case if this is the entryRow
         if(this.props.testCaseId === 0 && summary !== '') {
-            const newTestCase = new TestCase(999, summary, ['test']);
+            const newTestCase = new TestCase(generateId(), summary, []);
             this.props.addTestCase(newTestCase);
             this.setState({ summary: '' });
         }

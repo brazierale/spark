@@ -6,4 +6,8 @@ export class TestCase {
     }
 }
 
-export const blankTestCase = new TestCase(0, '', []);
+export const blankTestCase = new TestCase(
+    0,
+    '',
+    []
+);
