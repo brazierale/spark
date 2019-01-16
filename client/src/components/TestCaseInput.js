@@ -26,7 +26,6 @@ export class TestCaseInput extends Component {
                 'Selected-input': this.props.isSelected
             }
         )
-        console.log('value: ' + this.state.summary)
         return (
             <input
             ref={(input) => { this.nameInput = input; }}
@@ -50,10 +49,8 @@ export class TestCaseInput extends Component {
 
         v === '' ? t = 'Empty' : t = 'Test-case';
 
-        if(e.key !== 'Enter') {
-            this.setState({ entryType: t, summary: v})
-            this.props.updateSelectedTestCaseSummary(e.target.value);
-        }
+        this.setState({ entryType: t, summary: v})
+        this.props.updateSelectedTestCaseSummary(e.target.value);
     }
 
     handleKeyPress(e) {
@@ -74,7 +71,7 @@ export class TestCaseInput extends Component {
     sendUpdate(summary) {
         // create new test case if this is the entryRow
         if(this.props.testCaseId === 0 && summary !== '') {
-            const newTestCase = new TestCase(999, summary, []);
+            const newTestCase = new TestCase(999, summary, ['test']);
             this.props.addTestCase(newTestCase);
             this.setState({ summary: '' });
         }

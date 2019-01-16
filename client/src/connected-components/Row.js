@@ -43,20 +43,12 @@ class Row extends Component {
                         isSelected={isSelected}
                     />
                 </div>
-                <DeleteTestCase 
-                    testCaseId={this.props.testCaseId}
-                    isSelected={isSelected}
-                    setSelectedTestCaseById={id => this.props.onSetSelectedTestCaseById(id)}
-                    deleteTestCaseById={id => this.props.onDeleteTestCaseById(id)}
-                />
-                <div className="Arrows">
-                    <div />
-                    <span className="Up arrow" onClick={this.handleUp} />
-                    <span className="Down arrow" onClick={this.handleDown} />
-                    <div />
-                </div>
-                <div className="Row-id">
-                </div>
+                    <DeleteTestCase 
+                        testCaseId={this.props.testCaseId}
+                        isSelected={isSelected}
+                        setSelectedTestCaseById={id => this.props.onSetSelectedTestCaseById(id)}
+                        deleteTestCaseById={id => this.props.onDeleteTestCaseById(id)}
+                    />
             </div>
         )
     }

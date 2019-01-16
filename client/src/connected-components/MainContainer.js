@@ -5,7 +5,6 @@ import DetailPane from './DetailPane'
 import { addTestCase, getTestCases } from '../actions/testcase-actions';
 import { TestCase } from '../modules/TestCase';
 import { TestCaseList } from '../components/TestCaseList';
-import '../support/Display.css'
 
 class MainContainer extends Component {
     constructor(props) {

@@ -1,43 +1,7 @@
-.Main-container {
-    display: flex;
-    position: absolute;
-    min-height: 100%;
-    width: 100%
-}
 
 .Test-case-list-container {
     width: 50%;
     padding: 60px 1px 20px 40px;
-}
-
-.Detail-pane-container {
-    min-height: 100%;
-    width: 50%;
-    padding: 60px 40px 20px 1px;
-}
-
-.Detail-pane {
-    min-height: 100%;
-    background: #F6F7FE;
-    box-sizing: border-box;
-    box-shadow: 2px 2px 5px #CCCCCC;
-    border-radius: 5px;
-    z-index: 2;
-}
-
-.Detail-pane-header {
-    padding: 20px 30px;
-}
-
-.Detail-pane-header h1 {
-    margin: 0px;
-    padding: 0px 0px 10px 0px;
-    font-size: 1.2rem;
-    border-bottom: 2px solid rgb(75, 109, 233);
-}
-
-.Detail-pane-container p {
-    font-size: 0.8rem;
 }
 
 .Row {
@@ -45,7 +9,7 @@
     display: grid;
     margin: auto;
     margin-top: 1px;
-    grid-template: 24px / auto 24px 24px 24px;
+    grid-template: 24px / auto  24px;
     background: white;
     box-sizing: border-box;
     box-shadow: 2px 2px 5px #CCCCCC;
@@ -64,33 +28,6 @@
     margin-right: 8px;
     line-height: 24px;
     text-align: right;
-}
-
-.Arrows {
-    display: grid;
-}
-
-.Up {
-    display: block;
-    width: 4px;
-    height: 4px;
-    border: solid black;
-    border-width: 0 2px 2px 0;
-    margin: auto;
-    transform: rotate(-135deg);
-    -webkit-transform: rotate(-135deg);
-}
-
-.Down {
-    display: block;
-    width: 4px;
-    height: 4px;
-    border: solid black;
-    border-width: 0 2px 2px 0;
-    margin: auto;
-    transform: rotate(45deg);
-    -webkit-transform: rotate(45deg);
-    align-self: center;
 }
 
 @import url('https://fonts.googleapis.com/css?family=Nunito');
@@ -131,10 +68,14 @@
 }
 
 .Delete-row {
+    color: #4B6DE9;
+    opacity: 0.4;
+    font-weight: bold;
     line-height: 24px;
     text-align: center;
     visibility: hidden;
     cursor: default;
+    transition: transform 0.05s ease-out;
 }
 
 .Row:hover .Delete-row {
@@ -142,6 +83,9 @@
 }
 
 .Delete-row:hover {
-    font-size: 120%;
-    font-weight: bold;
+    opacity: 1;
+}
+
+.Delete-row:active {
+    transform: scale(0.8);
 }

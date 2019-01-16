@@ -75,9 +75,9 @@ export function setSelectedTestCaseById(id) {
     }
 }
 
-export function updateSelectedTestCase(summary) {
+export function updateSelectedTestCase(testCase) {
     return dispatch => {
-        dispatch(updateSelectedTestCaseExecute(summary));
+        dispatch(updateSelectedTestCaseExecute(testCase));
     }
 }
 

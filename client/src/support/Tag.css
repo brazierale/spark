@@ -5,46 +5,48 @@
 }
 
 .Tag-list {
-    height: 20px;
+    width: 100%;
     margin-left: 10px;
-    padding: 5px;
     background: white;
+    border: 1px solid #CCCCCC;
     border-radius: 5px;
     display: flex;
+    flex-wrap: wrap;
 }
 
 .Tag {
     font-size: 0.8rem;
     height: 18px;
     padding: 0px 5px;
-    margin: 0px 5px;
-    border: 1px solid blue;
-    border-radius: 2px;
-    background: lightblue;
+    margin: 5px;
+    border: 1px solid #03A4CA;
+    border-radius: 5px;
+    background: #91E0F3;
     font-weight: bold;
-    color: blue;
+    color: #005B70;
     cursor: default;
 }
 
 .Delete-tag {
     font-size: 0.8rem;
-    color: rgba(0, 0, 255, 0.3);
+    color: #03A4CA;
     padding: 0px 0px 0px 5px;
     cursor: default;
 }
 
 .Delete-tag:hover {
-    color: blue;
+    color: #005B70;
 }
 
 .Tag-input {
-    margin: 0px;
-    padding: 0px;
+    flex: 1 1 auto;
+    font-size: 0.8rem;
+    color: #005B70;
+    margin: 5px;
+    padding: 0px 5px;
     padding-left:0px;
     border: none;
     height: 20px;
-    color: blue;
-    font-size: 0.8rem;
 }
 
 .Tag-input::placeholder {
@@ -55,14 +57,4 @@
 
 .Tag-input:focus {
     outline: none;
-}
-
-
-
-.Test-case-input:focus, .Selected-input{
-    height:24px;
-    outline: none;
-    box-sizing: border-box;
-    box-shadow: -4px 0px 0px rgb(75, 109, 233);
-    background-color: #F6F7FE;
 }
