@@ -42,12 +42,10 @@ export class TagList extends Component {
     }
 
     handleUserInput(e) {
-        console.log(e.target.value)
         this.setState({ newTag: e.target.value})
     }
 
     handleKeyPress(e) {
-        console.log(e.key)
         if (e.key === 'Enter') {
             this.props.addTag(e.target.value);
             this.setState({ newTag: '' })
