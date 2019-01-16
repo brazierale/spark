@@ -32,10 +32,15 @@
     color: #03A4CA;
     padding: 0px 0px 0px 5px;
     cursor: default;
+    transition: transform 0.05s ease-out;
 }
 
 .Delete-tag:hover {
     color: #005B70;
+}
+
+.Delete-tag:active {
+    transform: scale(0.8);
 }
 
 .Tag-input {
