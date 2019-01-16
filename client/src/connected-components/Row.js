@@ -7,10 +7,11 @@ import {
     deleteTestCaseById,
     updateTestCase,
     setSelectedTestCaseById,
-    updateSelectedTestCaseSummary
+    updateSelectedTestCase
 } from '../actions/testcase-actions';
 import { TestCaseInput } from '../components/TestCaseInput'
 import { DeleteTestCase } from  '../components/DeleteTestCase';
+import { TestCase } from '../modules/TestCase';
 
 class Row extends Component {
     constructor(props) {
@@ -38,7 +39,7 @@ class Row extends Component {
                         deleteTestCaseById={id => this.props.onDeleteTestCaseById(id)}
                         updateTestCase={testCase => this.props.onUpdateTestCase(testCase)}
                         setSelectedTestCaseById={id => this.props.onSetSelectedTestCaseById(id)}
-                        updateSelectedTestCaseSummary={summary => this.props.onUpdateSelectedTestCaseSummary(summary)}
+                        updateSelectedTestCaseSummary={summary => this.onUpdateSelectedTestCaseSummary(summary)}
                         isSelected={isSelected}
                     />
                 </div>
@@ -60,7 +61,8 @@ class Row extends Component {
         )
     }
     onUpdateSelectedTestCaseSummary(summary) {
-        this.props.onUpdateSelectedTestCaseSummary(summary);
+        let updatedTestCase = new TestCase(this.props.selectedTestCase.id, summary)
+        this.props.onUpdateSelectedTestCase(updatedTestCase);
     };
 }
 
@@ -75,7 +77,7 @@ const mapDispatchToProps = {
     onDeleteTestCaseById: deleteTestCaseById,
     onUpdateTestCase: updateTestCase,
     onSetSelectedTestCaseById: setSelectedTestCaseById,
-    onUpdateSelectedTestCaseSummary: updateSelectedTestCaseSummary
+    onUpdateSelectedTestCase: updateSelectedTestCase
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Row);
