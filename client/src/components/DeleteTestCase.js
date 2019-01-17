@@ -9,14 +9,19 @@ export class DeleteTestCase extends Component {
     }
 
     render() {
-        return (
-            <div className="Delete-row"
-                type="text"
-                onClick={this.deleteTestCase}
-            >
-            x
-            </div>
-        );
+        if (this.props.testCaseKey !== 0) {
+            return (
+                <div className="Delete-row"
+                    type="text"
+                    onClick={this.deleteTestCase}
+                >
+                x
+                </div>
+            );
+        }
+        else {
+            return null;
+        }
     }
 
     deleteTestCase() {
