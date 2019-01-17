@@ -27,7 +27,7 @@ export class Description extends Component {
     render() {
         return(
             <div className="Description-container">
-                <span className="Label">Description: </span>
+                <span className="Label">Description</span>
                     <textarea
                         className="Description-input"
                         rows="4"

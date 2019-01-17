@@ -27,7 +27,7 @@ export class TagList extends Component {
 
         return(
             <div className="Tag-list-container">
-                <span className="Label">Tags: </span>
+                <span className="Label">Tags</span>
                 <span className="Tag-list">
                     {tagsToRender}
                     <input

@@ -1,7 +1,8 @@
 .Label {
     color: #002D37;
     font-weight: 600;
-    margin-top: 5px;
+    margin: 0px 10px 10px 10px;
+    align-self: flex-start;
 }
 
 .Detail-pane-container {
