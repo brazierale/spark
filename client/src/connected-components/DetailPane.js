@@ -24,6 +24,7 @@ class DetailPane extends Component {
         this.save = this.save.bind(this);
     }
     render() {
+        console.log(this.props);
         if (this.props.selectedTestCase){
             return (
                 <div className="Detail-pane">
@@ -32,7 +33,8 @@ class DetailPane extends Component {
                         <h1>{this.props.selectedTestCase.summary}</h1>
                     </div>
                     <div className="Detail-pane-body">
-                    <Description 
+                    <Description
+                        description={this.props.selectedTestCase.description}
                         updateDescription={this.updateDescription}
                     />
                     <TagList 

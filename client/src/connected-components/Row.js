@@ -11,7 +11,6 @@ import {
 } from '../actions/testcase-actions';
 import { TestCaseInput } from '../components/TestCaseInput'
 import { DeleteTestCase } from  '../components/DeleteTestCase';
-import { TestCase } from '../modules/TestCase';
 
 class Row extends Component {
     constructor(props) {
