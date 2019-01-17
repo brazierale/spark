@@ -82,12 +82,11 @@ export default function testCaseReducer(state = blankState, action) {
             let newArray = state.testCases;
             let index = newArray.findIndex( tc => {return tc.key === action.payload.testCase.key });
 
-            newArray[index].summary = action.payload.testCase.summary;
+            newArray[index] = action.payload.testCase;
             
             return {
                 ...state,
                 testCases: newArray,
-                selectedTestCase: newArray.find(x => x.key === state.selectedTestCase.key),
                 saving: true,
                 error: null
             }

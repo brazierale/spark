@@ -15,7 +15,6 @@ export class TestCaseInput extends Component {
         this.handleUserInput = this.handleUserInput.bind(this);
         this.handleKeyPress = this.handleKeyPress.bind(this);
         this.handleFocus = this.handleFocus.bind(this);
-        this.handleBlur = this.handleBlur.bind(this);
         this.sendUpdate = this.sendUpdate.bind(this);
     }
 
@@ -60,12 +59,9 @@ export class TestCaseInput extends Component {
     }
 
     handleFocus() {
-        this.props.setSelectedTestCaseByKey(this.props.testCaseKey);
-    }
-
-    handleBlur() {
-        //try to only trigger on change
-        this.sendUpdate(this.state.summary);
+        if (this.props.selectedTestCase.key !== this.props.testCaseKey) {
+            this.props.setSelectedTestCaseByKey(this.props.testCaseKey);
+        }
     }
     
     sendUpdate(summary) {
@@ -73,8 +69,9 @@ export class TestCaseInput extends Component {
         if(this.props.testCaseKey === 0 && summary !== '') {
             const newTestCase = this.props.selectedTestCase;
             newTestCase.key = generateKey();
-            console.log(newTestCase);
+            
             this.props.addTestCase(newTestCase);
+
             this.setState({ summary: '' });
             this.props.setSelectedTestCaseByKey(0);
         }

@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { 
+    addTestCase,
     updateSelectedTestCase,
     updateTestCase
 } from '../actions/testcase-actions';
 import { TagList } from '../components/TagList';
 import { TestCase } from '../modules/TestCase';
+import { generateKey } from '../modules/KeyGen';
 import '../support/DetailPane.css'
 
 // right-hand pane displaying details of selected test case
@@ -62,7 +64,18 @@ class DetailPane extends Component {
     }
 
     save() {
-        this.props.onUpdateTestCase(this.props.selectedTestCase);
+        if (this.props.selectedTestCase.key === 0 && this.props.selectedTestCase.summary !== '') {
+            const newTestCase = this.props.selectedTestCase;
+            newTestCase.key = generateKey();
+
+            this.props.onAddTestCase(newTestCase);
+        }
+        else if (this.props.selectedTestCase.summary === '') {
+            // do nothing
+        }
+        else if (this.props.testCaseKey !== 0) {
+            this.props.onUpdateTestCase(this.props.selectedTestCase);
+        }
     }
 }
 
@@ -73,6 +86,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
+    onAddTestCase: addTestCase,
     onUpdateTestCase: updateTestCase,
     onUpdateSelectedTestCase: updateSelectedTestCase
 };
