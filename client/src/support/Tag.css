@@ -1,5 +1,5 @@
 .Tag-list-container {
-    margin: 0px 20px;
+    margin: 20px 20px;
     display: flex;
     text-align: center;
 }
@@ -48,15 +48,13 @@
     font-size: 0.8rem;
     color: #005B70;
     margin: 5px;
-    padding: 0px 5px;
-    padding-left:0px;
+    padding: 0px;
     border: none;
     height: 20px;
 }
 
 .Tag-input::placeholder {
     color: #CCCCCC;
-    font-size: 0.8rem;
     font-style: italic;
 }
 
