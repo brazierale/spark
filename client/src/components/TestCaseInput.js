@@ -85,6 +85,7 @@ export class TestCaseInput extends Component {
                 this.props.testCase.key,
                 summary,
                 this.props.testCase.description,
+                this.props.testCase.steps,
                 this.props.testCase.tags
             );
             this.props.updateTestCase(updatedTestCase);

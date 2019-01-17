@@ -89,6 +89,7 @@ export function addTestCase(testCase) {
             key: testCase.key,
             summary: testCase.summary,
             description: testCase.description,
+            steps: testCase.steps,
             tags: testCase.tags
         })
         .then(res => {
@@ -119,6 +120,7 @@ export function updateTestCase(testCase) {
             update: {
                 summary: testCase.summary,
                 description: testCase.description,
+                steps: testCase.steps,
                 tags: testCase.tags
             }
         })
@@ -143,6 +145,7 @@ export function getTestCases() {
                             testCase.key,
                             testCase.summary,
                             testCase.description,
+                            testCase.steps,
                             testCase.tags
                         )
                     );

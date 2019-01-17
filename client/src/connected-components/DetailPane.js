@@ -7,7 +7,8 @@ import {
     updateTestCase
 } from '../actions/testcase-actions';
 import { TagList } from '../components/TagList';
-import { Description } from '../components/Description'
+import { StepList } from '../components/StepList';
+import { Description } from '../components/Description';
 import { TestCase } from '../modules/TestCase';
 import { generateKey } from '../modules/KeyGen';
 import '../support/DetailPane.css'
@@ -21,6 +22,8 @@ class DetailPane extends Component {
         this.deleteTag = this.deleteTag.bind(this);
         this.updateDescription = this.updateDescription.bind(this);
         this.updateDetails = this.updateDetails.bind(this);
+        this.addStep = this.addStep.bind(this);
+        this.deleteStep = this.deleteStep.bind(this);
         this.save = this.save.bind(this);
     }
     render() {
@@ -35,6 +38,11 @@ class DetailPane extends Component {
                     <Description
                         description={this.props.selectedTestCase.description}
                         updateDescription={this.updateDescription}
+                    />
+                    <StepList
+                        steps={this.props.selectedTestCase.steps}
+                        addStep={this.addStep}
+                        deleteStep={this.deleteStep}
                     />
                     <TagList 
                         tags={this.props.selectedTestCase.tags}
@@ -73,6 +81,22 @@ class DetailPane extends Component {
         this.updateDetails(tags, updatedTagList);
     }
 
+    addStep(newStep) {
+        let steps = 'steps';
+        let updatedStepList = [...this.props.selectedTestCase.steps, newStep];
+
+        this.updateDetails(steps, updatedStepList);
+    }
+
+    deleteStep(toDelete) {
+        let steps = 'steps';
+        let updatedStepList = this.props.selectedTestCase.steps.filrter(
+            step => step !== toDelete
+        );
+
+        this.updateDetails(steps, updatedStepList);
+    }
+
     updateDescription(updatedDescription) {
         let description = 'description';
 
@@ -85,6 +109,7 @@ class DetailPane extends Component {
                 this.props.selectedTestCase.key,
                 this.props.selectedTestCase.summary,
                 this.props.selectedTestCase.description,
+                this.props.selectedTestCase.steps,
                 this.props.selectedTestCase.tags
             )
             // update the relevant field based on updateType
