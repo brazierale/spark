@@ -7,6 +7,7 @@ import {
     updateTestCase
 } from '../actions/testcase-actions';
 import { TagList } from '../components/TagList';
+import { Description } from '../components/Description'
 import { TestCase } from '../modules/TestCase';
 import { generateKey } from '../modules/KeyGen';
 import '../support/DetailPane.css'
@@ -18,6 +19,8 @@ class DetailPane extends Component {
 
         this.addTag = this.addTag.bind(this);
         this.deleteTag = this.deleteTag.bind(this);
+        this.updateDescription = this.updateDescription.bind(this);
+        this.updateDetails = this.updateDetails.bind(this);
         this.save = this.save.bind(this);
     }
     render() {
@@ -29,6 +32,9 @@ class DetailPane extends Component {
                         <h1>{this.props.selectedTestCase.summary}</h1>
                     </div>
                     <div className="Detail-pane-body">
+                    <Description 
+                        updateDescription={this.updateDescription}
+                    />
                     <TagList 
                         tags={this.props.selectedTestCase.tags}
                         addTag={this.addTag}
@@ -49,22 +55,48 @@ class DetailPane extends Component {
         }
     };
 
-    addTag(tag) {
-        let updatedTagList = [...this.props.selectedTestCase.tags, tag];
-        let updatedTestCase = new TestCase (this.props.selectedTestCase.key, this.props.selectedTestCase.summary, updatedTagList);
-        this.props.onUpdateSelectedTestCase(updatedTestCase);
+    addTag(newTag) {
+        // TODO: add logic to prevent duplicate tags
+        let tags = 'tags';
+        let updatedTagList = [...this.props.selectedTestCase.tags, newTag];
+        
+        this.updateDetails(tags, updatedTagList);
     };
 
     deleteTag(toDelete) {
+        let tags = 'tags';
         let updatedTagList = this.props.selectedTestCase.tags.filter(
             tag => tag !== toDelete
         );
-        let updatedTestCase = new TestCase (this.props.selectedTestCase.key, this.props.selectedTestCase.summary, updatedTagList);
-        this.props.onUpdateSelectedTestCase(updatedTestCase);
+
+        this.updateDetails(tags, updatedTagList);
+    }
+
+    updateDescription(updatedDescription) {
+        let description = 'description';
+
+        this.updateDetails(description, updatedDescription);
+    }
+
+    updateDetails(updateType, update) {
+            // take the current state
+            let updatedTestCase = new TestCase (
+                this.props.selectedTestCase.key,
+                this.props.selectedTestCase.summary,
+                this.props.selectedTestCase.description,
+                this.props.selectedTestCase.tags
+            )
+            // update the relevant field based on updateType
+            updatedTestCase[updateType] = update;
+            console.log(updatedTestCase);
+            // push out the updated state
+            this.props.onUpdateSelectedTestCase(updatedTestCase);
     }
 
     save() {
-        if (this.props.selectedTestCase.key === 0 && this.props.selectedTestCase.summary !== '') {
+        // create new test case if this is the entryRow
+        if (this.props.selectedTestCase.key === 0 &&
+                this.props.selectedTestCase.summary !== '') {
             const newTestCase = this.props.selectedTestCase;
             newTestCase.key = generateKey();
 
@@ -73,7 +105,7 @@ class DetailPane extends Component {
         else if (this.props.selectedTestCase.summary === '') {
             // do nothing
         }
-        else if (this.props.testCaseKey !== 0) {
+        else if (this.props.selectedTestCase.key !== 0) {
             this.props.onUpdateTestCase(this.props.selectedTestCase);
         }
     }

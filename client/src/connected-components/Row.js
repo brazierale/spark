@@ -22,7 +22,7 @@ class Row extends Component {
 
     render() {
         let isSelected = false;
-        if (this.props.testCaseKey === this.props.selectedTestCase.key) { isSelected = true }
+        if (this.props.testCase.key === this.props.selectedTestCase.key) { isSelected = true }
         let classes = classNames(
             'Row',
             {
@@ -33,8 +33,7 @@ class Row extends Component {
             <div className={classes}>
                 <div className="Test-case-container">
                     <TestCaseInput
-                        testCaseKey={this.props.testCaseKey}
-                        testCaseSummary={this.props.testCaseSummary}
+                        testCase={this.props.testCase}
                         addTestCase={testCase => this.props.onAddTestCase(testCase)}
                         deleteTestCaseByKey={key => this.props.onDeleteTestCaseByKey(key)}
                         updateTestCase={testCase => this.props.onUpdateTestCase(testCase)}
@@ -45,7 +44,7 @@ class Row extends Component {
                     />
                 </div>
                     <DeleteTestCase 
-                        testCaseKey={this.props.testCaseKey}
+                        testCaseKey={this.props.testCase.key}
                         isSelected={isSelected}
                         setSelectedTestCaseByKey={key => this.props.onSetSelectedTestCaseByKey(key)}
                         deleteTestCaseByKey={key => this.props.onDeleteTestCaseByKey(key)}
@@ -54,7 +53,8 @@ class Row extends Component {
         )
     }
     onUpdateSelectedTestCaseSummary(summary) {
-        let updatedTestCase = new TestCase(this.props.selectedTestCase.key, summary, this.props.selectedTestCase.tags)
+        let updatedTestCase = this.props.selectedTestCase;
+        updatedTestCase.summary = summary;
         this.props.onUpdateSelectedTestCase(updatedTestCase);
     };
 }

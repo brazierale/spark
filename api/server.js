@@ -51,9 +51,10 @@ router.get("/testCases/:key", (req, res) => {
 // create a new test case
 router.post("/testCases", (req, res) => {
     let data = new Data();
-    const { key, summary, tags } = req.body;
+    const { key, summary, description, tags } = req.body;
     data.key = key;
     data.summary = summary;
+    data.description = description;
     data.tags = tags;
 
     data.save(err => {

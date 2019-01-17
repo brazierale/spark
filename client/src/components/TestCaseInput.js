@@ -8,7 +8,7 @@ export class TestCaseInput extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            summary: props.testCaseSummary,
+            summary: props.testCase.summary,
             entryType: 'Test-case',
         };
 
@@ -59,15 +59,15 @@ export class TestCaseInput extends Component {
     }
 
     handleFocus() {
-        if (this.props.selectedTestCase.key !== this.props.testCaseKey) {
-            this.props.setSelectedTestCaseByKey(this.props.testCaseKey);
+        if (this.props.selectedTestCase.key !== this.props.testCase.key) {
+            this.props.setSelectedTestCaseByKey(this.props.testCase.key);
         }
     }
     
     sendUpdate(summary) {
         // create new test case if this is the entryRow
-        if(this.props.testCaseKey === 0 && summary !== '') {
-            const newTestCase = this.props.selectedTestCase;
+        if(this.props.testCase.key === 0 && summary !== '') {
+            const newTestCase = this.props.testCase;
             newTestCase.key = generateKey();
             
             this.props.addTestCase(newTestCase);
@@ -76,12 +76,17 @@ export class TestCaseInput extends Component {
             this.props.setSelectedTestCaseByKey(0);
         }
         // delete the test case if it is empty
-        else if (summary === '' && this.props.testCaseKey !== 0) {
+        else if (summary === '' && this.props.testCase.key !== 0) {
             this.props.setSelectedTestCaseByKey(0);
-            this.props.deleteTestCaseByKey(this.props.testCaseKey);
+            this.props.deleteTestCaseByKey(this.props.testCase.key);
         }
-        else if (this.props.testCaseKey !==0) {
-            const updatedTestCase = new TestCase(this.props.testCaseKey, summary, this.props.testCaseTags);
+        else if (this.props.testCase.key !==0) {
+            const updatedTestCase = new TestCase(
+                this.props.testCase.key,
+                summary,
+                this.props.testCase.description,
+                this.props.testCase.tags
+            );
             this.props.updateTestCase(updatedTestCase);
         }
     }

@@ -1,0 +1,24 @@
+.Description-container {
+    margin: 20px 20px;
+    display: flex;
+    text-align: center
+}
+
+.Description-input {
+    flex: 1 1 auto;
+    font-size: 0.8rem;
+    margin-left: 10px;
+    background: white;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.Description-input::placeholder {
+    color: #CCCCCC;
+    font-style: italic;
+}
+
+.Description-input:focus {
+    outline: none;
+}

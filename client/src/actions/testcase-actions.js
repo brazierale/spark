@@ -88,6 +88,7 @@ export function addTestCase(testCase) {
         axios.post("/api/testCases", {
             key: testCase.key,
             summary: testCase.summary,
+            description: testCase.description,
             tags: testCase.tags
         })
         .then(res => {
@@ -117,6 +118,7 @@ export function updateTestCase(testCase) {
         axios.put(`/api/testCases/${testCase.key}`, {
             update: {
                 summary: testCase.summary,
+                description: testCase.description,
                 tags: testCase.tags
             }
         })
@@ -136,7 +138,14 @@ export function getTestCases() {
         axios.get("/api/testCases")
             .then(res => {
                 if (res.data.data.length > 0) {
-                    testCases = res.data.data.map((testCase) => new TestCase(testCase.key, testCase.summary, testCase.tags));
+                    testCases = res.data.data.map((testCase) =>
+                        new TestCase(
+                            testCase.key,
+                            testCase.summary,
+                            testCase.description,
+                            testCase.tags
+                        )
+                    );
                 }
                 testCases.push(blankTestCase);
             })

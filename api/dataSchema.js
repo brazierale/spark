@@ -5,6 +5,7 @@ const TestCaseSchema = new Schema(
     {
         key: String,
         summary: String,
+        description: String,
         tags: [String]
       },
 )
