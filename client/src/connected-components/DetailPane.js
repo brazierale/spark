@@ -90,7 +90,7 @@ class DetailPane extends Component {
 
     deleteStep(toDelete) {
         let steps = 'steps';
-        let updatedStepList = this.props.selectedTestCase.steps.filrter(
+        let updatedStepList = this.props.selectedTestCase.steps.filter(
             step => step !== toDelete
         );
 
