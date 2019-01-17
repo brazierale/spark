@@ -13,6 +13,7 @@ export class TagList extends Component {
         }
         this.handleUserInput = this.handleUserInput.bind(this);
         this.handleKeyPress = this.handleKeyPress.bind(this);
+        this.handleBlur = this.handleBlur.bind(this);
     }
     render() {
         let key = 0;
@@ -35,6 +36,7 @@ export class TagList extends Component {
                         value={this.state.newTag}
                         onChange={this.handleUserInput}
                         onKeyPress={this.handleKeyPress}
+                        onBlur={this.handleBlur}
                     />
                 </span>
             </div>
@@ -50,5 +52,9 @@ export class TagList extends Component {
             this.props.addTag(e.target.value);
             this.setState({ newTag: '' })
         }
+    }
+
+    handleBlur() {
+        this.setState({ newTag: '' })
     }
 }

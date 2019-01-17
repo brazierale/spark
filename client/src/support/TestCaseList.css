@@ -48,6 +48,7 @@
     font-size: 1rem;
     text-align: left;
     border-radius: 0px 2px 2px 0px;
+    cursor: default;
 }
 
 .Test-case-input::placeholder {
@@ -65,6 +66,7 @@
     box-sizing: border-box;
     box-shadow: -4px 0px 0px rgb(75, 109, 233);
     background-color: #F6F7FE;
+    cursor: text;
 }
 
 .Delete-row {
