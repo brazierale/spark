@@ -1,6 +1,6 @@
 export class TestCase {
-    constructor(id, summary, tags) {
-        this.id = id;
+    constructor(key, summary, tags) {
+        this.key = key;
         this.summary = summary;
         this.tags = tags;
     }

@@ -29,7 +29,7 @@ export default function testCaseReducer(state = blankState, action) {
         case SET_SELECTED_TESTCASE:
             return {
                 ...state,
-                selectedTestCase: state.testCases.find(x => x.id === action.payload.id)
+                selectedTestCase: state.testCases.find(x => x.key === action.payload.key)
             }
         case UPDATE_SELECTED_TESTCASE:
             return {
@@ -62,7 +62,7 @@ export default function testCaseReducer(state = blankState, action) {
             return {
                 ...state,
                 testCases: [
-                    ...state.testCases.filter(tc => tc.id !== action.payload.id)
+                    ...state.testCases.filter(tc => tc.key !== action.payload.key)
                 ],
                 saving: true,
                 error: null
@@ -80,14 +80,14 @@ export default function testCaseReducer(state = blankState, action) {
             }
         case UPDATE_TEST_CASE_BEGIN:
             let newArray = state.testCases;
-            let index = newArray.findIndex( tc => {return tc.id === action.payload.testCase.id });
+            let index = newArray.findIndex( tc => {return tc.key === action.payload.testCase.key });
 
             newArray[index].summary = action.payload.testCase.summary;
             
             return {
                 ...state,
                 testCases: newArray,
-                selectedTestCase: newArray.find(x => x.id === state.selectedTestCase.id),
+                selectedTestCase: newArray.find(x => x.key === state.selectedTestCase.key),
                 saving: true,
                 error: null
             }
@@ -112,7 +112,7 @@ export default function testCaseReducer(state = blankState, action) {
             return {
                 ...state,
                 testCases: action.payload.testCases,
-                selectedTestCase: action.payload.testCases.find(x => x.id === state.selectedTestCase.id),
+                selectedTestCase: action.payload.testCases.find(x => x.key === state.selectedTestCase.key),
                 loading: false,
                 error: null
             }

@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const TestCaseSchema = new Schema(
     {
-        id: String,
+        key: String,
         summary: String,
         tags: [String]
       },

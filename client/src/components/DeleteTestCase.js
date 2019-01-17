@@ -22,8 +22,8 @@ export class DeleteTestCase extends Component {
     deleteTestCase() {
         // if the currently selected test case is being deleted, set the selected test case to entry row
         if(this.props.isSelected) {
-            this.props.setSelectedTestCaseById(0);
+            this.props.setSelectedTestCaseByKey(0);
         }
-        this.props.deleteTestCaseById(this.props.testCaseId);
+        this.props.deleteTestCaseByKey(this.props.testCaseKey);
     }
 }

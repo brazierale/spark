@@ -4,9 +4,9 @@ import classNames from 'classnames';
 
 import { 
     addTestCase,
-    deleteTestCaseById,
+    deleteTestCaseByKey,
     updateTestCase,
-    setSelectedTestCaseById,
+    setSelectedTestCaseByKey,
     updateSelectedTestCase
 } from '../actions/testcase-actions';
 import { TestCaseInput } from '../components/TestCaseInput'
@@ -22,7 +22,7 @@ class Row extends Component {
 
     render() {
         let isSelected = false;
-        if (this.props.testCaseId === this.props.selectedTestCase.id) { isSelected = true }
+        if (this.props.testCaseKey === this.props.selectedTestCase.key) { isSelected = true }
         let classes = classNames(
             'Row',
             {
@@ -33,27 +33,28 @@ class Row extends Component {
             <div className={classes}>
                 <div className="Test-case-container">
                     <TestCaseInput
-                        testCaseId={this.props.testCaseId}
+                        testCaseKey={this.props.testCaseKey}
                         testCaseSummary={this.props.testCaseSummary}
                         addTestCase={testCase => this.props.onAddTestCase(testCase)}
-                        deleteTestCaseById={id => this.props.onDeleteTestCaseById(id)}
+                        deleteTestCaseByKey={key => this.props.onDeleteTestCaseByKey(key)}
                         updateTestCase={testCase => this.props.onUpdateTestCase(testCase)}
-                        setSelectedTestCaseById={id => this.props.onSetSelectedTestCaseById(id)}
+                        setSelectedTestCaseByKey={key => this.props.onSetSelectedTestCaseByKey(key)}
                         updateSelectedTestCaseSummary={summary => this.onUpdateSelectedTestCaseSummary(summary)}
+                        selectedTestCase={this.props.selectedTestCase}
                         isSelected={isSelected}
                     />
                 </div>
                     <DeleteTestCase 
-                        testCaseId={this.props.testCaseId}
+                        testCaseKey={this.props.testCaseKey}
                         isSelected={isSelected}
-                        setSelectedTestCaseById={id => this.props.onSetSelectedTestCaseById(id)}
-                        deleteTestCaseById={id => this.props.onDeleteTestCaseById(id)}
+                        setSelectedTestCaseByKey={key => this.props.onSetSelectedTestCaseByKey(key)}
+                        deleteTestCaseByKey={key => this.props.onDeleteTestCaseByKey(key)}
                     />
             </div>
         )
     }
     onUpdateSelectedTestCaseSummary(summary) {
-        let updatedTestCase = new TestCase(this.props.selectedTestCase.id, summary, this.props.selectedTestCase.tags)
+        let updatedTestCase = new TestCase(this.props.selectedTestCase.key, summary, this.props.selectedTestCase.tags)
         this.props.onUpdateSelectedTestCase(updatedTestCase);
     };
 }
@@ -66,9 +67,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
     onAddTestCase: addTestCase,
-    onDeleteTestCaseById: deleteTestCaseById,
+    onDeleteTestCaseByKey: deleteTestCaseByKey,
     onUpdateTestCase: updateTestCase,
-    onSetSelectedTestCaseById: setSelectedTestCaseById,
+    onSetSelectedTestCaseByKey: setSelectedTestCaseByKey,
     onUpdateSelectedTestCase: updateSelectedTestCase
 };
 

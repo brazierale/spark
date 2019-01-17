@@ -23,13 +23,6 @@
     z-index: 13;
 }
 
-.Row-id {
-    font-size: 0.6rem;
-    margin-right: 8px;
-    line-height: 24px;
-    text-align: right;
-}
-
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 
 * {

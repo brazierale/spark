@@ -41,17 +41,18 @@ router.get("/testCases", (req,res) => {
 });
 
 // get details for a single test case
-router.get("/testCases/:id", (req, res) => {
-    Data.findById( {id: req.params.id}, (err, data) => {
+router.get("/testCases/:key", (req, res) => {
+    Data.findOne({key: req.params.key}, (err, data) => {
         if (err) return res.json ( {success:false, error: err });
-        return res.json( {success:true, data: data });
+        return res.json({ success:true, data: data });
     });
 });
 
 // create a new test case
 router.post("/testCases", (req, res) => {
     let data = new Data();
-    const { summary, tags } = req.body;
+    const { key, summary, tags } = req.body;
+    data.key = key;
     data.summary = summary;
     data.tags = tags;
 
@@ -62,16 +63,16 @@ router.post("/testCases", (req, res) => {
 });
 
 // update an existing test case
-router.put("/testCases/:id", (req, res) => {
-    Data.findByIdAndUpdate( req.params.id, req.body.update, err => {
+router.put("/testCases/:key", (req, res) => {
+    Data.findOneAndUpdate({ key: req.params.key }, req.body.update, err => {
         if (err) return res.json({ success: false, error: err });
         return res.json({ success: true });
     });
 });
 
 // delete a test case
-router.delete("/testCases/:id", (req, res) => {
-    Data.findByIdAndDelete( req.params.id, err => {
+router.delete("/testCases/:key", (req, res) => {
+    Data.findOneAndDelete({ key: req.params.key }, err => {
         if (err) return res.send(err);
         return res.json({ success: true });
     });

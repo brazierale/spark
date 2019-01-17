@@ -1,9 +1,9 @@
-export function generateId(){
+export function generateKey(){
     var length = 20,
     allc = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",
-    idgen = '';
+    keygen = '';
     for (var i = 0; i < length; i++) {
-      idgen += allc[Math.floor(Math.random() * allc.length)];
+      keygen += allc[Math.floor(Math.random() * allc.length)];
     }
-    return idgen;
+    return keygen;
 }

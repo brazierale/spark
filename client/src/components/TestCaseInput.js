@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 
 import { TestCase } from '../modules/TestCase';
-import { generateId } from '../modules/IdGen';
+import { generateKey } from '../modules/KeyGen';
 
 export class TestCaseInput extends Component {
     constructor(props) {
@@ -20,7 +20,6 @@ export class TestCaseInput extends Component {
     }
 
     render() {
-        console.log(this.props.testCaseId);
         let classes = classNames(
             this.state.entryType,
             {
@@ -46,7 +45,6 @@ export class TestCaseInput extends Component {
     // update entry field type based on whether its empty or not
     handleUserInput(e) {
         let v = e.target.value;
-        console.log('target value: ' + this.state.summary)
         let t = 'Test-case-header';
 
         v === '' ? t = 'Empty' : t = 'Test-case';
@@ -62,7 +60,7 @@ export class TestCaseInput extends Component {
     }
 
     handleFocus() {
-        this.props.setSelectedTestCaseById(this.props.testCaseId);
+        this.props.setSelectedTestCaseByKey(this.props.testCaseKey);
     }
 
     handleBlur() {
@@ -72,18 +70,21 @@ export class TestCaseInput extends Component {
     
     sendUpdate(summary) {
         // create new test case if this is the entryRow
-        if(this.props.testCaseId === 0 && summary !== '') {
-            const newTestCase = new TestCase(generateId(), summary, []);
+        if(this.props.testCaseKey === 0 && summary !== '') {
+            const newTestCase = this.props.selectedTestCase;
+            newTestCase.key = generateKey();
+            console.log(newTestCase);
             this.props.addTestCase(newTestCase);
             this.setState({ summary: '' });
+            this.props.setSelectedTestCaseByKey(0);
         }
         // delete the test case if it is empty
-        else if (summary === '' && this.props.testCaseId !== 0) {
-            this.props.setSelectedTestCaseById(0);
-            this.props.deleteTestCaseById(this.props.testCaseId);
+        else if (summary === '' && this.props.testCaseKey !== 0) {
+            this.props.setSelectedTestCaseByKey(0);
+            this.props.deleteTestCaseByKey(this.props.testCaseKey);
         }
-        else if (this.props.testCaseId !==0) {
-            const updatedTestCase = new TestCase(this.props.testCaseId, summary, this.props.testCaseTags);
+        else if (this.props.testCaseKey !==0) {
+            const updatedTestCase = new TestCase(this.props.testCaseKey, summary, this.props.testCaseTags);
             this.props.updateTestCase(updatedTestCase);
         }
     }

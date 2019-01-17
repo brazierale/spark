@@ -16,9 +16,9 @@ export const GET_TESTCASES_BEGIN = 'GET_TESTCASES_BEGIN';
 export const GET_TESTCASES_SUCCESS = 'GET_TESTCASES_SUCCESS';
 export const GET_TESTCASES_FAILURE = 'GET_TESTCASES_FAILURE';
 
-export const setSelectedTestCase = id => ({
+export const setSelectedTestCase = key => ({
     type: SET_SELECTED_TESTCASE,
-    payload: { id }
+    payload: { key }
 });
 export const updateSelectedTestCaseExecute = testCase => ({
     type: UPDATE_SELECTED_TESTCASE,
@@ -35,9 +35,9 @@ export const addTestCaseFailure = err => ({
     type: ADD_TEST_CASE_FAILURE,
     payload: { err }
 });
-export const deleteTestCasesBegin = id => ({
+export const deleteTestCasesBegin = key => ({
     type: DELETE_TEST_CASE_BEGIN,
-    payload: { id }
+    payload: { key }
 });
 export const deleteTestCaseSuccess = () => ({
     type: DELETE_TEST_CASE_SUCCESS
@@ -69,9 +69,9 @@ export const getTestCasesFailure = err => ({
     payload: { err }
 });
 
-export function setSelectedTestCaseById(id) {
+export function setSelectedTestCaseByKey(key) {
     return dispatch => {
-        dispatch(setSelectedTestCase(id));
+        dispatch(setSelectedTestCase(key));
     }
 }
 
@@ -86,6 +86,7 @@ export function addTestCase(testCase) {
         dispatch(addTestCasesBegin(testCase));
 
         axios.post("/api/testCases", {
+            key: testCase.key,
             summary: testCase.summary,
             tags: testCase.tags
         })
@@ -97,10 +98,10 @@ export function addTestCase(testCase) {
     }
 }
 
-export function deleteTestCaseById(id) {
+export function deleteTestCaseByKey(key) {
     return dispatch => {
-        dispatch(deleteTestCasesBegin(id));
-        axios.delete(`/api/testCases/${id}`)
+        dispatch(deleteTestCasesBegin(key));
+        axios.delete(`/api/testCases/${key}`)
         .then(res => {
             dispatch(deleteTestCaseSuccess());
             dispatch(getTestCases());
@@ -113,7 +114,7 @@ export function updateTestCase(testCase) {
     return dispatch => {
         dispatch(updateTestCasesBegin(testCase));
 
-        axios.put(`/api/testCases/${testCase.id}`, {
+        axios.put(`/api/testCases/${testCase.key}`, {
             update: {
                 summary: testCase.summary,
                 tags: testCase.tags
@@ -135,7 +136,7 @@ export function getTestCases() {
         axios.get("/api/testCases")
             .then(res => {
                 if (res.data.data.length > 0) {
-                    testCases = res.data.data.map((testCase) => new TestCase(testCase._id, testCase.summary, testCase.tags));
+                    testCases = res.data.data.map((testCase) => new TestCase(testCase.key, testCase.summary, testCase.tags));
                 }
                 testCases.push(blankTestCase);
             })
