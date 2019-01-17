@@ -24,7 +24,6 @@ class DetailPane extends Component {
         this.save = this.save.bind(this);
     }
     render() {
-        console.log(this.props);
         if (this.props.selectedTestCase){
             return (
                 <div className="Detail-pane">
@@ -90,7 +89,6 @@ class DetailPane extends Component {
             )
             // update the relevant field based on updateType
             updatedTestCase[updateType] = update;
-            console.log(updatedTestCase);
             // push out the updated state
             this.props.onUpdateSelectedTestCase(updatedTestCase);
     }

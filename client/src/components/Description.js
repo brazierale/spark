@@ -25,8 +25,6 @@ export class Description extends Component {
     }
 
     render() {
-        console.log(this.props)
-        console.log(this.state)
         return(
             <div className="Description-container">
                 <span className="Label">Description: </span>
