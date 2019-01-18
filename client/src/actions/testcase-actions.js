@@ -150,6 +150,7 @@ export function getTestCases() {
                         )
                     );
                 }
+                console.log(blankTestCase)
                 testCases.push(blankTestCase);
             })
             .then(() => {

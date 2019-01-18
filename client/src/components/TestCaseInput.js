@@ -67,7 +67,7 @@ export class TestCaseInput extends Component {
     sendUpdate(summary) {
         // create new test case if this is the entryRow
         if(this.props.testCase.key === 0 && summary !== '') {
-            const newTestCase = this.props.testCase;
+            let newTestCase = this.props.testCase;
             newTestCase.key = generateKey();
 
             this.props.addTestCase(newTestCase);
@@ -81,7 +81,7 @@ export class TestCaseInput extends Component {
             this.props.deleteTestCaseByKey(this.props.testCase.key);
         }
         else if (this.props.testCase.key !==0) {
-            const updatedTestCase = new TestCase(
+            let updatedTestCase = new TestCase(
                 this.props.testCase.key,
                 summary,
                 this.props.testCase.description,
