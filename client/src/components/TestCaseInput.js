@@ -69,7 +69,7 @@ export class TestCaseInput extends Component {
         if(this.props.testCase.key === 0 && summary !== '') {
             const newTestCase = this.props.testCase;
             newTestCase.key = generateKey();
-            
+
             this.props.addTestCase(newTestCase);
 
             this.setState({ summary: '' });

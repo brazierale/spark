@@ -9,7 +9,7 @@ import {
 import { TagList } from '../components/TagList';
 import { StepList } from '../components/StepList';
 import { Description } from '../components/Description';
-import { TestCase } from '../modules/TestCase';
+import { TestCase, Step } from '../modules/TestCase';
 import { generateKey } from '../modules/KeyGen';
 import '../support/DetailPane.css'
 
@@ -24,6 +24,7 @@ class DetailPane extends Component {
         this.updateDetails = this.updateDetails.bind(this);
         this.addStep = this.addStep.bind(this);
         this.deleteStep = this.deleteStep.bind(this);
+        this.updateStepList = this.updateStepList.bind(this);
         this.save = this.save.bind(this);
     }
     render() {
@@ -43,6 +44,7 @@ class DetailPane extends Component {
                         steps={this.props.selectedTestCase.steps}
                         addStep={this.addStep}
                         deleteStep={this.deleteStep}
+                        updateStepList={this.updateStepList}
                     />
                     <TagList 
                         tags={this.props.selectedTestCase.tags}
@@ -81,17 +83,20 @@ class DetailPane extends Component {
         this.updateDetails(tags, updatedTagList);
     }
 
-    addStep(newStep) {
+    addStep(name) {
         let steps = 'steps';
+        let newStep = new Step (
+            this.props.selectedTestCase.steps.length,
+            name
+        )
         let updatedStepList = [...this.props.selectedTestCase.steps, newStep];
-
         this.updateDetails(steps, updatedStepList);
     }
 
-    deleteStep(toDelete) {
+    deleteStep(id) {
         let steps = 'steps';
         let updatedStepList = this.props.selectedTestCase.steps.filter(
-            step => step !== toDelete
+            step => step.id !== id
         );
 
         this.updateDetails(steps, updatedStepList);
@@ -101,6 +106,12 @@ class DetailPane extends Component {
         let description = 'description';
 
         this.updateDetails(description, updatedDescription);
+    }
+
+    updateStepList(updatedSteps) {
+        let steps = 'steps';
+
+        this.updateDetails(steps, updatedSteps);
     }
 
     updateDetails(updateType, update) {

@@ -15,6 +15,13 @@ export class TestCase {
         }
 }
 
+export class Step {
+    constructor(id, name) {
+        this.id = id;
+        this.name = name;
+    }
+}
+
 export const blankTestCase = new TestCase(
     0,
     '',

@@ -11,17 +11,18 @@ export class StepList extends Component {
         this.state = {
             newStep: ''
         }
+        this.updateStep = this.updateStep.bind(this);
         this.handleUserInput = this.handleUserInput.bind(this);
         this.handleKeyPress = this.handleKeyPress.bind(this);
         this.handleBlur = this.handleBlur.bind(this);
     }
     render() {
-        let key = 0;
         const stepsToRender = this.props.steps.map( step => 
             <Step
-                key={key++} 
-                stepName={step}
+                key={step.id}
+                step={step}
                 deleteStep={this.props.deleteStep}
+                updateStep={(id, newName) => this.updateStep(id, newName)}
             />
         );
 
@@ -41,6 +42,15 @@ export class StepList extends Component {
                 </span>
             </div>
         );
+    }
+
+    updateStep(id, newName) {
+        let updatedStepList = this.props.steps;
+        console.log(id);
+        console.log(newName);
+        updatedStepList[id].name = newName;
+
+        this.props.updateStepList(updatedStepList);
     }
 
     handleUserInput(e) {
