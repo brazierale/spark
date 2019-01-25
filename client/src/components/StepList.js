@@ -65,6 +65,9 @@ export class StepList extends Component {
     }
 
     handleBlur() {
+        if (this.state.newStep !== '') {
+            this.props.addStep(this.state.newStep);
+        }
         this.setState({ newStep: '' })
     }
 }

@@ -6,6 +6,7 @@
 
 .Step-list {
     flex: 1 1 auto;
+    width: 100%;
     align-self: flex-start;
     margin: 0px 10px;
     display: flex;
@@ -14,9 +15,13 @@
 
 .Step-container {
     display: flex;
+    margin-right: 20px;
 }
 
 .Step {
+    display: grid;
+    grid-template: 20px / auto 16px;
+    width: 100%;
     font-size: 0.9rem;
     height: 20px;
     padding: 4px 5px;
@@ -50,18 +55,18 @@
 }
 
 .Step-input {
-    max-width: 100%;
+    width: auto;
     font-size: 0.9rem;
     height: 20px;
     padding: 4px 5px;
     background: white;
-    margin: 5px;
+    margin: 5px 25px 5px 0px;
     border: 1px solid #CCCCCC;
     border-radius: 5px;
 }
 
 .Step-edit {
-    max-width: 100%;
+    width: auto;
     font-size: 0.9rem;
     height: 20px;
     padding: 0px 5px;
