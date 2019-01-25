@@ -37,7 +37,6 @@ export class TestCaseInput extends Component {
             onChange={this.handleUserInput}
             onKeyDown={this.handleKeyDown}
             onFocus={this.handleFocus}
-            onBlur={this.handleBlur}
             />
             )
     }
