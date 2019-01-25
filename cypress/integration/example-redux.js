@@ -17,7 +17,7 @@ it('has expected state on load', () => {
     })
 })
 
-it('adds new test case', () => {
+it('add and update test case', () => {
     cy.visit('/');
 
     const toAdd = new TestCase(
