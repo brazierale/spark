@@ -36,3 +36,51 @@
   min-height: 100%;
   width: 100%
 }
+
+.Loading {
+  position: absolute;
+  overflow: hidden;
+  width: 100%;
+  height: 4px;
+  margin-top: 40px;
+  background-color: #56B742;
+  opacity: 0.4;
+  animation: loading 1s infinite linear;
+}
+@keyframes loading {
+  0% {
+    width: 0%;
+    left: 0%
+  }
+  50% {
+    width: 100%;
+    left: 0%
+  }
+  100% { width: 0%;
+    left: 100%
+  }
+}
+
+.Saving {
+  position: absolute;
+  overflow: hidden;
+  width: 100%;
+  height: 4px;
+  margin-top: 40px;
+  background-color: #FF7F00;
+  opacity: 0.4;
+  animation: saving 1s infinite linear;
+}
+@keyframes saving {
+  0% {
+    width: 0%;
+    left: 0%
+  }
+  50% {
+    width: 100%;
+    left: 0%
+  }
+  100% { width: 0%;
+    left: 100%
+  }
+}

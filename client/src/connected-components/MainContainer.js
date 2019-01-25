@@ -5,6 +5,7 @@ import DetailPane from './DetailPane'
 import { addTestCase, getTestCases } from '../actions/testcase-actions';
 import { TestCase } from '../modules/TestCase';
 import { TestCaseList } from '../components/TestCaseList';
+import { Indicator } from '../components/Indicator';
 
 class MainContainer extends Component {
     constructor(props) {
@@ -25,6 +26,10 @@ class MainContainer extends Component {
     render() {
         return(
             <div className="Main-container">
+                <Indicator
+                    loading={this.props.loading}
+                    saving={this.props.saving}
+                />
                 <div className="Test-case-list-container">
                     <TestCaseList testCases={this.props.testCases} />
                 </div>
@@ -41,6 +46,7 @@ const mapStateToProps = state => {
         testCases: state.testCases,
         selectedTestCase: state.selectedTestCase,
         loading: state.loading,
+        saving: state.saving,
         error: state.error
     }
 };
