@@ -46,8 +46,6 @@ export class StepList extends Component {
 
     updateStep(id, newName) {
         let updatedStepList = this.props.steps;
-        console.log(id);
-        console.log(newName);
         updatedStepList[id].name = newName;
 
         this.props.updateStepList(updatedStepList);

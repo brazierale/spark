@@ -67,10 +67,17 @@ class DetailPane extends Component {
     };
 
     addTag(newTag) {
-        // TODO: add logic to prevent duplicate tags
+        const isDuplicate = element => {
+            return element === newTag;
+        };
         let tags = 'tags';
-        let updatedTagList = [...this.props.selectedTestCase.tags, newTag];
+        let updatedTagList = [...this.props.selectedTestCase.tags];
         
+        // only add if it is not a duplicate
+        if (!this.props.selectedTestCase.tags.some(isDuplicate)) {
+            updatedTagList = [...this.props.selectedTestCase.tags, newTag];
+
+        }
         this.updateDetails(tags, updatedTagList);
     };
 
