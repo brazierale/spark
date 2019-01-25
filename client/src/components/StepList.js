@@ -13,7 +13,7 @@ export class StepList extends Component {
         }
         this.updateStep = this.updateStep.bind(this);
         this.handleUserInput = this.handleUserInput.bind(this);
-        this.handleKeyPress = this.handleKeyPress.bind(this);
+        this.handleKeyDown = this.handleKeyDown.bind(this);
         this.handleBlur = this.handleBlur.bind(this);
     }
     render() {
@@ -36,7 +36,7 @@ export class StepList extends Component {
                         placeholder="Enter new step..."
                         value={this.state.newStep}
                         onChange={this.handleUserInput}
-                        onKeyPress={this.handleKeyPress}
+                        onKeyDown={this.handleKeyDown}
                         onBlur={this.handleBlur}
                     />
                 </span>
@@ -55,9 +55,10 @@ export class StepList extends Component {
         this.setState({ newStep: e.target.value})
     }
 
-    handleKeyPress(e) {
-        if (e.key === 'Enter') {
-            this.props.addStep(e.target.value);
+    handleKeyDown(e) {
+        if (e.key === 'Enter' || e.keyCode === 9) {
+            e.preventDefault();
+            this.props.addStep(this.state.newStep);
             this.setState({ newStep: '' })
         }
     }

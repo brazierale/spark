@@ -12,7 +12,7 @@ export class TagList extends Component {
             newTag: ''
         }
         this.handleUserInput = this.handleUserInput.bind(this);
-        this.handleKeyPress = this.handleKeyPress.bind(this);
+        this.handleKeyDown = this.handleKeyDown.bind(this);
         this.handleBlur = this.handleBlur.bind(this);
     }
     render() {
@@ -35,7 +35,7 @@ export class TagList extends Component {
                         placeholder="Enter new tag..."
                         value={this.state.newTag}
                         onChange={this.handleUserInput}
-                        onKeyPress={this.handleKeyPress}
+                        onKeyDown={this.handleKeyDown}
                         onBlur={this.handleBlur}
                     />
                 </span>
@@ -47,9 +47,10 @@ export class TagList extends Component {
         this.setState({ newTag: e.target.value})
     }
 
-    handleKeyPress(e) {
-        if (e.key === 'Enter') {
-            this.props.addTag(e.target.value);
+    handleKeyDown(e) {
+        if (e.key === 'Enter' || e.keyCode === 9) {
+            e.preventDefault();
+            this.props.addTag(this.state.newTag);
             this.setState({ newTag: '' })
         }
     }

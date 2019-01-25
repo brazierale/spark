@@ -13,7 +13,7 @@ export class TestCaseInput extends Component {
         };
 
         this.handleUserInput = this.handleUserInput.bind(this);
-        this.handleKeyPress = this.handleKeyPress.bind(this);
+        this.handleKeyDown = this.handleKeyDown.bind(this);
         this.handleFocus = this.handleFocus.bind(this);
         this.sendUpdate = this.sendUpdate.bind(this);
     }
@@ -35,7 +35,7 @@ export class TestCaseInput extends Component {
             className={classes}
             value={this.state.summary}
             onChange={this.handleUserInput}
-            onKeyPress={this.handleKeyPress}
+            onKeyDown={this.handleKeyDown}
             onFocus={this.handleFocus}
             onBlur={this.handleBlur}
             />
@@ -52,9 +52,10 @@ export class TestCaseInput extends Component {
         this.props.updateSelectedTestCaseSummary(e.target.value);
     }
 
-    handleKeyPress(e) {
-        if (e.key === 'Enter') {
-            this.sendUpdate(e.target.value);
+    handleKeyDown(e) {
+        if (e.key === 'Enter' || e.keyCode === 9) {
+            e.preventDefault();
+            this.sendUpdate(this.state.summary);
         }
     }
 
