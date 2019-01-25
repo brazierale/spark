@@ -28,4 +28,9 @@ ReactDOM.render(
     </Provider>,
     document.getElementById('root')
 );
+
+if (window.Cypress) {
+    window.store = testCaseStore;
+}
+
 registerServiceWorker();
