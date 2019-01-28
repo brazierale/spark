@@ -137,7 +137,7 @@ class DetailPane extends Component {
             // update the relevant field based on updateType
             updatedTestCase[updateType] = update;
             // push out the updated state
-            this.props.onUpdateSelectedTestCase(updatedTestCase);
+            this.props.updateSelectedTestCase(updatedTestCase);
     }
 
     save() {
@@ -147,13 +147,13 @@ class DetailPane extends Component {
             const newTestCase = this.props.selectedTestCase;
             newTestCase.key = generateKey();
 
-            this.props.onAddTestCase(newTestCase);
+            this.props.addTestCase(newTestCase);
         }
         else if (this.props.selectedTestCase.summary === '') {
             // do nothing
         }
         else if (this.props.selectedTestCase.key !== 0) {
-            this.props.onUpdateTestCase(this.props.selectedTestCase);
+            this.props.updateTestCase(this.props.selectedTestCase);
             // forcing update as otherwise the detail pane isn't getting the selectedTestCase updates - not sure why
             this.forceUpdate();
         }
@@ -167,9 +167,9 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-    onAddTestCase: addTestCase,
-    onUpdateTestCase: updateTestCase,
-    onUpdateSelectedTestCase: updateSelectedTestCase
+    addTestCase: addTestCase,
+    updateTestCase: updateTestCase,
+    updateSelectedTestCase: updateSelectedTestCase
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(DetailPane);

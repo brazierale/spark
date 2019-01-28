@@ -13,6 +13,7 @@
     border-radius: 5px;
     display: flex;
     flex-wrap: wrap;
+    transition: 0.2s linear;
 }
 
 .Tag {
@@ -52,6 +53,7 @@
     padding: 0px;
     border: none;
     height: 20px;
+    transition: 0.1s linear;
 }
 
 .Tag-input::placeholder {

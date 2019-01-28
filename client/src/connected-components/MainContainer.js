@@ -9,7 +9,7 @@ import { Indicator } from '../components/Indicator';
 class MainContainer extends Component {
 
     componentDidMount() {
-        this.props.onGetTestCases();
+        this.props.getTestCases();
     }
 
     render() {
@@ -41,7 +41,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-    onGetTestCases: getTestCases,
+    getTestCases: getTestCases,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainContainer);
