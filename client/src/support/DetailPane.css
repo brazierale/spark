@@ -70,6 +70,10 @@ button:active {
     transform: scale(0.9); 
 }
 
+button:disabled {
+    opacity: 0.2;
+}
+
 .Save-details {
     background: #39A223;
 }

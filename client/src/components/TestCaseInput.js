@@ -76,6 +76,7 @@ export class TestCaseInput extends Component {
             this.props.setSelectedTestCaseByKey(0);
             this.props.deleteTestCaseByKey(this.props.testCase.key);
         }
+        // otherwise, update the test case
         else if (this.props.testCase.key !==0) {
             let updatedTestCase = new TestCase(
                 this.props.testCase.key,

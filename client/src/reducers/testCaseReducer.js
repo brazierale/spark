@@ -86,9 +86,11 @@ export default function testCaseReducer(state = blankState, action) {
 
             newArray[index] = action.payload.testCase;
             
+            // update selected test case too to ensure state updates
             return {
                 ...state,
                 testCases: newArray,
+                selectedTestCase: action.payload.testCase,
                 saving: true,
                 error: null
             }

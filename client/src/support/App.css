@@ -84,3 +84,18 @@
     left: 100%
   }
 }
+
+.Test-case-saving, .Test-case-saving:focus {
+  animation: test-case-saving 2s infinite linear;
+}
+@keyframes test-case-saving {
+  0% {
+      opacity: 1;
+  }
+  50% {
+      opacity: 0.5;
+  }
+  100% {
+      opacity: 1;
+  }
+}

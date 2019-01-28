@@ -55,6 +55,7 @@ class DetailPane extends Component {
                     <div className="Detail-pane-footer">
                         <button 
                             className="Save-details"
+                            disabled={this.props.selectedTestCase.saving}
                             onClick={this.save}
                         >Save</button>
                     </div>
@@ -150,6 +151,7 @@ class DetailPane extends Component {
         }
         else if (this.props.selectedTestCase.key !== 0) {
             this.props.onUpdateTestCase(this.props.selectedTestCase);
+            this.props.onUpdateSelectedTestCase(this.props.selectedTestCase);
         }
     }
 }
