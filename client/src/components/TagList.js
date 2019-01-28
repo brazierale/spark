@@ -23,6 +23,7 @@ export class TagList extends Component {
                 key={key++} 
                 tagName={tag}
                 deleteTag={this.props.deleteTag}
+                disabled={this.props.disabled}
             />
         );
 

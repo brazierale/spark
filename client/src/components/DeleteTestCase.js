@@ -9,7 +9,7 @@ export class DeleteTestCase extends Component {
     }
 
     render() {
-        if (this.props.testCaseKey !== 0) {
+        if (this.props.testCaseKey !== 0 && this.props.disabled !== true) {
             return (
                 <div className="Delete-row"
                     type="text"

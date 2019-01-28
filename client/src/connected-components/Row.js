@@ -27,6 +27,7 @@ class Row extends Component {
                 'Selected-row': isSelected,
                 'Test-case-saving': this.props.testCase.saving
         })
+        console.log(this.props.testCase.key + this.props.testCase.saving)
         return (
             <div className={classes}>
                 <div className="Test-case-container">
@@ -46,6 +47,7 @@ class Row extends Component {
                         isSelected={isSelected}
                         setSelectedTestCaseByKey={key => this.props.onSetSelectedTestCaseByKey(key)}
                         deleteTestCaseByKey={key => this.props.onDeleteTestCaseByKey(key)}
+                        disabled={this.props.testCase.saving}
                     />
             </div>
         )

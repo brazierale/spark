@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { DeleteTag } from './DeleteTag';
 
 // single tag which will in future act as a link to filtering
 export class Tag extends Component {
@@ -11,10 +12,10 @@ export class Tag extends Component {
         return(
                 <span className="Tag">
                     {this.props.tagName}
-                    <span 
-                        className="Delete-tag"
-                        onClick={this.deleteTag}
-                    >x</span>
+                    <DeleteTag
+                        deleteTag={this.props.deleteTag}
+                        disabled={this.props.disabled}
+                    />
                 </span>
         );
     }

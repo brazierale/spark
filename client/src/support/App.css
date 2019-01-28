@@ -34,11 +34,15 @@
   display: flex;
   position: absolute;
   min-height: 100%;
-  width: 100%
+  width: 100%;
 }
 
 .Disabled {
-  background-color: #EEEEEE
+  background-color: #EEEEEE;
+}
+
+.Disabled-delete {
+  visibility: hidden;
 }
 
 .Loading {
