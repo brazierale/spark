@@ -1,8 +1,8 @@
-describe('cypress test', function() {
+describe('Smoke test', function() {
 
     beforeEach(function() {
         // reset data to 1 new item
-        cy.exec('node api/drop-data.js')
+        cy.exec('node api/support/dropData.js')
 
         cy.visit('/')
         
@@ -15,15 +15,6 @@ describe('cypress test', function() {
         })
     })
 
-    it('Last row is the new row', () => {
-
-        cy.get('@lastRow').within(() => {
-            cy.get('.Row-id')
-                .contains(0)
-        })
-       
-    })
-
     it('Detail pane displays entered text after creating a new test', () => {
 
         cy.get('.Test-case[value="Hello World!"]')
@@ -33,6 +24,21 @@ describe('cypress test', function() {
             .contains('Hello World!')
 
         // get the detail pane summary and check it matches the entered text
+
+    })
+
+    it('Detail pane displays updated text after updating a test', () => {
+        
+        cy.get('.Test-case[value="Hello World!"')
+            .click()
+            .type(' Updated')
+            .type('{Enter}')
+
+        cy.get('.Test-case[value="Hello World! Updated')
+            .click()
+        
+        cy.get('.Detail-pane-header h1')
+            .contains('Hello World! Updated')
 
     })
 
