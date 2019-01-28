@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 // delete button for a single tag
 export class DeleteTag extends Component {
@@ -10,12 +12,11 @@ export class DeleteTag extends Component {
         })
 
         return(
-            <span 
-                className={classes}
-                onClick={this.props.deleteTag}
-            >
-            x
-            </span>
+                <FontAwesomeIcon
+                    className={classes}
+                    icon={faTimes}
+                    onClick={this.props.deleteTag}
+                />
         );
     }
 }

@@ -64,10 +64,8 @@
 
 .Delete-row {
     color: #4B6DE9;
+    margin: 5px 7px;
     opacity: 0.4;
-    font-weight: bold;
-    line-height: 24px;
-    text-align: center;
     visibility: hidden;
     cursor: default;
     transition: transform 0.05s ease-out;

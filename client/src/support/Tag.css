@@ -17,6 +17,8 @@
 }
 
 .Tag {
+    display: grid;
+    grid-template: 18px / auto 15px;
     font-size: 0.8rem;
     height: 18px;
     padding: 0px 5px;
@@ -30,9 +32,8 @@
 }
 
 .Delete-tag {
-    font-size: 0.8rem;
     color: #03A4CA;
-    padding: 0px 0px 0px 5px;
+    padding: 3px 5px;
     cursor: default;
     transition: transform 0.05s ease-out;
 }
