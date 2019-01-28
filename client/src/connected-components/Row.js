@@ -11,6 +11,7 @@ import {
 } from '../actions/testcase-actions';
 import { TestCaseInput } from '../components/TestCaseInput'
 import { DeleteTestCase } from  '../components/DeleteTestCase';
+import { MoveTestCase } from '../components/MoveTestCase';
 
 class Row extends Component {
     constructor(props) {
@@ -41,13 +42,17 @@ class Row extends Component {
                         isSelected={isSelected}
                     />
                 </div>
-                    <DeleteTestCase 
-                        testCaseKey={this.props.testCase.key}
-                        isSelected={isSelected}
-                        setSelectedTestCaseByKey={key => this.props.setSelectedTestCaseByKey(key)}
-                        deleteTestCaseByKey={key => this.props.deleteTestCaseByKey(key)}
-                        disabled={this.props.testCase.saving}
-                    />
+                <MoveTestCase
+                    testCaseKey={this.props.testCase.key}
+                    disabled={this.props.testCase.saving}
+                />
+                <DeleteTestCase 
+                    testCaseKey={this.props.testCase.key}
+                    isSelected={isSelected}
+                    setSelectedTestCaseByKey={key => this.props.setSelectedTestCaseByKey(key)}
+                    deleteTestCaseByKey={key => this.props.deleteTestCaseByKey(key)}
+                    disabled={this.props.testCase.saving}
+                />
             </div>
         )
     }
