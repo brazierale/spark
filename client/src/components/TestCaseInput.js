@@ -9,7 +9,6 @@ export class TestCaseInput extends Component {
         super(props);
         this.state = {
             summary: props.testCase.summary,
-            entryType: 'Test-case',
         };
 
         this.handleUserInput = this.handleUserInput.bind(this);
@@ -20,8 +19,8 @@ export class TestCaseInput extends Component {
 
     render() {
         let classes = classNames(
-            this.state.entryType,
             {
+                'Test-case': true,
                 'Test-case-input': true,
                 'Selected-input': this.props.isSelected,
                 'Test-case-saving': this.props.testCase.saving
@@ -42,14 +41,9 @@ export class TestCaseInput extends Component {
             />
             )
     }
-    // update entry field type based on whether its empty or not
+
     handleUserInput(e) {
-        let v = e.target.value;
-        let t = 'Test-case-header';
-
-        v === '' ? t = 'Empty' : t = 'Test-case';
-
-        this.setState({ entryType: t, summary: v})
+        this.setState({ summary: e.target.value})
         this.props.updateSelectedTestCaseSummary(e.target.value);
     }
 
