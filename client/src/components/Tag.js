@@ -13,7 +13,7 @@ export class Tag extends Component {
                 <span className="Tag">
                     {this.props.tagName}
                     <DeleteTag
-                        deleteTag={this.props.deleteTag}
+                        deleteTag={this.deleteTag}
                         disabled={this.props.disabled}
                     />
                 </span>
