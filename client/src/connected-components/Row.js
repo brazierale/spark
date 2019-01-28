@@ -20,10 +20,6 @@ class Row extends Component {
     }
 
     render() {
-        if (this.props.testCase.saving) {
-            console.log(this.props.testCase.key);
-        }
-
         let isSelected = false;
         if (this.props.testCase.key === this.props.selectedTestCase.key) { isSelected = true }
         let classes = classNames(
