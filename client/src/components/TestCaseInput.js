@@ -26,16 +26,16 @@ export class TestCaseInput extends Component {
         })
         return (
             <input
-            ref={(input) => { this.nameInput = input; }}
-            type="text"
-            maxLength="255"
-            placeholder="Enter your test case here..."
-            className={classes}
-            value={this.state.summary}
-            onChange={this.handleUserInput}
-            onKeyDown={this.handleKeyDown}
-            onFocus={this.handleFocus}
-            disabled={this.props.testCase.saving}
+                ref={(input) => { this.nameInput = input; }}
+                type="text"
+                maxLength="255"
+                placeholder="Enter your test case here..."
+                className={classes}
+                value={this.state.summary}
+                onChange={this.handleUserInput}
+                onKeyDown={this.handleKeyDown}
+                onFocus={this.handleFocus}
+                disabled={this.props.testCase.saving}
             />
             )
     }
