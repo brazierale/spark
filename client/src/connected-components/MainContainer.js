@@ -2,25 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import DetailPane from './DetailPane'
-import { addTestCase, getTestCases } from '../actions/testcase-actions';
-import { TestCase } from '../modules/TestCase';
+import { getTestCases } from '../actions/testcase-actions';
 import { TestCaseList } from '../components/TestCaseList';
 import { Indicator } from '../components/Indicator';
 
 class MainContainer extends Component {
-    constructor(props) {
-        super(props);
-
-        this.onAddTestCase = this.onAddTestCase.bind(this);
-    }
 
     componentDidMount() {
         this.props.onGetTestCases();
-    }
-
-    onAddTestCase() {
-        const newTestCase = new TestCase('10', 'adding this using redux');
-        this.props.onAddTestCase(newTestCase);
     }
 
     render() {
@@ -52,7 +41,6 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-    onAddTestCase: addTestCase,
     onGetTestCases: getTestCases,
 };
 

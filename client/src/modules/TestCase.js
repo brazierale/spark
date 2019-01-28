@@ -12,6 +12,7 @@ export class TestCase {
             this.description = description;
             this.steps = steps;
             this.tags = tags;
+            this.saving = false;
         }
 }
 
@@ -27,5 +28,5 @@ export const blankTestCase = new TestCase(
     '',
     '',
     [],
-    []
+    [],
 );

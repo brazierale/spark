@@ -83,6 +83,9 @@ export function updateSelectedTestCase(testCase) {
 
 export function addTestCase(testCase) {
     return dispatch => {
+        let updatedTestCase = testCase;
+        updatedTestCase.saving = true;
+        
         dispatch(addTestCasesBegin(testCase));
 
         axios.post("/api/testCases", {
@@ -114,7 +117,10 @@ export function deleteTestCaseByKey(key) {
 
 export function updateTestCase(testCase) {
     return dispatch => {
-        dispatch(updateTestCasesBegin(testCase));
+        let updatedTestCase = testCase;
+        updatedTestCase.saving = true;
+
+        dispatch(updateTestCasesBegin(updatedTestCase));
 
         axios.put(`/api/testCases/${testCase.key}`, {
             update: {
