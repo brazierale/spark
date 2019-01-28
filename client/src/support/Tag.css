@@ -62,3 +62,7 @@
 .Tag-input:focus {
     outline: none;
 }
+
+.Tag-input:disabled {
+    background-color: #EEEEEE;
+}

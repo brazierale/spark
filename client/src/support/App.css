@@ -37,6 +37,10 @@
   width: 100%
 }
 
+.Disabled {
+  background-color: #EEEEEE
+}
+
 .Loading {
   position: absolute;
   overflow: hidden;

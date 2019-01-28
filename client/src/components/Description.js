@@ -35,6 +35,7 @@ export class Description extends Component {
                         value={this.state.description}
                         onChange={this.handleUserInput}
                         onBlur={this.handleBlur}
+                        disabled={this.props.disabled}
                     >
                     {this.state.description}
                     </textarea>

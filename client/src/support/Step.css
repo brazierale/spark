@@ -65,12 +65,20 @@
     border-radius: 5px;
 }
 
+.Step-input:disabled {
+    background-color: #EEEEEE;
+}
+
 .Step-edit {
     width: auto;
     font-size: 0.9rem;
     height: 20px;
     padding: 0px 5px;
     border: none;
+}
+
+.Step-edit:disabled {
+    background-color: #EEEEEE;
 }
 
 .Step-input::placeholder {

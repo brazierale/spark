@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import classNames from 'classnames';
 
 // single step
 export class Step extends Component {
@@ -25,18 +26,25 @@ export class Step extends Component {
     }
 
     render() {
+        let stepClasses = classNames({
+                'Step': true,
+                'Disabled': this.props.disabled
+        })
+
         return(
                 <div className="Step-container">
                     <input
                         className="Step-checkbox"
                         type="checkbox"
+                        disabled={this.props.disabled}
                     />
-                    <div className="Step">
+                    <div className={stepClasses}>
                         <input 
                             className="Step-edit"
                             value={this.state.stepName}
                             onChange={this.handleUserInput}
                             onBlur={this.handleBlur}
+                            disabled={this.props.disabled}
                         />
                         <span 
                             className="Delete-step"

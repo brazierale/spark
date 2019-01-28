@@ -22,3 +22,7 @@
 .Description-input:focus {
     outline: none;
 }
+
+.Description-input:disabled {
+    background-color: #EEEEEE;
+}

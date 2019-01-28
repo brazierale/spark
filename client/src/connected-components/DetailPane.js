@@ -39,17 +39,20 @@ class DetailPane extends Component {
                     <Description
                         description={this.props.selectedTestCase.description}
                         updateDescription={this.updateDescription}
+                        disabled={this.props.selectedTestCase.saving}
                     />
                     <StepList
                         steps={this.props.selectedTestCase.steps}
                         addStep={this.addStep}
                         deleteStep={this.deleteStep}
                         updateStepList={this.updateStepList}
+                        disabled={this.props.selectedTestCase.saving}
                     />
                     <TagList 
                         tags={this.props.selectedTestCase.tags}
                         addTag={this.addTag}
                         deleteTag={this.deleteTag}
+                        disabled={this.props.selectedTestCase.saving}
                     />
                     </div>
                     <div className="Detail-pane-footer">

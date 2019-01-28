@@ -18,14 +18,12 @@ export class TestCaseInput extends Component {
     }
 
     render() {
-        let classes = classNames(
-            {
+        let classes = classNames({
                 'Test-case': true,
                 'Test-case-input': true,
                 'Selected-input': this.props.isSelected,
                 'Test-case-saving': this.props.testCase.saving
-            }
-        )
+        })
         return (
             <input
             ref={(input) => { this.nameInput = input; }}

@@ -23,6 +23,7 @@ export class StepList extends Component {
                 step={step}
                 deleteStep={this.props.deleteStep}
                 updateStep={(id, newName) => this.updateStep(id, newName)}
+                disabled={this.props.disabled}
             />
         );
 
@@ -38,6 +39,7 @@ export class StepList extends Component {
                         onChange={this.handleUserInput}
                         onKeyDown={this.handleKeyDown}
                         onBlur={this.handleBlur}
+                        disabled={this.props.disabled}
                     />
                 </span>
             </div>
@@ -57,9 +59,11 @@ export class StepList extends Component {
 
     handleKeyDown(e) {
         if (e.key === 'Enter' || e.keyCode === 9) {
-            e.preventDefault();
-            this.props.addStep(this.state.newStep);
-            this.setState({ newStep: '' })
+            if (this.state.newStep !== '') {
+                e.preventDefault();
+                this.props.addStep(this.state.newStep);
+                this.setState({ newStep: '' })
+            }
         }
     }
 

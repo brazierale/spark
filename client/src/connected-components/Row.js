@@ -22,13 +22,11 @@ class Row extends Component {
     render() {
         let isSelected = false;
         if (this.props.testCase.key === this.props.selectedTestCase.key) { isSelected = true }
-        let classes = classNames(
-            'Row',
-            {
+        let classes = classNames({
+                'Row': true,
                 'Selected-row': isSelected,
                 'Test-case-saving': this.props.testCase.saving
-            }
-        )
+        })
         return (
             <div className={classes}>
                 <div className="Test-case-container">

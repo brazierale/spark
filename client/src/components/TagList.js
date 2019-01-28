@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import classNames from 'classnames';
 
 import { Tag } from './Tag';
-import '../support/Tag.css'
+import '../support/Tag.css';
 
 
 // list of tags
@@ -25,10 +26,15 @@ export class TagList extends Component {
             />
         );
 
+        let listClasses = classNames({
+            'Tag-list': true,
+            'Disabled': this.props.disabled
+        })
+
         return(
             <div className="Tag-list-container">
                 <span className="Label">Tags</span>
-                <span className="Tag-list">
+                <span className={listClasses}>
                     {tagsToRender}
                     <input
                         className="Tag-input"
@@ -37,6 +43,7 @@ export class TagList extends Component {
                         onChange={this.handleUserInput}
                         onKeyDown={this.handleKeyDown}
                         onBlur={this.handleBlur}
+                        disabled={this.props.disabled}
                     />
                 </span>
             </div>
