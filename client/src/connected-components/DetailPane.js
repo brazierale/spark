@@ -151,7 +151,6 @@ class DetailPane extends Component {
         }
         else if (this.props.selectedTestCase.key !== 0) {
             this.props.onUpdateTestCase(this.props.selectedTestCase);
-            this.props.onUpdateSelectedTestCase(this.props.selectedTestCase);
         }
     }
 }
