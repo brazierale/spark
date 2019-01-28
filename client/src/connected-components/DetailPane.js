@@ -154,6 +154,8 @@ class DetailPane extends Component {
         }
         else if (this.props.selectedTestCase.key !== 0) {
             this.props.onUpdateTestCase(this.props.selectedTestCase);
+            // forcing update as otherwise the detail pane isn't getting the selectedTestCase updates - not sure why
+            this.forceUpdate();
         }
     }
 }

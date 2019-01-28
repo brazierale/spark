@@ -85,7 +85,7 @@ export function addTestCase(testCase) {
     return dispatch => {
         let updatedTestCase = testCase;
         updatedTestCase.saving = true;
-        
+
         dispatch(addTestCasesBegin(testCase));
 
         axios.post("/api/testCases", {
@@ -156,7 +156,7 @@ export function getTestCases() {
                         )
                     );
                 }
-                console.log(blankTestCase)
+                //console.log(blankTestCase)
                 // should be using blankTestCase but its getting updated before being used for some reason 
                 let blank = new TestCase (0, '', '', [], [])
                 testCases.push(blank);
