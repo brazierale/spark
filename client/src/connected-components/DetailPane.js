@@ -128,7 +128,8 @@ class DetailPane extends Component {
                 this.props.selectedTestCase.summary,
                 this.props.selectedTestCase.description,
                 this.props.selectedTestCase.steps,
-                this.props.selectedTestCase.tags
+                this.props.selectedTestCase.tags,
+                false
             )
             // update the relevant field based on updateType
             updatedTestCase[updateType] = update;
