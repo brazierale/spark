@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import DetailPane from './DetailPane'
-import { getTestCases } from '../actions/testcase-actions';
-import { TestCaseList } from '../components/TestCaseList';
+import TestCaseList from '../components/TestCaseList';
 import Indicator from '../components/Indicator';
+
+import { getTestCases } from '../actions/testcase-actions';
 
 class MainContainer extends Component {
 
