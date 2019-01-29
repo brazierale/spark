@@ -25,7 +25,7 @@ MoveTestCase.propTypes = {
     testCaseKey: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.number
-    ]),
+    ]).isRequired,
     
     disabled: PropTypes.bool.isRequired
 }

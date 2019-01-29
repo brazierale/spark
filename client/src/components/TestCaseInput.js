@@ -33,25 +33,25 @@ class TestCaseInput extends Component {
         )
     }
 
-    handleUserInput(e) {
-        this.setState({ summary: e.target.value})
-        this.props.updateSelectedTestCaseSummary(e.target.value);
+    handleUserInput = event => {
+        this.setState({ summary: event.target.value})
+        this.props.updateSelectedTestCaseSummary(event.target.value);
     }
 
-    handleKeyDown(e) {
-        if (e.key === 'Enter' || e.keyCode === 9) {
-            e.preventDefault();
+    handleKeyDown = event => {
+        if (event.key === 'Enter' || event.keyCode === 9) {
+            event.preventDefault();
             this.sendUpdate(this.state.summary);
         }
     }
 
-    handleFocus() {
+    handleFocus = () => {
         if (this.props.selectedTestCase.key !== this.props.testCase.key) {
             this.props.setSelectedTestCaseByKey(this.props.testCase.key);
         }
     }
     
-    sendUpdate(summary) {
+    sendUpdate = summary => {
         // create new test case if this is the entryRow
         if(this.props.testCase.key === 0 && summary !== '') {
             let newTestCase = this.props.testCase;

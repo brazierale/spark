@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { TestCaseObject } from '../modules/TestCase';
 import Row from '../connected-components/Row';
+
+import { TestCaseObject } from '../modules/TestCase';
 import '../support/TestCaseList.css'
 
 const TestCaseList = props => {

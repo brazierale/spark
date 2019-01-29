@@ -1,21 +1,18 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import Tag from './Tag';
+
 import '../support/Tag.css';
 
 
 // list of tags
-export class TagList extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            newTag: ''
-        }
-        this.handleUserInput = this.handleUserInput.bind(this);
-        this.handleKeyDown = this.handleKeyDown.bind(this);
-        this.handleBlur = this.handleBlur.bind(this);
+class TagList extends Component {
+    state = {
+        newTag: ''
     }
+
     render() {
         let key = 0;
         const tagsToRender = this.props.tags.map( tag => 
@@ -51,19 +48,29 @@ export class TagList extends Component {
         );
     }
 
-    handleUserInput(e) {
-        this.setState({ newTag: e.target.value})
+    handleUserInput = event => {
+        this.setState({ newTag: event.target.value})
     }
 
-    handleKeyDown(e) {
-        if (e.key === 'Enter' || e.keyCode === 9) {
-            e.preventDefault();
+    handleKeyDown = event => {
+        if (event.key === 'Enter' || event.keyCode === 9) {
+            event.preventDefault();
             this.props.addTag(this.state.newTag);
             this.setState({ newTag: '' })
         }
     }
 
-    handleBlur() {
+    handleBlur = () => {
         this.setState({ newTag: '' })
     }
+}
+
+export default TagList;
+
+TagList.propTypes = {
+    tags: PropTypes.arrayOf(PropTypes.string).isRequired,
+
+    disabled: PropTypes.bool.isRequired,
+
+    deleteTag: PropTypes.func.isRequired
 }

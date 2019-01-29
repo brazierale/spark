@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import TagList from '../components/TagList';
+import StepList from '../components/StepList';
+import Description from '../components/Description';
+
+import { TestCaseObject, StepObject } from '../modules/TestCase';
+import { generateKey } from '../modules/KeyGen';
+import '../support/DetailPane.css'
 import { 
     addTestCase,
     updateSelectedTestCase,
     updateTestCase
 } from '../actions/testcase-actions';
-import { TagList } from '../components/TagList';
-import StepList from '../components/StepList';
-import Description from '../components/Description';
-import { TestCaseObject, StepObject } from '../modules/TestCase';
-import { generateKey } from '../modules/KeyGen';
-import '../support/DetailPane.css'
 
 // right-hand pane displaying details of selected test case
 class DetailPane extends Component {
