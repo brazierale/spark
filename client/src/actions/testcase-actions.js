@@ -1,4 +1,4 @@
-import { TestCase, blankTestCase } from '../modules/TestCase';
+import { TestCaseObject, blankTestCase } from '../modules/TestCase';
 import axios from 'axios';
 
 export const SET_SELECTED_TESTCASE = 'SET_SELECTED_TESTCASE';
@@ -147,7 +147,7 @@ export function getTestCases() {
             .then(res => {
                 if (res.data.data.length > 0) {
                     testCases = res.data.data.map((testCase) =>
-                        new TestCase(
+                        new TestCaseObject(
                             testCase.key,
                             testCase.summary,
                             testCase.description,
@@ -158,7 +158,7 @@ export function getTestCases() {
                 }
                 //console.log(blankTestCase)
                 // should be using blankTestCase but its getting updated before being used for some reason 
-                let blank = new TestCase (0, '', '', [], [])
+                let blank = new TestCaseObject (0, '', '', [], [])
                 testCases.push(blank);
             })
             .then(() => {

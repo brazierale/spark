@@ -1,4 +1,4 @@
-import { blankTestCase, TestCase } from '../../client/src/modules/TestCase'
+import { blankTestCase, TestCaseObject } from '../../client/src/modules/TestCase'
 import { addTestCase, updateTestCase } from '../../client/src/actions/testcase-actions'
 
 const dispatch = action => {
@@ -20,7 +20,7 @@ it('has expected state on load', () => {
 it('add and update test case', () => {
     cy.visit('/');
 
-    const toAdd = new TestCase(
+    const toAdd = new TestCaseObject(
         '1',
         'Test',
         'Description to be added',
@@ -28,7 +28,7 @@ it('add and update test case', () => {
         ['tag', 'v1']
     )
 
-    const updated = new TestCase(
+    const updated = new TestCaseObject(
         '1',
         'Test-update',
         'Description has been updated',

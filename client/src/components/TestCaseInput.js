@@ -1,20 +1,13 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
+import PropTypes from 'prop-types';
 
-import { TestCase } from '../modules/TestCase';
+import { TestCaseObject } from '../modules/TestCase';
 import { generateKey } from '../modules/KeyGen';
 
-export class TestCaseInput extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            summary: props.testCase.summary,
-        };
-
-        this.handleUserInput = this.handleUserInput.bind(this);
-        this.handleKeyDown = this.handleKeyDown.bind(this);
-        this.handleFocus = this.handleFocus.bind(this);
-        this.sendUpdate = this.sendUpdate.bind(this);
+class TestCaseInput extends Component {
+    state = {
+        summary: this.props.testCase.summary
     }
 
     render() {
@@ -37,7 +30,7 @@ export class TestCaseInput extends Component {
                 onFocus={this.handleFocus}
                 disabled={this.props.testCase.saving}
             />
-            )
+        )
     }
 
     handleUserInput(e) {
@@ -76,7 +69,7 @@ export class TestCaseInput extends Component {
         }
         // otherwise, update the test case
         else if (this.props.testCase.key !==0) {
-            let updatedTestCase = new TestCase(
+            let updatedTestCase = new TestCaseObject(
                 this.props.testCase.key,
                 summary,
                 this.props.testCase.description,
@@ -86,4 +79,19 @@ export class TestCaseInput extends Component {
             this.props.updateTestCase(updatedTestCase);
         }
     }
+}
+
+export default TestCaseInput;
+
+TestCaseInput.propTypes = {
+    testCase: PropTypes.objectOf(TestCaseObject).isRequired,
+    selectedTestCase: PropTypes.objectOf(TestCaseObject).isRequired,
+
+    isSelected: PropTypes.bool.isRequired,
+
+    addTestCase: PropTypes.func.isRequired,
+    deleteTestCaseByKey: PropTypes.func.isRequired,
+    setSelectedTestCaseByKey: PropTypes.func.isRequired,
+    updateSelectedTestCaseSummary: PropTypes.func.isRequired,
+    updateTestCase: PropTypes.func.isRequired
 }

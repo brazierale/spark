@@ -9,7 +9,7 @@ import {
 import { TagList } from '../components/TagList';
 import StepList from '../components/StepList';
 import Description from '../components/Description';
-import { TestCase, StepObject } from '../modules/TestCase';
+import { TestCaseObject, StepObject } from '../modules/TestCase';
 import { generateKey } from '../modules/KeyGen';
 import '../support/DetailPane.css'
 
@@ -127,7 +127,7 @@ class DetailPane extends Component {
 
     updateDetails(updateType, update) {
             // take the current state
-            let updatedTestCase = new TestCase (
+            let updatedTestCase = new TestCaseObject (
                 this.props.selectedTestCase.key,
                 this.props.selectedTestCase.summary,
                 this.props.selectedTestCase.description,

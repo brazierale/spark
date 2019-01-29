@@ -1,4 +1,4 @@
-export class TestCase {
+export class TestCaseObject {
     constructor(
         key,
         summary,
@@ -23,7 +23,7 @@ export class StepObject {
     }
 }
 
-export const blankTestCase = new TestCase(
+export const blankTestCase = new TestCaseObject(
     0,
     '',
     '',
