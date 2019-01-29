@@ -48,7 +48,7 @@ class Row extends Component {
                 />
                 <DeleteTestCase 
                     testCaseKey={this.props.testCase.key}
-                    deleteTestCase={key => this.deleteTestCase(key)}
+                    deleteTestCase={this.deleteTestCase}
                     disabled={this.props.testCase.saving}
                 />
             </div>

@@ -16,7 +16,7 @@ export class TestCase {
         }
 }
 
-export class Step {
+export class StepObject {
     constructor(id, name) {
         this.id = id;
         this.name = name;

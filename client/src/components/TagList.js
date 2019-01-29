@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
 
-import { Tag } from './Tag';
+import Tag from './Tag';
 import '../support/Tag.css';
 
 
@@ -22,7 +22,7 @@ export class TagList extends Component {
             <Tag
                 key={key++} 
                 tagName={tag}
-                deleteTag={this.props.deleteTag}
+                deleteTag={() => this.props.deleteTag(tag)}
                 disabled={this.props.disabled}
             />
         );

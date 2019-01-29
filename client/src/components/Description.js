@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import '../support/Description.css'
 
 // description field
-
 class Description extends Component {
     state = {
         description: this.props.description
@@ -43,9 +42,7 @@ class Description extends Component {
     }
 
     handleUserInput = event => {
-        this.setState({
-            description: event.target.value
-        });
+        this.setState({ description: event.target.value });
     }
 }
 
@@ -53,7 +50,7 @@ export default Description;
 
 Description.propTypes = {
     description: PropTypes.string.isRequired,
-    
+
     disabled: PropTypes.bool.isRequired,
 
     updateDescription: PropTypes.func.isRequired
