@@ -10,7 +10,7 @@ import {
     updateSelectedTestCase
 } from '../actions/testcase-actions';
 import { TestCaseInput } from '../components/TestCaseInput'
-import { DeleteTestCase } from  '../components/DeleteTestCase';
+import DeleteTestCase from  '../components/DeleteTestCase';
 import { MoveTestCase } from '../components/MoveTestCase';
 
 class Row extends Component {
@@ -18,14 +18,14 @@ class Row extends Component {
         super(props);
 
         this.updateSelectedTestCaseSummary = this.updateSelectedTestCaseSummary.bind(this);
+        this.deleteTestCase = this.deleteTestCase.bind(this);
+        this.isSelected = this.isSelected.bind(this);
     }
 
     render() {
-        let isSelected = false;
-        if (this.props.testCase.key === this.props.selectedTestCase.key) { isSelected = true }
         let classes = classNames({
                 'Row': true,
-                'Selected-row': isSelected,
+                'Selected-row': this.isSelected(),
                 'Test-case-saving': this.props.testCase.saving
         })
         return (
@@ -39,7 +39,7 @@ class Row extends Component {
                         setSelectedTestCaseByKey={key => this.props.setSelectedTestCaseByKey(key)}
                         updateSelectedTestCaseSummary={summary => this.updateSelectedTestCaseSummary(summary)}
                         selectedTestCase={this.props.selectedTestCase}
-                        isSelected={isSelected}
+                        isSelected={this.isSelected()}
                     />
                 </div>
                 <MoveTestCase
@@ -48,9 +48,7 @@ class Row extends Component {
                 />
                 <DeleteTestCase 
                     testCaseKey={this.props.testCase.key}
-                    isSelected={isSelected}
-                    setSelectedTestCaseByKey={key => this.props.setSelectedTestCaseByKey(key)}
-                    deleteTestCaseByKey={key => this.props.deleteTestCaseByKey(key)}
+                    deleteTestCase={key => this.deleteTestCase(key)}
                     disabled={this.props.testCase.saving}
                 />
             </div>
@@ -60,6 +58,15 @@ class Row extends Component {
         let updatedTestCase = this.props.selectedTestCase;
         updatedTestCase.summary = summary;
         this.props.updateSelectedTestCase(updatedTestCase);
+    };
+    deleteTestCase() {
+        if (this.isSelected()) {
+            this.props.setSelectedTestCaseByKey(0);
+        }
+        this.props.deleteTestCaseByKey(this.props.testCase.key);
+    };
+    isSelected() {
+        return this.props.testCase.key === this.props.selectedTestCase.key
     };
 }
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { DeleteTag } from './DeleteTag';
+import DeleteTag from './DeleteTag';
 
 // single tag which will in future act as a link to filtering
 export class Tag extends Component {
