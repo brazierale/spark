@@ -14,14 +14,14 @@ const DeleteTag = props => {
             icon={faTimes}
             onClick={props.deleteTag}
         />
-    )
+    );
 }
 
 const Classes = disabled => {
     return classNames({
         'Delete-tag': true,
         'Disabled-delete': disabled
-    })
+    });
 }
 
 export default DeleteTag;

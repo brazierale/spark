@@ -8,7 +8,7 @@ import {
 } from '../actions/testcase-actions';
 import { TagList } from '../components/TagList';
 import { StepList } from '../components/StepList';
-import { Description } from '../components/Description';
+import Description from '../components/Description';
 import { TestCase, Step } from '../modules/TestCase';
 import { generateKey } from '../modules/KeyGen';
 import '../support/DetailPane.css'
