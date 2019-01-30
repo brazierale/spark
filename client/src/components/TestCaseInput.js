@@ -56,6 +56,7 @@ class TestCaseInput extends Component {
         if(this.props.testCase.key === 0 && summary !== '') {
             let newTestCase = this.props.testCase;
             newTestCase.key = generateKey();
+            newTestCase.sortId = this.props.nextSortId();
 
             this.props.addTestCase(newTestCase);
 
@@ -71,6 +72,7 @@ class TestCaseInput extends Component {
         else if (this.props.testCase.key !==0) {
             let updatedTestCase = new TestCaseObject(
                 this.props.testCase.key,
+                this.props.testCase.sortId,
                 summary,
                 this.props.testCase.description,
                 this.props.testCase.steps,
@@ -91,7 +93,8 @@ TestCaseInput.propTypes = {
     deleteTestCaseByKey: PropTypes.func.isRequired,
     setSelectedTestCaseByKey: PropTypes.func.isRequired,
     updateSelectedTestCaseSummary: PropTypes.func.isRequired,
-    updateTestCase: PropTypes.func.isRequired
+    updateTestCase: PropTypes.func.isRequired,
+    nextSortId: PropTypes.func.isRequired
 }
 
 export default TestCaseInput;

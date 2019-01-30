@@ -90,6 +90,7 @@ export function addTestCase(testCase) {
 
         axios.post("/api/testCases", {
             key: testCase.key,
+            sortId: testCase.sortId,
             summary: testCase.summary,
             description: testCase.description,
             steps: testCase.steps,
@@ -125,6 +126,7 @@ export function updateTestCase(testCase) {
         axios.put(`/api/testCases/${testCase.key}`, {
             update: {
                 summary: testCase.summary,
+                sortId: testCase.sortId,
                 description: testCase.description,
                 steps: testCase.steps,
                 tags: testCase.tags
@@ -149,6 +151,7 @@ export function getTestCases() {
                     testCases = res.data.data.map((testCase) =>
                         new TestCaseObject(
                             testCase.key,
+                            testCase.sortId,
                             testCase.summary,
                             testCase.description,
                             testCase.steps,
@@ -158,7 +161,7 @@ export function getTestCases() {
                 }
                 //console.log(blankTestCase)
                 // should be using blankTestCase but its getting updated before being used for some reason 
-                let blank = new TestCaseObject (0, '', '', [], [])
+                let blank = new TestCaseObject (0, 999999, '', '', [], [])
                 testCases.push(blank);
             })
             .then(() => {

@@ -8,15 +8,16 @@ import '../styles/TestCaseList.css'
 
 const TestCaseList = props => {
     return(
-        <div>{testCasesToRender(props.testCases)}</div>
+        <div>{testCasesToRender(props, props.testCases)}</div>
     );
 }
 
-const testCasesToRender = testCases => {
+const testCasesToRender = (props, testCases) => {
     return (
         testCases.map((testCase) => 
             <Row key={testCase.key}
                 testCase={testCase}
+                nextSortId={props.nextSortId}
             >
             </Row>
         )
@@ -24,7 +25,9 @@ const testCasesToRender = testCases => {
 }
 
 TestCaseList.propTypes = {
-    testCases: PropTypes.arrayOf(TestCasePropTypes).isRequired
+    testCases: PropTypes.arrayOf(TestCasePropTypes).isRequired,
+
+    nextSortId: PropTypes.func.isRequired
 }
 
 export default TestCaseList;

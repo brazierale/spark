@@ -10,6 +10,7 @@ export class StepObject {
 export class TestCaseObject {
     constructor(
         key,
+        sortId,
         summary,
         description,
         steps,
@@ -17,6 +18,7 @@ export class TestCaseObject {
         )
         {
             this.key = key;
+            this.sortId = sortId;
             this.summary = summary;
             this.description = description;
             this.steps = steps;
@@ -37,6 +39,7 @@ export let TestCasePropTypes = PropTypes.shape({
         PropTypes.string,
         PropTypes.number
     ]),
+    sortId: PropTypes.number,
     summary: PropTypes.string,
     description: PropTypes.string,
     steps: StepPropTypes,
@@ -46,6 +49,7 @@ export let TestCasePropTypes = PropTypes.shape({
 
 export const blankTestCase = new TestCaseObject(
     0,
+    999999,
     '',
     '',
     [],

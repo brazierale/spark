@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
 
@@ -35,6 +36,7 @@ class Row extends Component {
                         updateSelectedTestCaseSummary={summary => this.updateSelectedTestCaseSummary(summary)}
                         selectedTestCase={this.props.selectedTestCase}
                         isSelected={this.isSelected()}
+                        nextSortId={this.props.nextSortId}
                     />
                 </div>
                 <MoveTestCase
@@ -81,6 +83,8 @@ const mapDispatchToProps = {
 
 Row.propTypes = {
     testCase: TestCasePropTypes,
+
+    nextSortId: PropTypes.func.isRequired
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Row);

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import TagList from '../components/TagList';
@@ -116,6 +117,7 @@ class DetailPane extends Component {
             // take the current state
             let updatedTestCase = new TestCaseObject (
                 this.props.selectedTestCase.key,
+                this.props.selectedTestCase.sortId,
                 this.props.selectedTestCase.summary,
                 this.props.selectedTestCase.description,
                 this.props.selectedTestCase.steps,
@@ -133,6 +135,7 @@ class DetailPane extends Component {
                 this.props.selectedTestCase.summary !== '') {
             const newTestCase = this.props.selectedTestCase;
             newTestCase.key = generateKey();
+            newTestCase.sortId = this.props.nextSortId();
 
             this.props.addTestCase(newTestCase);
         }
@@ -145,18 +148,24 @@ class DetailPane extends Component {
             this.forceUpdate();
         }
     }
+
+    
 }
 
 const mapStateToProps = state => {    
     return {
         selectedTestCase: state.selectedTestCase,
     }
-};
+}
 
 const mapDispatchToProps = {
     addTestCase: addTestCase,
     updateTestCase: updateTestCase,
     updateSelectedTestCase: updateSelectedTestCase
-};
+}
+
+DetailPane.propTypes = {
+    nextSortId: PropTypes.func.isRequired
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(DetailPane);
