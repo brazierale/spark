@@ -68,7 +68,7 @@ class Row extends Component {
     };
     moveTestCaseUp = () => {
         let updatedTestCase = this.props.testCase;
-        updatedTestCase.sortId = this.props.testCase.sortId - 1001;
+        updatedTestCase.sortId = this.props.moveUpSortId(this.props.testCase.key);
         this.props.updateTestCase(updatedTestCase);
     }
 }
@@ -90,6 +90,7 @@ const mapDispatchToProps = {
 Row.propTypes = {
     testCase: TestCasePropTypes,
 
+    moveUpSortId: PropTypes.func.isRequired,
     nextSortId: PropTypes.func.isRequired
 }
 
