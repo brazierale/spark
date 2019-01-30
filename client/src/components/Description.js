@@ -46,12 +46,12 @@ class Description extends Component {
     }
 }
 
-export default Description;
-
 Description.propTypes = {
     description: PropTypes.string.isRequired,
-
+    
     disabled: PropTypes.bool.isRequired,
-
+    
     updateDescription: PropTypes.func.isRequired
 }
+
+export default Description;

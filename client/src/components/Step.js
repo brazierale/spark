@@ -62,10 +62,10 @@ class Step extends Component {
     }
 }
 
-export default Step;
-
 Step.propTypes = {
     step: PropTypes.object.isRequired,
-
+    
     disabled: PropTypes.bool.isRequired
 }
+
+export default Step;

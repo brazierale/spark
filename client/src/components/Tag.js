@@ -17,12 +17,12 @@ const Tag = props => {
     );
 }
 
-export default Tag;
-
 Tag.propTypes = {
     tagName: PropTypes.string.isRequired,
-
+    
     disabled: PropTypes.bool.isRequired,
-
+    
     deleteTag: PropTypes.func.isRequired,
 }
+
+export default Tag;

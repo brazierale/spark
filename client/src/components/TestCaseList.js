@@ -23,8 +23,8 @@ const testCasesToRender = testCases => {
     );
 }
 
-export default TestCaseList;
-
 TestCaseList.propTypes = {
     testCases: PropTypes.arrayOf(TestCaseObject).isRequired
 }
+
+export default TestCaseList;

@@ -19,8 +19,6 @@ const MoveTestCase = props => {
     }
 }
 
-export default MoveTestCase;
-
 MoveTestCase.propTypes = {
     testCaseKey: PropTypes.oneOfType([
         PropTypes.string,
@@ -29,3 +27,5 @@ MoveTestCase.propTypes = {
     
     disabled: PropTypes.bool.isRequired
 }
+
+export default MoveTestCase;

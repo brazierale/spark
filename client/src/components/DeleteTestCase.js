@@ -19,15 +19,15 @@ const DeleteTestCase = props => {
     }
 }
 
-export default DeleteTestCase;
-
 DeleteTestCase.propTypes = {
     testCaseKey: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.number
     ]),
-
+    
     disabled: PropTypes.bool.isRequired,
     
     deleteTestCase: PropTypes.func.isRequired
 }
+
+export default DeleteTestCase;

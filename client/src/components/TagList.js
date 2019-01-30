@@ -65,12 +65,12 @@ class TagList extends Component {
     }
 }
 
-export default TagList;
-
 TagList.propTypes = {
     tags: PropTypes.arrayOf(PropTypes.string).isRequired,
-
+    
     disabled: PropTypes.bool.isRequired,
-
+    
     deleteTag: PropTypes.func.isRequired
 }
+
+export default TagList;

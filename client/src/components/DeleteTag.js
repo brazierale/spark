@@ -23,10 +23,10 @@ const Classes = disabled => {
     });
 }
 
-export default DeleteTag;
-
 DeleteTag.propTypes = {
     disabled: PropTypes.bool.isRequired,
-
+    
     deleteTag: PropTypes.func.isRequired
 }
+
+export default DeleteTag;

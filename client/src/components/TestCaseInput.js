@@ -81,17 +81,17 @@ class TestCaseInput extends Component {
     }
 }
 
-export default TestCaseInput;
-
 TestCaseInput.propTypes = {
     testCase: PropTypes.objectOf(TestCaseObject).isRequired,
     selectedTestCase: PropTypes.objectOf(TestCaseObject).isRequired,
-
+    
     isSelected: PropTypes.bool.isRequired,
-
+    
     addTestCase: PropTypes.func.isRequired,
     deleteTestCaseByKey: PropTypes.func.isRequired,
     setSelectedTestCaseByKey: PropTypes.func.isRequired,
     updateSelectedTestCaseSummary: PropTypes.func.isRequired,
     updateTestCase: PropTypes.func.isRequired
 }
+
+export default TestCaseInput;

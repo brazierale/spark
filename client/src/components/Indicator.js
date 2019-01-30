@@ -14,9 +14,9 @@ const Indicator = props => {
     }
 }
 
-export default Indicator;
-
 Indicator.propTypes = {
     loading: PropTypes.bool.isRequired,
     saving: PropTypes.bool.isRequired
 }
+
+export default Indicator;

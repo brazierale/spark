@@ -72,14 +72,14 @@ class StepList extends Component {
     }
 }
 
-export default StepList;
-
 StepList.propTypes = {
     steps: PropTypes.arrayOf(StepObject).isRequired,
-
+    
     disabled: PropTypes.bool.isRequired,
-
+    
     addStep: PropTypes.func.isRequired,
     deleteStep: PropTypes.func.isRequired,
     updateStepList: PropTypes.func.isRequired,
 }
+
+export default StepList;
