@@ -12,7 +12,6 @@ class StepList extends Component {
     state = {
         newStep: ''
     }
-
     render() {
         const stepsToRender = this.props.steps.map( step => 
             <Step
@@ -73,7 +72,7 @@ class StepList extends Component {
 }
 
 StepList.propTypes = {
-    steps: PropTypes.arrayOf(StepPropTypes).isRequired,
+    steps: StepPropTypes,
     
     disabled: PropTypes.bool.isRequired,
     
