@@ -15,13 +15,6 @@ import {
 } from '../actions/testcase-actions';
 
 class Row extends Component {
-    constructor(props) {
-        super(props);
-
-        this.updateSelectedTestCaseSummary = this.updateSelectedTestCaseSummary.bind(this);
-        this.deleteTestCase = this.deleteTestCase.bind(this);
-        this.isSelected = this.isSelected.bind(this);
-    }
 
     render() {
         let classes = classNames({
@@ -55,18 +48,18 @@ class Row extends Component {
             </div>
         )
     }
-    updateSelectedTestCaseSummary(summary) {
+    updateSelectedTestCaseSummary = summary => {
         let updatedTestCase = this.props.selectedTestCase;
         updatedTestCase.summary = summary;
         this.props.updateSelectedTestCase(updatedTestCase);
     };
-    deleteTestCase() {
+    deleteTestCase = () => {
         if (this.isSelected()) {
             this.props.setSelectedTestCaseByKey(0);
         }
         this.props.deleteTestCaseByKey(this.props.testCase.key);
     };
-    isSelected() {
+    isSelected = () => {
         return this.props.testCase.key === this.props.selectedTestCase.key
     };
 }
