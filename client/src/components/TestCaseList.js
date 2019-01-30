@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import Row from '../connected-components/Row';
 
-import { TestCaseObject } from '../modules/TestCase';
+import { TestCasePropTypes } from '../modules/TestCase';
 import '../styles/TestCaseList.css'
 
 const TestCaseList = props => {
@@ -24,7 +24,7 @@ const testCasesToRender = testCases => {
 }
 
 TestCaseList.propTypes = {
-    testCases: PropTypes.arrayOf(TestCaseObject).isRequired
+    testCases: PropTypes.arrayOf(TestCasePropTypes).isRequired
 }
 
 export default TestCaseList;

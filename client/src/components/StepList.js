@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import Step from './Step';
 
-import { StepObject } from '../modules/TestCase';
+import { StepPropTypes } from '../modules/TestCase';
 import '../styles/Step.css'
 
 
@@ -73,7 +73,7 @@ class StepList extends Component {
 }
 
 StepList.propTypes = {
-    steps: PropTypes.arrayOf(StepObject).isRequired,
+    steps: PropTypes.arrayOf(StepPropTypes).isRequired,
     
     disabled: PropTypes.bool.isRequired,
     

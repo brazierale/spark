@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
-import { TestCaseObject } from '../modules/TestCase';
+import { TestCaseObject, TestCasePropTypes } from '../modules/TestCase';
 import { generateKey } from '../modules/KeyGen';
 
 class TestCaseInput extends Component {
@@ -82,8 +82,8 @@ class TestCaseInput extends Component {
 }
 
 TestCaseInput.propTypes = {
-    testCase: PropTypes.objectOf(TestCaseObject).isRequired,
-    selectedTestCase: PropTypes.objectOf(TestCaseObject).isRequired,
+    testCase: TestCasePropTypes,
+    selectedTestCase: TestCasePropTypes.isRequired,
     
     isSelected: PropTypes.bool.isRequired,
     
