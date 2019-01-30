@@ -84,7 +84,7 @@ export function updateSelectedTestCase(testCase) {
 export function addTestCase(testCase) {
     return dispatch => {
         let updatedTestCase = testCase;
-        updatedTestCase.saving = true;
+        updatedTestCase.disabled = true;
 
         dispatch(addTestCasesBegin(testCase));
 
@@ -118,7 +118,7 @@ export function deleteTestCaseByKey(key) {
 export function updateTestCase(testCase) {
     return dispatch => {
         let updatedTestCase = testCase;
-        updatedTestCase.saving = true;
+        updatedTestCase.disabled = true;
 
         dispatch(updateTestCasesBegin(updatedTestCase));
 

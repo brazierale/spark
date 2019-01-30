@@ -21,7 +21,7 @@ export class TestCaseObject {
             this.description = description;
             this.steps = steps;
             this.tags = tags;
-            this.saving = false;
+            this.disabled = false;
         }
 }
 
@@ -41,7 +41,7 @@ export let TestCasePropTypes = PropTypes.shape({
     description: PropTypes.string,
     steps: StepPropTypes,
     tags: PropTypes.arrayOf(PropTypes.string),
-    saving: PropTypes.bool
+    disabled: PropTypes.bool
 })
 
 export const blankTestCase = new TestCaseObject(

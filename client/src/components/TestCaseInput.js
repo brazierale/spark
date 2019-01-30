@@ -15,7 +15,7 @@ class TestCaseInput extends Component {
                 'Test-case': true,
                 'Test-case-input': true,
                 'Selected-input': this.props.isSelected,
-                'Test-case-saving': this.props.testCase.saving
+                'Test-case-disabled': this.props.testCase.disabled
         })
         return (
             <input
@@ -28,7 +28,7 @@ class TestCaseInput extends Component {
                 onChange={this.handleUserInput}
                 onKeyDown={this.handleKeyDown}
                 onFocus={this.handleFocus}
-                disabled={this.props.testCase.saving}
+                disabled={this.props.testCase.disabled}
             />
         )
     }

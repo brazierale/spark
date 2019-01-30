@@ -21,7 +21,7 @@ class Row extends Component {
         let classes = classNames({
                 'Row': true,
                 'Selected-row': this.isSelected(),
-                'Test-case-saving': this.props.testCase.saving
+                'Test-case-disabled': this.props.testCase.disabled
         })
         return (
             <div className={classes}>
@@ -39,12 +39,12 @@ class Row extends Component {
                 </div>
                 <MoveTestCase
                     testCaseKey={this.props.testCase.key}
-                    disabled={this.props.testCase.saving}
+                    disabled={this.props.testCase.disabled}
                 />
                 <DeleteTestCase 
                     testCaseKey={this.props.testCase.key}
                     deleteTestCase={this.deleteTestCase}
-                    disabled={this.props.testCase.saving}
+                    disabled={this.props.testCase.disabled}
                 />
             </div>
         )

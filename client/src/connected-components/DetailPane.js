@@ -27,26 +27,26 @@ class DetailPane extends Component {
                     <Description
                         description={this.props.selectedTestCase.description}
                         updateDescription={this.updateDescription}
-                        disabled={this.props.selectedTestCase.saving}
+                        disabled={this.props.selectedTestCase.disabled}
                     />
                     <StepList
                         steps={this.props.selectedTestCase.steps}
                         addStep={this.addStep}
                         deleteStep={this.deleteStep}
                         updateStepList={this.updateStepList}
-                        disabled={this.props.selectedTestCase.saving}
+                        disabled={this.props.selectedTestCase.disabled}
                     />
                     <TagList 
                         tags={this.props.selectedTestCase.tags}
                         addTag={this.addTag}
                         deleteTag={this.deleteTag}
-                        disabled={this.props.selectedTestCase.saving}
+                        disabled={this.props.selectedTestCase.disabled}
                     />
                     </div>
                     <div className="Detail-pane-footer">
                         <button 
                             className="Save-details"
-                            disabled={this.props.selectedTestCase.saving}
+                            disabled={this.props.selectedTestCase.disabled}
                             onClick={this.save}
                         >Save</button>
                     </div>
