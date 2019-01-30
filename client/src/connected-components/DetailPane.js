@@ -8,7 +8,7 @@ import Description from '../components/Description';
 
 import { TestCaseObject, StepObject } from '../modules/TestCase';
 import { generateKey } from '../modules/KeyGen';
-import '../support/DetailPane.css'
+import '../styles/DetailPane.css'
 import { 
     addTestCase,
     updateSelectedTestCase,

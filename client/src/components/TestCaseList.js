@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Row from '../connected-components/Row';
 
 import { TestCaseObject } from '../modules/TestCase';
-import '../support/TestCaseList.css'
+import '../styles/TestCaseList.css'
 
 const TestCaseList = props => {
     return(

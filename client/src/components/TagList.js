@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import Tag from './Tag';
 
-import '../support/Tag.css';
+import '../styles/Tag.css';
 
 
 // list of tags

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import '../support/Description.css'
+import '../styles/Description.css'
 
 // description field
 class Description extends Component {

@@ -6,7 +6,7 @@ import thunk from 'redux-thunk';
 import registerServiceWorker from './registerServiceWorker';
 
 import testCaseReducer from './reducers/testCaseReducer'
-import './support/index.css';
+import './styles/index.css';
 import App from './App'
 
 const allStoreEnhancers = compose(

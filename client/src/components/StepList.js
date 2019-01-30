@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Step from './Step';
 
 import { StepObject } from '../modules/TestCase';
-import '../support/Step.css'
+import '../styles/Step.css'
 
 
 // list of steps to run a test case
