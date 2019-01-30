@@ -55,7 +55,7 @@ const mapStateToProps = state => {
         saving: state.saving,
         error: state.error
     }
-};
+}
 
 const mapDispatchToProps = {
     getTestCases: getTestCases,

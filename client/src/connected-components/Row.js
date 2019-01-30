@@ -42,6 +42,7 @@ class Row extends Component {
                 <MoveTestCase
                     testCaseKey={this.props.testCase.key}
                     disabled={this.props.testCase.disabled}
+                    moveTestCaseUp={this.moveTestCaseUp}
                 />
                 <DeleteTestCase 
                     testCaseKey={this.props.testCase.key}
@@ -65,6 +66,11 @@ class Row extends Component {
     isSelected = () => {
         return this.props.testCase.key === this.props.selectedTestCase.key
     };
+    moveTestCaseUp = () => {
+        let updatedTestCase = this.props.testCase;
+        updatedTestCase.sortId = this.props.testCase.sortId - 1001;
+        this.props.updateTestCase(updatedTestCase);
+    }
 }
 
 const mapStateToProps = state => {    
