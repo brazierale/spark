@@ -13,6 +13,8 @@ const TestCaseList = props => {
 }
 
 const testCasesToRender = (props, testCases) => {
+    testCases.sort((a, b) => sortBySortId(a, b));
+
     return (
         testCases.map((testCase) => 
             <Row key={testCase.key}
@@ -22,6 +24,18 @@ const testCasesToRender = (props, testCases) => {
             </Row>
         )
     );
+}
+
+const sortBySortId = (a, b) => {
+    if (a.sortId < b.sortId) {
+        return -1;
+    }
+    if (a.sortId > b.sortId) {
+        return 1;
+    }
+    else {
+        return 0;
+    }
 }
 
 TestCaseList.propTypes = {
