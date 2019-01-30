@@ -79,7 +79,7 @@ const mapDispatchToProps = {
     updateSelectedTestCase: updateSelectedTestCase
 };
 
-Row.PropTypes = {
+Row.propTypes = {
     testCase: TestCasePropTypes,
 }
 
