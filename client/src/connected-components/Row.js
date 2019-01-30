@@ -6,6 +6,7 @@ import TestCaseInput from '../components/TestCaseInput'
 import DeleteTestCase from  '../components/DeleteTestCase';
 import MoveTestCase from '../components/MoveTestCase';
 
+import { TestCasePropTypes } from '../modules/TestCase';
 import { 
     addTestCase,
     deleteTestCaseByKey,
@@ -77,5 +78,9 @@ const mapDispatchToProps = {
     setSelectedTestCaseByKey: setSelectedTestCaseByKey,
     updateSelectedTestCase: updateSelectedTestCase
 };
+
+Row.PropTypes = {
+    testCase: TestCasePropTypes,
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Row);
