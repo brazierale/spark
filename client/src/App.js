@@ -1,6 +1,6 @@
 import React from 'react';
 import MainContainer from './connected-components/MainContainer';
-import logo from './support/small-header.svg';
+import logo from './styles/small-header.svg';
 import './styles/App.css';
 
 const App = () => {
