@@ -1,14 +1,17 @@
 import React from 'react';
+import { DragDropContextProvider } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
+
 import MainContainer from './connected-components/MainContainer';
 import logo from './styles/small-header.svg';
 import './styles/App.css';
 
 const App = () => {
   return (
-    <div className="App">
+    <DragDropContextProvider backend={HTML5Backend} className="App">
       <Header />
       <MainContainer />
-      </div>
+    </DragDropContextProvider>
   );
 }
 

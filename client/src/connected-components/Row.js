@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { compose } from 'redux';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
+import { ItemTypes } from '../modules/Constants.js';
+import { DragSource } from 'react-dnd';
 
 import TestCaseInput from '../components/TestCaseInput'
 import DeleteTestCase from  '../components/DeleteTestCase';
@@ -16,6 +19,12 @@ import {
     updateSelectedTestCase
 } from '../actions/testcase-actions';
 
+const testCaseSource = {
+    beginDrag(props) {
+        return {testCaseId: props.testCase.key}
+    }
+}
+
 class Row extends Component {
 
     render() {
@@ -24,7 +33,10 @@ class Row extends Component {
                 'Selected-row': this.isSelected(),
                 'Test-case-disabled': this.props.testCase.disabled
         })
-        return (
+
+        const { isDragging, connectDragSource } = this.props
+
+        return connectDragSource(
             <div className={classes}>
                 <div className="Test-case-container">
                     <TestCaseInput
@@ -73,6 +85,13 @@ class Row extends Component {
     }
 }
 
+const collect = (connect, monitor) => {
+    return {
+        connectDragSource: connect.dragSource(),
+        isDragging: monitor.isDragging()
+    }
+}
+
 const mapStateToProps = state => {    
     return {
         selectedTestCase: state.selectedTestCase,
@@ -94,4 +113,9 @@ Row.propTypes = {
     nextSortId: PropTypes.func.isRequired
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Row);
+const enhance = compose(
+    DragSource(ItemTypes.TEST_CASE, testCaseSource, collect),
+    connect(mapStateToProps, mapDispatchToProps)
+)
+
+export default enhance(Row);
