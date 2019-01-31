@@ -49,7 +49,7 @@ export let TestCasePropTypes = PropTypes.shape({
 
 export const blankTestCase = new TestCaseObject(
     0,
-    999999,
+    9999999,
     '',
     '',
     [],

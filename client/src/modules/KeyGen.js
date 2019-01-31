@@ -9,5 +9,5 @@ export function generateKey(){
 }
 
 export function generateSortId(latestId) {
-  return latestId + 1000;
+  return latestId + 100000;
 }

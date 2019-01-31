@@ -43,12 +43,16 @@ class TestCaseList extends Component {
     }
     
     moveAboveSortId = key => {
-        // okay start, but need to take ccount of edge cases
-        // defaulting to 0 means sorting above sets to negative numbers which stops working when sorting from 2nd to top
-        // numbers quickly end up the same, e.g. sorting 2 items above 1000 in a row sets them both to 999
-        // suggestion to check numbers either side of new position then come up with a number based on that
+        // get the numbers either side of the new position and pick a sortId between them
+        // could still use with improving as it takes < 20 switches to end up with duplicate sortIds
         let thisIndex = this.props.testCases.findIndex( tc => {return tc.key === key});
-            return this.props.testCases[thisIndex].sortId -1;
+        let toMoveAbove = this.props.testCases[thisIndex];
+        let toMoveBelow = this.props.testCases[thisIndex-1];
+        console.log(toMoveAbove)
+        console.log(toMoveBelow)
+        if (!toMoveBelow) {toMoveBelow = {sortId: 0}}
+        
+        return Math.floor(( toMoveAbove.sortId + toMoveBelow.sortId) / 2 );
     }
 }
 

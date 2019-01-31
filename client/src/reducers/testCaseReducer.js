@@ -38,7 +38,7 @@ export default function testCaseReducer(state = blankState, action) {
             }
         case ADD_TEST_CASE_BEGIN:
             // should be using blankTestCase but its getting updated before being used for some reason 
-            let blank = new TestCaseObject (0, 999999, '', '', [], [])
+            let blank = new TestCaseObject (0, 9999999, '', '', [], [])
             return {
                 ...state,
                 testCases: [
