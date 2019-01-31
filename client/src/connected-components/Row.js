@@ -34,7 +34,7 @@ class Row extends Component {
                 'Test-case-disabled': this.props.testCase.disabled
         })
 
-        const { isDragging, connectDragSource } = this.props
+        const { connectDragSource } = this.props;
 
         return connectDragSource(
             <div className={classes}>
