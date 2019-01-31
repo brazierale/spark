@@ -44,15 +44,13 @@ class TestCaseList extends Component {
     
     moveAboveSortId = key => {
         // get the numbers either side of the new position and pick a sortId between them
-        // could still use with improving as it takes < 20 switches to end up with duplicate sortIds
         let thisIndex = this.props.testCases.findIndex( tc => {return tc.key === key});
         let toMoveAbove = this.props.testCases[thisIndex];
         let toMoveBelow = this.props.testCases[thisIndex-1];
-        console.log(toMoveAbove)
-        console.log(toMoveBelow)
+
         if (!toMoveBelow) {toMoveBelow = {sortId: 0}}
         
-        return Math.floor(( toMoveAbove.sortId + toMoveBelow.sortId) / 2 );
+        return ( toMoveAbove.sortId + toMoveBelow.sortId) / 2;
     }
 }
 
