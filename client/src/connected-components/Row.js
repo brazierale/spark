@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { compose } from 'redux';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
 import { ItemTypes } from '../modules/Constants.js';
@@ -55,7 +54,6 @@ class Row extends Component {
                     <MoveTestCase
                         testCaseKey={this.props.testCase.key}
                         disabled={this.props.testCase.disabled}
-                        moveTestCaseUp={this.moveTestCaseUp}
                     />
                     <DeleteTestCase 
                         testCaseKey={this.props.testCase.key}
@@ -71,20 +69,15 @@ class Row extends Component {
         let updatedTestCase = this.props.selectedTestCase;
         updatedTestCase.summary = summary;
         this.props.updateSelectedTestCase(updatedTestCase);
-    };
+    }
     deleteTestCase = () => {
         if (this.isSelected()) {
             this.props.setSelectedTestCaseByKey(0);
         }
         this.props.deleteTestCaseByKey(this.props.testCase.key);
-    };
+    }
     isSelected = () => {
         return this.props.testCase.key === this.props.selectedTestCase.key
-    };
-    moveTestCaseUp = () => {
-        let updatedTestCase = this.props.testCase;
-        updatedTestCase.sortId = this.props.moveUpSortId(this.props.testCase.key);
-        this.props.updateTestCase(updatedTestCase);
     }
 }
 
@@ -92,15 +85,18 @@ class Row extends Component {
 const testCaseSource = {
     beginDrag(props) {
         console.log('dragging ' + props.testCase.summary)
-        return {testCaseId: props.testCase.key}
+        return {testCase: props.testCase}
     }
 }
 
 // actions to carry out when item is dropped
-// update this in conjunction with moveTestCaseUp to move 1 above the test case dropped onto
 const testCaseTarget = {
-    drop(props) {
-        console.log('dropped onto ' + props.testCase.summary)
+    drop(props, monitor) {
+        // get the test case we're dropping
+        let testCaseToMove = monitor.getItem().testCase;
+        // current this is the row being dropped onto, so get the Id to sort above
+        testCaseToMove.sortId = props.moveAboveSortId(props.testCase.key)
+        props.updateTestCase(testCaseToMove);
     }
 }
 
@@ -108,7 +104,7 @@ const testCaseTarget = {
 const collectDrag = (connect, monitor) => {
     return {
         connectDragSource: connect.dragSource(),
-        isDragging: monitor.isDragging(),
+        isDragging: monitor.isDragging()
     }
 }
 
@@ -116,7 +112,7 @@ const collectDrag = (connect, monitor) => {
 const collectDrop = (connect, monitor) => {
     return {
         connectDropTarget: connect.dropTarget(),
-        isOver: monitor.isOver()
+        isOver: monitor.isOver(),
     }
 }
 
@@ -137,7 +133,7 @@ const mapDispatchToProps = {
 Row.propTypes = {
     testCase: TestCasePropTypes,
 
-    moveUpSortId: PropTypes.func.isRequired,
+    moveAboveSortId: PropTypes.func.isRequired,
     nextSortId: PropTypes.func.isRequired
 }
 

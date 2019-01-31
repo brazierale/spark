@@ -11,7 +11,6 @@ const MoveTestCase = props => {
                 className="Move-row"
                 icon={faArrowsAlt}
                 size="sm"
-                onClick={props.moveTestCaseUp}
             />
         );
     }
@@ -26,9 +25,6 @@ MoveTestCase.propTypes = {
         PropTypes.number
     ]).isRequired,
     
-    disabled: PropTypes.bool.isRequired,
-
-    moveTestCaseUp: PropTypes.func.isRequired
-}
+    disabled: PropTypes.bool.isRequired,}
 
 export default MoveTestCase;

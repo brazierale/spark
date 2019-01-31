@@ -23,7 +23,7 @@ class TestCaseList extends Component {
                 <Row key={testCase.key}
                     testCase={testCase}
                     nextSortId={this.props.nextSortId}
-                    moveUpSortId={key => this.moveUpSortId(key)}
+                    moveAboveSortId={key => this.moveAboveSortId(key)}
                 >
                 </Row>
             )
@@ -42,19 +42,13 @@ class TestCaseList extends Component {
         }
     }
     
-    moveUpSortId = key => {
+    moveAboveSortId = key => {
         // okay start, but need to take ccount of edge cases
         // defaulting to 0 means sorting above sets to negative numbers which stops working when sorting from 2nd to top
         // numbers quickly end up the same, e.g. sorting 2 items above 1000 in a row sets them both to 999
         // suggestion to check numbers either side of new position then come up with a number based on that
         let thisIndex = this.props.testCases.findIndex( tc => {return tc.key === key});
-        
-        if (this.props.testCases[thisIndex-1]){
-            return this.props.testCases[thisIndex-1].sortId -1;
-        }
-        else {
-            return 0;
-        }
+            return this.props.testCases[thisIndex].sortId -1;
     }
 }
 
