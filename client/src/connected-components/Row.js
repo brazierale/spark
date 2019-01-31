@@ -4,7 +4,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
 import { ItemTypes } from '../modules/Constants.js';
-import { DragSource } from 'react-dnd';
+import { DragSource, DropTarget } from 'react-dnd';
 
 import TestCaseInput from '../components/TestCaseInput'
 import DeleteTestCase from  '../components/DeleteTestCase';
@@ -19,50 +19,53 @@ import {
     updateSelectedTestCase
 } from '../actions/testcase-actions';
 
-const testCaseSource = {
-    beginDrag(props) {
-        return {testCaseId: props.testCase.key}
-    }
-}
-
 class Row extends Component {
 
     render() {
+        const {
+            connectDragSource,
+            connectDropTarget,
+            isDragging,
+            isOver
+        } = this.props;
+        
         let classes = classNames({
                 'Row': true,
                 'Selected-row': this.isSelected(),
-                'Test-case-disabled': this.props.testCase.disabled
+                'Test-case-disabled': this.props.testCase.disabled,
+                'Hover-over': isOver,
         })
 
-        const { connectDragSource } = this.props;
-
-        return connectDragSource(
-            <div className={classes}>
-                <div className="Test-case-container">
-                    <TestCaseInput
-                        testCase={this.props.testCase}
-                        addTestCase={testCase => this.props.addTestCase(testCase)}
-                        deleteTestCaseByKey={key => this.props.deleteTestCaseByKey(key)}
-                        updateTestCase={testCase => this.props.updateTestCase(testCase)}
-                        setSelectedTestCaseByKey={key => this.props.setSelectedTestCaseByKey(key)}
-                        updateSelectedTestCaseSummary={summary => this.updateSelectedTestCaseSummary(summary)}
-                        selectedTestCase={this.props.selectedTestCase}
-                        isSelected={this.isSelected()}
-                        nextSortId={this.props.nextSortId}
+        if (!isDragging) {
+            return connectDropTarget(connectDragSource(
+                <div className={classes}>
+                    <div className="Test-case-container">
+                        <TestCaseInput
+                            testCase={this.props.testCase}
+                            addTestCase={testCase => this.props.addTestCase(testCase)}
+                            deleteTestCaseByKey={key => this.props.deleteTestCaseByKey(key)}
+                            updateTestCase={testCase => this.props.updateTestCase(testCase)}
+                            setSelectedTestCaseByKey={key => this.props.setSelectedTestCaseByKey(key)}
+                            updateSelectedTestCaseSummary={summary => this.updateSelectedTestCaseSummary(summary)}
+                            selectedTestCase={this.props.selectedTestCase}
+                            isSelected={this.isSelected()}
+                            nextSortId={this.props.nextSortId}
+                        />
+                    </div>
+                    <MoveTestCase
+                        testCaseKey={this.props.testCase.key}
+                        disabled={this.props.testCase.disabled}
+                        moveTestCaseUp={this.moveTestCaseUp}
+                    />
+                    <DeleteTestCase 
+                        testCaseKey={this.props.testCase.key}
+                        deleteTestCase={this.deleteTestCase}
+                        disabled={this.props.testCase.disabled}
                     />
                 </div>
-                <MoveTestCase
-                    testCaseKey={this.props.testCase.key}
-                    disabled={this.props.testCase.disabled}
-                    moveTestCaseUp={this.moveTestCaseUp}
-                />
-                <DeleteTestCase 
-                    testCaseKey={this.props.testCase.key}
-                    deleteTestCase={this.deleteTestCase}
-                    disabled={this.props.testCase.disabled}
-                />
-            </div>
-        )
+            ))
+        }
+        else return null;
     }
     updateSelectedTestCaseSummary = summary => {
         let updatedTestCase = this.props.selectedTestCase;
@@ -85,10 +88,35 @@ class Row extends Component {
     }
 }
 
-const collect = (connect, monitor) => {
+// actions to carry out when drag starts
+const testCaseSource = {
+    beginDrag(props) {
+        console.log('dragging ' + props.testCase.summary)
+        return {testCaseId: props.testCase.key}
+    }
+}
+
+// actions to carry out when item is dropped
+// update this in conjunction with moveTestCaseUp to move 1 above the test case dropped onto
+const testCaseTarget = {
+    drop(props) {
+        console.log('dropped onto ' + props.testCase.summary)
+    }
+}
+
+// set methods for Dragging
+const collectDrag = (connect, monitor) => {
     return {
         connectDragSource: connect.dragSource(),
-        isDragging: monitor.isDragging()
+        isDragging: monitor.isDragging(),
+    }
+}
+
+// set methods for Dropping
+const collectDrop = (connect, monitor) => {
+    return {
+        connectDropTarget: connect.dropTarget(),
+        isOver: monitor.isOver()
     }
 }
 
@@ -113,9 +141,8 @@ Row.propTypes = {
     nextSortId: PropTypes.func.isRequired
 }
 
-const enhance = compose(
-    DragSource(ItemTypes.TEST_CASE, testCaseSource, collect),
-    connect(mapStateToProps, mapDispatchToProps)
-)
+// attach the HOC one at a time
+const draggableRow = DragSource(ItemTypes.TEST_CASE, testCaseSource, collectDrag)(Row);
+const targetableRow = DropTarget(ItemTypes.TEST_CASE, testCaseTarget, collectDrop)(draggableRow);
 
-export default enhance(Row);
+export default connect(mapStateToProps, mapDispatchToProps)(targetableRow);
