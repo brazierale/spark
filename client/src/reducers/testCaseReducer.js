@@ -12,7 +12,8 @@ import {
     DELETE_TEST_CASE_FAILURE,
     UPDATE_TEST_CASE_BEGIN,
     UPDATE_TEST_CASE_SUCCESS,
-    UPDATE_TEST_CASE_FAILURE
+    UPDATE_TEST_CASE_FAILURE,
+    SET_DRAG_ENABLED
 } from '../actions/testcase-actions';
 import { blankTestCase, TestCaseObject } from '../modules/TestCase';
 
@@ -21,7 +22,8 @@ const blankState = {
     selectedTestCase: blankTestCase,
     loading: false,
     saving: false,
-    error: null
+    error: null,
+    dragEnabled: false
 }
 
 export default function testCaseReducer(state = blankState, action) {
@@ -124,6 +126,11 @@ export default function testCaseReducer(state = blankState, action) {
                 ...state,
                 loading: false,
                 error: action.payload.error
+            }
+        case SET_DRAG_ENABLED:
+            return {
+                ...state,
+                dragEnabled: action.payload.dragEnabled
             }
         default:
             return state;

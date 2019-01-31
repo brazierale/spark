@@ -15,6 +15,7 @@ export const UPDATE_TEST_CASE_FAILURE = 'UPDATE_TESTCASE_FAILURE';
 export const GET_TESTCASES_BEGIN = 'GET_TESTCASES_BEGIN';
 export const GET_TESTCASES_SUCCESS = 'GET_TESTCASES_SUCCESS';
 export const GET_TESTCASES_FAILURE = 'GET_TESTCASES_FAILURE';
+export const SET_DRAG_ENABLED = 'SET_DRAG_ENABLED';
 
 export const setSelectedTestCase = key => ({
     type: SET_SELECTED_TESTCASE,
@@ -68,6 +69,10 @@ export const getTestCasesFailure = err => ({
     type: GET_TESTCASES_FAILURE,
     payload: { err }
 });
+export const setDragEnabled = dragEnabled => ({
+    type: SET_DRAG_ENABLED,
+    payload: { dragEnabled }
+})
 
 export function setSelectedTestCaseByKey(key) {
     return dispatch => {
@@ -169,5 +174,11 @@ export function getTestCases() {
                 dispatch(getTestCasesSuccess(testCases));
             })
             .catch(err => dispatch(getTestCasesFailure(err)));
+    }
+}
+
+export function setDragEnabledStatus(bool) {
+    return dispatch => {
+        dispatch(setDragEnabled(bool))
     }
 }

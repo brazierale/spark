@@ -11,6 +11,8 @@ const MoveTestCase = props => {
                 className="Move-row"
                 icon={faArrowsAlt}
                 size="sm"
+                onMouseDown={() => enableMove(props)}
+                onMouseLeave={() => disableMove(props)}
             />
         );
     }
@@ -19,12 +21,23 @@ const MoveTestCase = props => {
     }
 }
 
+const enableMove = props => {
+    props.setDragEnabledStatus(true);
+}
+
+const disableMove = props => {
+    props.setDragEnabledStatus(false);
+}
+
 MoveTestCase.propTypes = {
     testCaseKey: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.number
     ]).isRequired,
     
-    disabled: PropTypes.bool.isRequired,}
+    disabled: PropTypes.bool.isRequired,
+
+    setDragEnabledStatus: PropTypes.func.isRequired
+}
 
 export default MoveTestCase;

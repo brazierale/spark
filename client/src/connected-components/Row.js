@@ -15,7 +15,8 @@ import {
     deleteTestCaseByKey,
     updateTestCase,
     setSelectedTestCaseByKey,
-    updateSelectedTestCase
+    updateSelectedTestCase,
+    setDragEnabledStatus
 } from '../actions/testcase-actions';
 
 class Row extends Component {
@@ -54,6 +55,7 @@ class Row extends Component {
                     <MoveTestCase
                         testCaseKey={this.props.testCase.key}
                         disabled={this.props.testCase.disabled}
+                        setDragEnabledStatus={bool => this.props.setDragEnabledStatus(bool)}
                     />
                     <DeleteTestCase 
                         testCaseKey={this.props.testCase.key}
@@ -86,6 +88,9 @@ const testCaseSource = {
     beginDrag(props) {
         console.log('dragging ' + props.testCase.summary)
         return {testCase: props.testCase}
+    },
+    canDrag(props) {
+        return props.dragEnabled;
     }
 }
 
@@ -119,6 +124,7 @@ const collectDrop = (connect, monitor) => {
 const mapStateToProps = state => {    
     return {
         selectedTestCase: state.selectedTestCase,
+        dragEnabled: state.dragEnabled
     }
 };
 
@@ -127,7 +133,8 @@ const mapDispatchToProps = {
     deleteTestCaseByKey: deleteTestCaseByKey,
     updateTestCase: updateTestCase,
     setSelectedTestCaseByKey: setSelectedTestCaseByKey,
-    updateSelectedTestCase: updateSelectedTestCase
+    updateSelectedTestCase: updateSelectedTestCase,
+    setDragEnabledStatus: setDragEnabledStatus
 };
 
 Row.propTypes = {
