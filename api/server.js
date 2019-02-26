@@ -8,7 +8,7 @@ const app = express();
 const router = express.Router();
 
 // mongoDB connection to spark database
-const dbRoute = 'mongodb+srv://alex:dpAFhp9Or8o0ZKKQ@mongo-mvqti.mongodb.net/spark?retryWrites=true';
+const dbRoute = 'mongodb+srv://alex:CXy0oQwqChhzDc1N@mongo-mvqti.mongodb.net/spark?retryWrites=true';
 mongoose.connect(
   dbRoute,
   { useNewUrlParser: true }
