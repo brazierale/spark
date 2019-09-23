@@ -18,8 +18,8 @@ import {
 import { blankTestCase, TestCaseObject } from '../modules/TestCase';
 
 const blankState = {
-    testCases: [blankTestCase],
-    selectedTestCase: blankTestCase,
+    testCases: [blankTestCase()],
+    selectedTestCase: blankTestCase(),
     loading: false,
     saving: false,
     error: null,
@@ -39,14 +39,12 @@ export default function testCaseReducer(state = blankState, action) {
                 selectedTestCase: action.payload.testCase
             }
         case ADD_TEST_CASE_BEGIN:
-            // should be using blankTestCase but its getting updated before being used for some reason 
-            let blank = new TestCaseObject (0, 9999999, '', '', [], [])
             return {
                 ...state,
                 testCases: [
                     ...state.testCases.slice(0, state.testCases.length-1),
                     action.payload.testCase,
-                    blank
+                    blankTestCase()
                 ],
                 saving: true,
                 error: null

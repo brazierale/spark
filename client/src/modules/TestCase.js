@@ -47,11 +47,13 @@ export let TestCasePropTypes = PropTypes.shape({
     disabled: PropTypes.bool
 })
 
-export const blankTestCase = new TestCaseObject(
-    0,
-    9999999,
-    '',
-    '',
-    [],
-    [],
-);
+export function blankTestCase() {
+    return new TestCaseObject(
+        0,
+        9999999,
+        '',
+        '',
+        [],
+        [],
+    )
+};

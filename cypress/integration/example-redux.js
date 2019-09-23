@@ -9,8 +9,8 @@ it('has expected state on load', () => {
     cy.visit('/')
 
     cy.window().its('store').invoke('getState').should('deep.equal', {
-        testCases: [blankTestCase],
-        selectedTestCase: blankTestCase,
+        testCases: [blankTestCase()],
+        selectedTestCase: blankTestCase(),
         loading: false,
         saving: false,
         error: null

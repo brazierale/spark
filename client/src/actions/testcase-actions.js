@@ -165,10 +165,7 @@ export function getTestCases() {
                         )
                     );
                 }
-                //console.log(blankTestCase)
-                // should be using blankTestCase but its getting updated before being used for some reason 
-                let blank = new TestCaseObject (0, 9999999, '', '', [], [])
-                testCases.push(blank);
+                testCases.push(blankTestCase());
             })
             .then(() => {
                 dispatch(getTestCasesSuccess(testCases));
