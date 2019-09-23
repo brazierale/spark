@@ -1,25 +1,28 @@
-import React, { Component } from 'react';
-import { DeleteTag } from './DeleteTag';
+import React from 'react';
+import PropTypes from 'prop-types';
+
+import DeleteTag from './DeleteTag';
 
 // single tag which will in future act as a link to filtering
-export class Tag extends Component {
-    constructor(props) {
-        super(props);
-
-        this.deleteTag = this.deleteTag.bind(this);
-    }
-    render() {
-        return(
-                <span className="Tag">
-                    {this.props.tagName}
-                    <DeleteTag
-                        deleteTag={this.deleteTag}
-                        disabled={this.props.disabled}
-                    />
-                </span>
-        );
-    }
-    deleteTag() {
-        this.props.deleteTag(this.props.tagName);
-    }
+const Tag = props => {
+    return(
+        <span className="Tag">
+            {props.tagName}
+            <DeleteTag
+                tagName={props.tagName}
+                deleteTag={props.deleteTag}
+                disabled={props.disabled}
+            />
+        </span>
+    );
 }
+
+Tag.propTypes = {
+    tagName: PropTypes.string.isRequired,
+    
+    disabled: PropTypes.bool.isRequired,
+    
+    deleteTag: PropTypes.func.isRequired,
+}
+
+export default Tag;

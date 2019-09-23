@@ -1,32 +1,21 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+import TagList from '../components/TagList';
+import StepList from '../components/StepList';
+import Description from '../components/Description';
+
+import { TestCaseObject, StepObject } from '../modules/TestCase';
+import { generateKey } from '../modules/KeyGen';
+import '../styles/DetailPane.css'
 import { 
     addTestCase,
     updateSelectedTestCase,
     updateTestCase
 } from '../actions/testcase-actions';
-import { TagList } from '../components/TagList';
-import { StepList } from '../components/StepList';
-import { Description } from '../components/Description';
-import { TestCase, Step } from '../modules/TestCase';
-import { generateKey } from '../modules/KeyGen';
-import '../support/DetailPane.css'
 
-// right-hand pane displaying details of selected test case
 class DetailPane extends Component {
-    constructor(props) {
-        super(props);
-
-        this.addTag = this.addTag.bind(this);
-        this.deleteTag = this.deleteTag.bind(this);
-        this.updateDescription = this.updateDescription.bind(this);
-        this.updateDetails = this.updateDetails.bind(this);
-        this.addStep = this.addStep.bind(this);
-        this.deleteStep = this.deleteStep.bind(this);
-        this.updateStepList = this.updateStepList.bind(this);
-        this.save = this.save.bind(this);
-    }
     render() {
         if (this.props.selectedTestCase){
             return (
@@ -39,38 +28,37 @@ class DetailPane extends Component {
                     <Description
                         description={this.props.selectedTestCase.description}
                         updateDescription={this.updateDescription}
-                        disabled={this.props.selectedTestCase.saving}
+                        disabled={this.props.selectedTestCase.disabled}
                     />
                     <StepList
                         steps={this.props.selectedTestCase.steps}
                         addStep={this.addStep}
                         deleteStep={this.deleteStep}
                         updateStepList={this.updateStepList}
-                        disabled={this.props.selectedTestCase.saving}
+                        disabled={this.props.selectedTestCase.disabled}
                     />
                     <TagList 
                         tags={this.props.selectedTestCase.tags}
                         addTag={this.addTag}
                         deleteTag={this.deleteTag}
-                        disabled={this.props.selectedTestCase.saving}
+                        disabled={this.props.selectedTestCase.disabled}
                     />
                     </div>
                     <div className="Detail-pane-footer">
                         <button 
                             className="Save-details"
-                            disabled={this.props.selectedTestCase.saving}
+                            disabled={this.props.selectedTestCase.disabled}
                             onClick={this.save}
                         >Save</button>
                     </div>
                 </div>
-            )            
+            );
         }
         else {
             return null
         }
-    };
-
-    addTag(newTag) {
+    }
+    addTag = newTag => {
         const isDuplicate = element => {
             return element === newTag;
         };
@@ -85,7 +73,7 @@ class DetailPane extends Component {
         this.updateDetails(tags, updatedTagList);
     };
 
-    deleteTag(toDelete) {
+    deleteTag = toDelete => {
         let tags = 'tags';
         let updatedTagList = this.props.selectedTestCase.tags.filter(
             tag => tag !== toDelete
@@ -94,9 +82,9 @@ class DetailPane extends Component {
         this.updateDetails(tags, updatedTagList);
     }
 
-    addStep(name) {
+    addStep = name => {
         let steps = 'steps';
-        let newStep = new Step (
+        let newStep = new StepObject (
             this.props.selectedTestCase.steps.length,
             name
         )
@@ -104,7 +92,7 @@ class DetailPane extends Component {
         this.updateDetails(steps, updatedStepList);
     }
 
-    deleteStep(id) {
+    deleteStep = id => {
         let steps = 'steps';
         let updatedStepList = this.props.selectedTestCase.steps.filter(
             step => step.id !== id
@@ -113,22 +101,23 @@ class DetailPane extends Component {
         this.updateDetails(steps, updatedStepList);
     }
 
-    updateDescription(updatedDescription) {
+    updateDescription = updatedDescription => {
         let description = 'description';
 
         this.updateDetails(description, updatedDescription);
     }
 
-    updateStepList(updatedSteps) {
+    updateStepList = updatedSteps => {
         let steps = 'steps';
 
         this.updateDetails(steps, updatedSteps);
     }
 
-    updateDetails(updateType, update) {
+    updateDetails = (updateType, update) => {
             // take the current state
-            let updatedTestCase = new TestCase (
+            let updatedTestCase = new TestCaseObject (
                 this.props.selectedTestCase.key,
+                this.props.selectedTestCase.sortId,
                 this.props.selectedTestCase.summary,
                 this.props.selectedTestCase.description,
                 this.props.selectedTestCase.steps,
@@ -140,12 +129,13 @@ class DetailPane extends Component {
             this.props.updateSelectedTestCase(updatedTestCase);
     }
 
-    save() {
+    save = () => {
         // create new test case if this is the entryRow
         if (this.props.selectedTestCase.key === 0 &&
                 this.props.selectedTestCase.summary !== '') {
             const newTestCase = this.props.selectedTestCase;
             newTestCase.key = generateKey();
+            newTestCase.sortId = this.props.nextSortId();
 
             this.props.addTestCase(newTestCase);
         }
@@ -158,18 +148,24 @@ class DetailPane extends Component {
             this.forceUpdate();
         }
     }
+
+    
 }
 
 const mapStateToProps = state => {    
     return {
         selectedTestCase: state.selectedTestCase,
     }
-};
+}
 
 const mapDispatchToProps = {
     addTestCase: addTestCase,
     updateTestCase: updateTestCase,
     updateSelectedTestCase: updateSelectedTestCase
-};
+}
+
+DetailPane.propTypes = {
+    nextSortId: PropTypes.func.isRequired
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(DetailPane);

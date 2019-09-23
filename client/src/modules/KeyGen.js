@@ -7,3 +7,7 @@ export function generateKey(){
     }
     return keygen;
 }
+
+export function generateSortId(latestId) {
+  return latestId + 100000;
+}

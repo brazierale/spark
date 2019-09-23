@@ -1,20 +1,16 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
-import { Step } from './Step';
-import '../support/Step.css'
+import Step from './Step';
+
+import { StepPropTypes } from '../modules/TestCase';
+import '../styles/Step.css'
 
 
 // list of steps to run a test case
-export class StepList extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            newStep: ''
-        }
-        this.updateStep = this.updateStep.bind(this);
-        this.handleUserInput = this.handleUserInput.bind(this);
-        this.handleKeyDown = this.handleKeyDown.bind(this);
-        this.handleBlur = this.handleBlur.bind(this);
+class StepList extends Component {
+    state = {
+        newStep: ''
     }
     render() {
         const stepsToRender = this.props.steps.map( step => 
@@ -46,31 +42,43 @@ export class StepList extends Component {
         );
     }
 
-    updateStep(id, newName) {
+    updateStep = (id, newName) => {
         let updatedStepList = this.props.steps;
         updatedStepList[id].name = newName;
 
         this.props.updateStepList(updatedStepList);
     }
 
-    handleUserInput(e) {
-        this.setState({ newStep: e.target.value})
+    handleUserInput = event => {
+        this.setState({ newStep: event.target.value })
     }
 
-    handleKeyDown(e) {
-        if (e.key === 'Enter' || e.keyCode === 9) {
+    handleKeyDown = event => {
+        if (event.key === 'Enter' || event.keyCode === 9) {
             if (this.state.newStep !== '') {
-                e.preventDefault();
+                event.preventDefault();
                 this.props.addStep(this.state.newStep);
                 this.setState({ newStep: '' })
             }
         }
     }
 
-    handleBlur() {
+    handleBlur = () => {
         if (this.state.newStep !== '') {
             this.props.addStep(this.state.newStep);
         }
         this.setState({ newStep: '' })
     }
 }
+
+StepList.propTypes = {
+    steps: StepPropTypes,
+    
+    disabled: PropTypes.bool.isRequired,
+    
+    addStep: PropTypes.func.isRequired,
+    deleteStep: PropTypes.func.isRequired,
+    updateStepList: PropTypes.func.isRequired,
+}
+
+export default StepList;

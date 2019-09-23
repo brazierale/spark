@@ -11,6 +11,7 @@ const StepSchema = new Schema(
 const TestCaseSchema = new Schema(
     {
         key: String,
+        sortId: Number,
         summary: String,
         description: String,
         steps: [StepSchema],

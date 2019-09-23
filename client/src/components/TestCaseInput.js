@@ -1,20 +1,13 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
+import PropTypes from 'prop-types';
 
-import { TestCase } from '../modules/TestCase';
+import { TestCaseObject, TestCasePropTypes } from '../modules/TestCase';
 import { generateKey } from '../modules/KeyGen';
 
-export class TestCaseInput extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            summary: props.testCase.summary,
-        };
-
-        this.handleUserInput = this.handleUserInput.bind(this);
-        this.handleKeyDown = this.handleKeyDown.bind(this);
-        this.handleFocus = this.handleFocus.bind(this);
-        this.sendUpdate = this.sendUpdate.bind(this);
+class TestCaseInput extends Component {
+    state = {
+        summary: this.props.testCase.summary
     }
 
     render() {
@@ -22,47 +15,48 @@ export class TestCaseInput extends Component {
                 'Test-case': true,
                 'Test-case-input': true,
                 'Selected-input': this.props.isSelected,
-                'Test-case-saving': this.props.testCase.saving
+                'Test-case-disabled': this.props.testCase.disabled
         })
         return (
             <input
-            ref={(input) => { this.nameInput = input; }}
-            type="text"
-            maxLength="255"
-            placeholder="Enter your test case here..."
-            className={classes}
-            value={this.state.summary}
-            onChange={this.handleUserInput}
-            onKeyDown={this.handleKeyDown}
-            onFocus={this.handleFocus}
-            disabled={this.props.testCase.saving}
+                ref={(input) => { this.nameInput = input; }}
+                type="text"
+                maxLength="255"
+                placeholder="Enter your test case here..."
+                className={classes}
+                value={this.state.summary}
+                onChange={this.handleUserInput}
+                onKeyDown={this.handleKeyDown}
+                onFocus={this.handleFocus}
+                disabled={this.props.testCase.disabled}
             />
-            )
+        )
     }
 
-    handleUserInput(e) {
-        this.setState({ summary: e.target.value})
-        this.props.updateSelectedTestCaseSummary(e.target.value);
+    handleUserInput = event => {
+        this.setState({ summary: event.target.value})
+        this.props.updateSelectedTestCaseSummary(event.target.value);
     }
 
-    handleKeyDown(e) {
-        if (e.key === 'Enter' || e.keyCode === 9) {
-            e.preventDefault();
+    handleKeyDown = event => {
+        if (event.key === 'Enter' || event.keyCode === 9) {
+            event.preventDefault();
             this.sendUpdate(this.state.summary);
         }
     }
 
-    handleFocus() {
+    handleFocus = () => {
         if (this.props.selectedTestCase.key !== this.props.testCase.key) {
             this.props.setSelectedTestCaseByKey(this.props.testCase.key);
         }
     }
     
-    sendUpdate(summary) {
+    sendUpdate = summary => {
         // create new test case if this is the entryRow
         if(this.props.testCase.key === 0 && summary !== '') {
             let newTestCase = this.props.testCase;
             newTestCase.key = generateKey();
+            newTestCase.sortId = this.props.nextSortId();
 
             this.props.addTestCase(newTestCase);
 
@@ -76,8 +70,9 @@ export class TestCaseInput extends Component {
         }
         // otherwise, update the test case
         else if (this.props.testCase.key !==0) {
-            let updatedTestCase = new TestCase(
+            let updatedTestCase = new TestCaseObject(
                 this.props.testCase.key,
+                this.props.testCase.sortId,
                 summary,
                 this.props.testCase.description,
                 this.props.testCase.steps,
@@ -87,3 +82,19 @@ export class TestCaseInput extends Component {
         }
     }
 }
+
+TestCaseInput.propTypes = {
+    testCase: TestCasePropTypes,
+    selectedTestCase: TestCasePropTypes.isRequired,
+    
+    isSelected: PropTypes.bool.isRequired,
+    
+    addTestCase: PropTypes.func.isRequired,
+    deleteTestCaseByKey: PropTypes.func.isRequired,
+    setSelectedTestCaseByKey: PropTypes.func.isRequired,
+    updateSelectedTestCaseSummary: PropTypes.func.isRequired,
+    updateTestCase: PropTypes.func.isRequired,
+    nextSortId: PropTypes.func.isRequired
+}
+
+export default TestCaseInput;

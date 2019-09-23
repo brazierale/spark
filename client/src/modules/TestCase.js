@@ -1,6 +1,16 @@
-export class TestCase {
+import { PropTypes } from 'prop-types';
+
+export class StepObject {
+    constructor(id, name) {
+        this.id = id;
+        this.name = name;
+    }
+}
+
+export class TestCaseObject {
     constructor(
         key,
+        sortId,
         summary,
         description,
         steps,
@@ -8,25 +18,42 @@ export class TestCase {
         )
         {
             this.key = key;
+            this.sortId = sortId;
             this.summary = summary;
             this.description = description;
             this.steps = steps;
             this.tags = tags;
-            this.saving = false;
+            this.disabled = false;
         }
 }
 
-export class Step {
-    constructor(id, name) {
-        this.id = id;
-        this.name = name;
-    }
-}
+export let StepPropTypes = PropTypes.arrayOf(
+    PropTypes.shape({
+        id: PropTypes.number,
+        name: PropTypes.string
+    })
+).isRequired
 
-export const blankTestCase = new TestCase(
-    0,
-    '',
-    '',
-    [],
-    [],
-);
+export let TestCasePropTypes = PropTypes.shape({
+    key: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number
+    ]),
+    sortId: PropTypes.number,
+    summary: PropTypes.string,
+    description: PropTypes.string,
+    steps: StepPropTypes,
+    tags: PropTypes.arrayOf(PropTypes.string),
+    disabled: PropTypes.bool
+})
+
+export function blankTestCase() {
+    return new TestCaseObject(
+        0,
+        9999999,
+        '',
+        '',
+        [],
+        [],
+    )
+};

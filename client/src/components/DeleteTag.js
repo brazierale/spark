@@ -1,27 +1,32 @@
-import React, { Component } from 'react';
+import React from 'react';
 import classNames from 'classnames';
+import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 // delete button for a single tag
-export class DeleteTag extends Component {
-    render() {
-        let classes = classNames({
-            'Delete-tag': true,
-            'Disabled-delete': this.props.disabled
-        })
 
-        return(
-                <FontAwesomeIcon
-                    className={classes}
-                    icon={faTimes}
-                    onClick={this.props.deleteTag}
-                />
-        );
-    }
+const DeleteTag = props => {
+    return (
+        <FontAwesomeIcon
+            className={Classes(props.disabled)}
+            icon={faTimes}
+            onClick={props.deleteTag}
+        />
+    );
 }
 
+const Classes = disabled => {
+    return classNames({
+        'Delete-tag': true,
+        'Disabled-delete': disabled
+    });
+}
 
+DeleteTag.propTypes = {
+    disabled: PropTypes.bool.isRequired,
+    
+    deleteTag: PropTypes.func.isRequired
+}
 
-
-
+export default DeleteTag;

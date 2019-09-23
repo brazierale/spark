@@ -1,4 +1,4 @@
-import { TestCase, blankTestCase } from '../modules/TestCase';
+import { TestCaseObject, blankTestCase } from '../modules/TestCase';
 import axios from 'axios';
 
 export const SET_SELECTED_TESTCASE = 'SET_SELECTED_TESTCASE';
@@ -15,6 +15,7 @@ export const UPDATE_TEST_CASE_FAILURE = 'UPDATE_TESTCASE_FAILURE';
 export const GET_TESTCASES_BEGIN = 'GET_TESTCASES_BEGIN';
 export const GET_TESTCASES_SUCCESS = 'GET_TESTCASES_SUCCESS';
 export const GET_TESTCASES_FAILURE = 'GET_TESTCASES_FAILURE';
+export const SET_DRAG_ENABLED = 'SET_DRAG_ENABLED';
 
 export const setSelectedTestCase = key => ({
     type: SET_SELECTED_TESTCASE,
@@ -68,6 +69,10 @@ export const getTestCasesFailure = err => ({
     type: GET_TESTCASES_FAILURE,
     payload: { err }
 });
+export const setDragEnabled = dragEnabled => ({
+    type: SET_DRAG_ENABLED,
+    payload: { dragEnabled }
+})
 
 export function setSelectedTestCaseByKey(key) {
     return dispatch => {
@@ -84,12 +89,13 @@ export function updateSelectedTestCase(testCase) {
 export function addTestCase(testCase) {
     return dispatch => {
         let updatedTestCase = testCase;
-        updatedTestCase.saving = true;
+        updatedTestCase.disabled = true;
 
         dispatch(addTestCasesBegin(testCase));
 
         axios.post("/api/testCases", {
             key: testCase.key,
+            sortId: testCase.sortId,
             summary: testCase.summary,
             description: testCase.description,
             steps: testCase.steps,
@@ -116,15 +122,17 @@ export function deleteTestCaseByKey(key) {
 }
 
 export function updateTestCase(testCase) {
+    console.log(testCase);
     return dispatch => {
         let updatedTestCase = testCase;
-        updatedTestCase.saving = true;
+        updatedTestCase.disabled = true;
 
         dispatch(updateTestCasesBegin(updatedTestCase));
 
         axios.put(`/api/testCases/${testCase.key}`, {
             update: {
                 summary: testCase.summary,
+                sortId: testCase.sortId,
                 description: testCase.description,
                 steps: testCase.steps,
                 tags: testCase.tags
@@ -147,8 +155,9 @@ export function getTestCases() {
             .then(res => {
                 if (res.data.data.length > 0) {
                     testCases = res.data.data.map((testCase) =>
-                        new TestCase(
+                        new TestCaseObject(
                             testCase.key,
+                            testCase.sortId,
                             testCase.summary,
                             testCase.description,
                             testCase.steps,
@@ -156,14 +165,17 @@ export function getTestCases() {
                         )
                     );
                 }
-                //console.log(blankTestCase)
-                // should be using blankTestCase but its getting updated before being used for some reason 
-                let blank = new TestCase (0, '', '', [], [])
-                testCases.push(blank);
+                testCases.push(blankTestCase());
             })
             .then(() => {
                 dispatch(getTestCasesSuccess(testCases));
             })
             .catch(err => dispatch(getTestCasesFailure(err)));
+    }
+}
+
+export function setDragEnabledStatus(bool) {
+    return dispatch => {
+        dispatch(setDragEnabled(bool))
     }
 }

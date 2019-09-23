@@ -9,7 +9,8 @@
     display: grid;
     margin: auto;
     margin-top: 1px;
-    grid-template: 24px / auto  24px;
+    padding-right: 4px;
+    grid-template: 24px / auto 24px 24px;
     background: white;
     box-sizing: border-box;
     box-shadow: 2px 2px 5px #CCCCCC;
@@ -21,6 +22,10 @@
     background-color: #F6F7FE;
     position: relative;
     z-index: 13;
+}
+
+.Hover-over {
+    border-top: 25px solid #ECF2F5;
 }
 
 @import url('https://fonts.googleapis.com/css?family=Nunito');
@@ -62,9 +67,9 @@
     cursor: text;
 }
 
-.Delete-row {
+.Delete-row, .Move-row {
     color: #4B6DE9;
-    margin: 5px 7px;
+    margin: 5px auto;
     opacity: 0.4;
     visibility: hidden;
     cursor: default;
@@ -75,10 +80,14 @@
     visibility: visible;
 }
 
-.Delete-row:hover {
+.Row:hover .Move-row {
+    visibility: visible;
+}
+
+.Delete-row:hover, .Move-row:hover {
     opacity: 1;
 }
 
-.Delete-row:active {
+.Delete-row:active, .Move-row:active {
     transform: scale(0.8);
 }

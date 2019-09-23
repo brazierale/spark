@@ -1,17 +1,11 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 // single step
-export class Step extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            stepName: props.step.name
-        }
-
-        this.deleteStep = this.deleteStep.bind(this);
-        this.handleUserInput = this.handleUserInput.bind(this);
-        this.handleBlur = this.handleBlur.bind(this);
+class Step extends Component {
+    state = {
+        stepName: this.props.step.name
     }
 
     static getDerivedStateFromProps(nextProps, prevState) {
@@ -54,15 +48,24 @@ export class Step extends Component {
                 </div>
         );
     }
-    deleteStep() {
+
+    deleteStep = () => {
         this.props.deleteStep(this.props.step.id);
     }
 
-    handleBlur() {
+    handleBlur = () => {
         this.props.updateStep(this.props.step.id, this.state.stepName);
     }
 
-    handleUserInput(e) {
-        this.setState({ stepName: e.target.value })
+    handleUserInput = event => {
+        this.setState({ stepName: event.target.value });
     }
 }
+
+Step.propTypes = {
+    step: PropTypes.object.isRequired,
+    
+    disabled: PropTypes.bool.isRequired
+}
+
+export default Step;

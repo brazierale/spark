@@ -12,16 +12,18 @@ import {
     DELETE_TEST_CASE_FAILURE,
     UPDATE_TEST_CASE_BEGIN,
     UPDATE_TEST_CASE_SUCCESS,
-    UPDATE_TEST_CASE_FAILURE
+    UPDATE_TEST_CASE_FAILURE,
+    SET_DRAG_ENABLED
 } from '../actions/testcase-actions';
-import { blankTestCase, TestCase } from '../modules/TestCase';
+import { blankTestCase, TestCaseObject } from '../modules/TestCase';
 
 const blankState = {
-    testCases: [blankTestCase],
-    selectedTestCase: blankTestCase,
+    testCases: [blankTestCase()],
+    selectedTestCase: blankTestCase(),
     loading: false,
     saving: false,
-    error: null
+    error: null,
+    dragEnabled: false
 }
 
 export default function testCaseReducer(state = blankState, action) {
@@ -37,14 +39,12 @@ export default function testCaseReducer(state = blankState, action) {
                 selectedTestCase: action.payload.testCase
             }
         case ADD_TEST_CASE_BEGIN:
-            // should be using blankTestCase but its getting updated before being used for some reason 
-            let blank = new TestCase (0, '', '', [], [])
             return {
                 ...state,
                 testCases: [
                     ...state.testCases.slice(0, state.testCases.length-1),
                     action.payload.testCase,
-                    blank
+                    blankTestCase()
                 ],
                 saving: true,
                 error: null
@@ -124,6 +124,11 @@ export default function testCaseReducer(state = blankState, action) {
                 ...state,
                 loading: false,
                 error: action.payload.error
+            }
+        case SET_DRAG_ENABLED:
+            return {
+                ...state,
+                dragEnabled: action.payload.dragEnabled
             }
         default:
             return state;

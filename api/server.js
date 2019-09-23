@@ -8,7 +8,7 @@ const app = express();
 const router = express.Router();
 
 // mongoDB connection to spark database
-const dbRoute = 'mongodb+srv://alex:dpAFhp9Or8o0ZKKQ@mongo-mvqti.mongodb.net/spark?retryWrites=true';
+const dbRoute = 'mongodb+srv://alex:CXy0oQwqChhzDc1N@mongo-mvqti.mongodb.net/spark?retryWrites=true';
 mongoose.connect(
   dbRoute,
   { useNewUrlParser: true }
@@ -51,8 +51,9 @@ router.get("/testCases/:key", (req, res) => {
 // create a new test case
 router.post("/testCases", (req, res) => {
     let data = new Data();
-    const { key, summary, description, steps, tags } = req.body;
+    const { key, sortId, summary, description, steps, tags } = req.body;
     data.key = key;
+    data.sortId = sortId;
     data.summary = summary;
     data.description = description;
     data.steps = steps;

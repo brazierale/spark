@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import DetailPane from './DetailPane'
+import TestCaseList from '../components/TestCaseList';
+import Indicator from '../components/Indicator';
+
 import { getTestCases } from '../actions/testcase-actions';
-import { TestCaseList } from '../components/TestCaseList';
-import { Indicator } from '../components/Indicator';
+import { generateSortId } from '../modules/KeyGen';
 
 class MainContainer extends Component {
 
@@ -20,13 +22,28 @@ class MainContainer extends Component {
                     saving={this.props.saving}
                 />
                 <div className="Test-case-list-container">
-                    <TestCaseList testCases={this.props.testCases} />
+                    <TestCaseList 
+                        testCases={this.props.testCases}
+                        nextSortId={this.nextSortId}
+                    />
                 </div>
                 <div className="Detail-pane-container">
-                    <DetailPane />
+                    <DetailPane nextSortId={this.nextSortId}/>
                 </div>
             </div>
         );
+    }
+
+    // this should move elsewhere, but I'm not sure where yet
+    nextSortId = () => {
+        if (this.props.testCases[this.props.testCases.length-2]) {
+            return generateSortId(
+                this.props.testCases[this.props.testCases.length-2].sortId
+            )
+        }
+        else {
+            return generateSortId(0);
+        }
     }
 }
 
@@ -38,7 +55,7 @@ const mapStateToProps = state => {
         saving: state.saving,
         error: state.error
     }
-};
+}
 
 const mapDispatchToProps = {
     getTestCases: getTestCases,

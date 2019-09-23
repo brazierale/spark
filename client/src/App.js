@@ -1,20 +1,21 @@
-import React, { Component } from 'react';
-import MainContainer from './connected-components/MainContainer';
-import logo from './support/small-header.svg';
-import './support/App.css';
+import React from 'react';
+import { DragDropContextProvider } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <Header />
-        <MainContainer />
-        </div>
-    );
-  }
+import MainContainer from './connected-components/MainContainer';
+import logo from './styles/small-header.svg';
+import './styles/App.css';
+
+const App = () => {
+  return (
+    <DragDropContextProvider backend={HTML5Backend} className="App">
+      <Header />
+      <MainContainer />
+    </DragDropContextProvider>
+  );
 }
 
-function Header(props) {
+const Header = () => {
   return (
     <div className="Header">
         <header className="App-header">

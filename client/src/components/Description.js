@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
-import '../support/Description.css'
+import '../styles/Description.css'
 
 // description field
-export class Description extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            description: props.description,
-        }
-        this.handleUserInput = this.handleUserInput.bind(this);
-        this.handleBlur = this.handleBlur.bind(this);
+class Description extends Component {
+    state = {
+        description: this.props.description
     }
 
     static getDerivedStateFromProps(nextProps, prevState) {
@@ -36,18 +32,26 @@ export class Description extends Component {
                         onChange={this.handleUserInput}
                         onBlur={this.handleBlur}
                         disabled={this.props.disabled}
-                    >
-                    {this.state.description}
-                    </textarea>
+                    />
             </div>
         );
     }
 
-    handleBlur() {
+    handleBlur = () => {
         this.props.updateDescription(this.state.description);
     }
 
-    handleUserInput(e) {
-        this.setState({ description: e.target.value})
+    handleUserInput = event => {
+        this.setState({ description: event.target.value });
     }
 }
+
+Description.propTypes = {
+    description: PropTypes.string.isRequired,
+    
+    disabled: PropTypes.bool.isRequired,
+    
+    updateDescription: PropTypes.func.isRequired
+}
+
+export default Description;
