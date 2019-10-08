@@ -69,7 +69,7 @@ class DetailPane extends Component {
             updatedTagList = [...this.props.selectedTestCase.tags, newTag];
 
         }
-        this.updateDetails('tags', updatedTagList);
+        this.props.updateSelectedTestCase('tags', updatedTagList);
     };
 
     deleteTag = toDelete => {
@@ -77,7 +77,7 @@ class DetailPane extends Component {
             tag => tag !== toDelete
         );
 
-        this.updateDetails('tags', updatedTagList);
+        this.props.updateSelectedTestCase('tags', updatedTagList);
     }
 
     addStep = name => {
@@ -86,7 +86,7 @@ class DetailPane extends Component {
             name
         )
         let updatedStepList = [...this.props.selectedTestCase.steps, newStep];
-        this.updateDetails('steps', updatedStepList);
+        this.props.updateSelectedTestCase('steps', updatedStepList);
     }
 
     deleteStep = id => {
@@ -94,31 +94,15 @@ class DetailPane extends Component {
             step => step.id !== id
         );
 
-        this.updateDetails('steps', updatedStepList);
+        this.props.updateSelectedTestCase('steps', updatedStepList);
     }
 
     updateDescription = updatedDescription => {
-        this.updateDetails('description', updatedDescription);
+        this.props.updateSelectedTestCase('description', updatedDescription);
     }
 
     updateStepList = updatedSteps => {
-        this.updateDetails('steps', updatedSteps);
-    }
-
-    updateDetails = (updateType, update) => {
-            // take the current state
-            let updatedTestCase = new TestCaseObject (
-                this.props.selectedTestCase.key,
-                this.props.selectedTestCase.sortId,
-                this.props.selectedTestCase.summary,
-                this.props.selectedTestCase.description,
-                this.props.selectedTestCase.steps,
-                this.props.selectedTestCase.tags
-            )
-            // update the relevant field based on updateType
-            updatedTestCase[updateType] = update;
-            // push out the updated state
-            this.props.updateSelectedTestCase(updatedTestCase);
+        this.props.updateSelectedTestCase('steps', updatedSteps);
     }
 
     save = () => {

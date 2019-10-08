@@ -21,9 +21,9 @@ export const setSelectedTestCase = key => ({
     type: SET_SELECTED_TESTCASE,
     payload: { key }
 });
-export const updateSelectedTestCaseExecute = testCase => ({
+export const updateSelectedTestCaseExecute = (updateType, update) => ({
     type: UPDATE_SELECTED_TESTCASE,
-    payload: { testCase }
+    payload: { updateType, update }
 })
 export const addTestCasesBegin = testCase => ({
     type: ADD_TEST_CASE_BEGIN,
@@ -80,9 +80,9 @@ export function setSelectedTestCaseByKey(key) {
     }
 }
 
-export function updateSelectedTestCase(testCase) {
+export function updateSelectedTestCase(updateType, update) {
     return dispatch => {
-        dispatch(updateSelectedTestCaseExecute(testCase));
+        dispatch(updateSelectedTestCaseExecute(updateType, update));
     }
 }
 

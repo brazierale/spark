@@ -68,12 +68,7 @@ class Row extends Component {
         else return null;
     }
     updateSelectedTestCaseSummary = summary => {
-        // quick fix to always update the summary when it changes, would be better to create a new redux action updateSelectedTestCaseSummary
-        let updatedTestCase = {
-            ...this.props.selectedTestCase,
-            summary: summary
-        }
-        this.props.updateSelectedTestCase(updatedTestCase);
+        this.props.updateSelectedTestCase('summary', summary);
     }
     deleteTestCase = () => {
         if (this.isSelected()) {
