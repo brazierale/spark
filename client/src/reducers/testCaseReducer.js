@@ -15,7 +15,7 @@ import {
     UPDATE_TEST_CASE_FAILURE,
     SET_DRAG_ENABLED
 } from '../actions/testcase-actions';
-import { blankTestCase, TestCaseObject } from '../modules/TestCase';
+import { blankTestCase } from '../modules/TestCase';
 
 const blankState = {
     testCases: [blankTestCase()],
@@ -34,18 +34,12 @@ export default function testCaseReducer(state = blankState, action) {
                 selectedTestCase: state.testCases.find(x => x.key === action.payload.key)
             }
         case UPDATE_SELECTED_TESTCASE:
-            let updatedTestCase = new TestCaseObject (
-                state.selectedTestCase.key,
-                state.selectedTestCase.sortId,
-                state.selectedTestCase.summary,
-                state.selectedTestCase.description,
-                state.selectedTestCase.steps,
-                state.selectedTestCase.tags
-            )
-            updatedTestCase[action.payload.updateType] = action.payload.update;
             return {
                 ...state,
-                selectedTestCase: updatedTestCase
+                selectedTestCase: {
+                    ...state.selectedTestCase,
+                    [action.payload.updateType] : action.payload.update
+                }
             }
         case ADD_TEST_CASE_BEGIN:
             return {

@@ -32,6 +32,7 @@ class TestCaseInput extends Component {
                 onChange={this.handleUserInput}
                 onKeyDown={this.handleKeyDown}
                 onFocus={this.handleFocus}
+                onBlur={this.handleOnBlur}
                 disabled={this.props.testCase.disabled}
             />
         )
@@ -47,13 +48,17 @@ class TestCaseInput extends Component {
             this.sendUpdate(event.target.value);
         }
     }
-
+    
     handleFocus = () => {
         if (this.props.selectedTestCase.key !== this.props.testCase.key) {
             this.props.setSelectedTestCaseByKey(this.props.testCase.key);
         }
     }
     
+    handleOnBlur = () => {
+        this.sendUpdate(this.props.selectedTestCase.summary);
+    }
+
     sendUpdate = summary => {
         // create new test case if this is the entryRow
         if(this.props.testCase.key === 0 && summary !== '') {

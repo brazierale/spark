@@ -6,7 +6,7 @@ import TagList from '../components/TagList';
 import StepList from '../components/StepList';
 import Description from '../components/Description';
 
-import { TestCaseObject, StepObject } from '../modules/TestCase';
+import { StepObject } from '../modules/TestCase';
 import { generateKey } from '../modules/KeyGen';
 import '../styles/DetailPane.css'
 import { 
