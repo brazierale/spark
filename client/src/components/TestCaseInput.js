@@ -6,9 +6,6 @@ import { TestCaseObject, TestCasePropTypes } from '../modules/TestCase';
 import { generateKey } from '../modules/KeyGen';
 
 class TestCaseInput extends Component {
-    state = {
-        summary: this.props.testCase.summary
-    }
 
     render() {
         let classes = classNames({
@@ -17,6 +14,13 @@ class TestCaseInput extends Component {
                 'Selected-input': this.props.isSelected,
                 'Test-case-disabled': this.props.testCase.disabled
         })
+
+        // this ensures the field remains editable and is not overwritten by the saved state
+        let summary = this.props.testCase.summary;
+        if (this.props.isSelected) {
+            summary = this.props.selectedTestCase.summary;
+        }
+
         return (
             <input
                 ref={(input) => { this.nameInput = input; }}
@@ -24,7 +28,7 @@ class TestCaseInput extends Component {
                 maxLength="255"
                 placeholder="Enter your test case here..."
                 className={classes}
-                value={this.state.summary}
+                value={summary}
                 onChange={this.handleUserInput}
                 onKeyDown={this.handleKeyDown}
                 onFocus={this.handleFocus}
@@ -34,14 +38,13 @@ class TestCaseInput extends Component {
     }
 
     handleUserInput = event => {
-        this.setState({ summary: event.target.value})
         this.props.updateSelectedTestCaseSummary(event.target.value);
     }
 
     handleKeyDown = event => {
         if (event.key === 'Enter' || event.keyCode === 9) {
             event.preventDefault();
-            this.sendUpdate(this.state.summary);
+            this.sendUpdate(event.target.value);
         }
     }
 
@@ -60,7 +63,6 @@ class TestCaseInput extends Component {
 
             this.props.addTestCase(newTestCase);
 
-            this.setState({ summary: '' });
             this.props.setSelectedTestCaseByKey(0);
         }
         // delete the test case if it is empty

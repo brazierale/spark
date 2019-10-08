@@ -15,7 +15,7 @@ import {
     UPDATE_TEST_CASE_FAILURE,
     SET_DRAG_ENABLED
 } from '../actions/testcase-actions';
-import { blankTestCase, TestCaseObject } from '../modules/TestCase';
+import { blankTestCase } from '../modules/TestCase';
 
 const blankState = {
     testCases: [blankTestCase()],

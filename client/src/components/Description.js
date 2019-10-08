@@ -5,20 +5,6 @@ import '../styles/Description.css'
 
 // description field
 class Description extends Component {
-    state = {
-        description: this.props.description
-    }
-
-    static getDerivedStateFromProps(nextProps, prevState) {
-        // required to update the state when selecting a different test case
-        if (prevState.description !== nextProps.description) {
-            return {
-                description: nextProps.description
-            }
-        }
-        
-        return null;
-    }
 
     render() {
         return(
@@ -28,7 +14,7 @@ class Description extends Component {
                         className="Description-input"
                         rows="4"
                         placeholder="Enter new description..."
-                        value={this.state.description}
+                        value={this.props.description}
                         onChange={this.handleUserInput}
                         onBlur={this.handleBlur}
                         disabled={this.props.disabled}
@@ -37,12 +23,8 @@ class Description extends Component {
         );
     }
 
-    handleBlur = () => {
-        this.props.updateDescription(this.state.description);
-    }
-
     handleUserInput = event => {
-        this.setState({ description: event.target.value });
+        this.props.updateDescription(event.target.value);
     }
 }
 

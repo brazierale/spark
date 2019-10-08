@@ -62,7 +62,6 @@ class DetailPane extends Component {
         const isDuplicate = element => {
             return element === newTag;
         };
-        let tags = 'tags';
         let updatedTagList = [...this.props.selectedTestCase.tags];
         
         // only add if it is not a duplicate
@@ -70,47 +69,40 @@ class DetailPane extends Component {
             updatedTagList = [...this.props.selectedTestCase.tags, newTag];
 
         }
-        this.updateDetails(tags, updatedTagList);
+        this.updateDetails('tags', updatedTagList);
     };
 
     deleteTag = toDelete => {
-        let tags = 'tags';
         let updatedTagList = this.props.selectedTestCase.tags.filter(
             tag => tag !== toDelete
         );
 
-        this.updateDetails(tags, updatedTagList);
+        this.updateDetails('tags', updatedTagList);
     }
 
     addStep = name => {
-        let steps = 'steps';
         let newStep = new StepObject (
             this.props.selectedTestCase.steps.length,
             name
         )
         let updatedStepList = [...this.props.selectedTestCase.steps, newStep];
-        this.updateDetails(steps, updatedStepList);
+        this.updateDetails('steps', updatedStepList);
     }
 
     deleteStep = id => {
-        let steps = 'steps';
         let updatedStepList = this.props.selectedTestCase.steps.filter(
             step => step.id !== id
         );
 
-        this.updateDetails(steps, updatedStepList);
+        this.updateDetails('steps', updatedStepList);
     }
 
     updateDescription = updatedDescription => {
-        let description = 'description';
-
-        this.updateDetails(description, updatedDescription);
+        this.updateDetails('description', updatedDescription);
     }
 
     updateStepList = updatedSteps => {
-        let steps = 'steps';
-
-        this.updateDetails(steps, updatedSteps);
+        this.updateDetails('steps', updatedSteps);
     }
 
     updateDetails = (updateType, update) => {
