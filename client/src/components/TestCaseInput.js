@@ -56,6 +56,7 @@ class TestCaseInput extends Component {
     }
     
     handleOnBlur = () => {
+        console.log(this.props.selectedTestCase.summary);
         this.sendUpdate(this.props.selectedTestCase.summary);
     }
 
@@ -65,6 +66,7 @@ class TestCaseInput extends Component {
             let newTestCase = this.props.testCase;
             newTestCase.key = generateKey();
             newTestCase.sortId = this.props.nextSortId();
+            newTestCase.summary = summary;
 
             this.props.addTestCase(newTestCase);
 
