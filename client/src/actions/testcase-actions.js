@@ -122,7 +122,6 @@ export function deleteTestCaseByKey(key) {
 }
 
 export function updateTestCase(testCase) {
-    console.log(testCase);
     return dispatch => {
         let updatedTestCase = testCase;
         updatedTestCase.disabled = true;

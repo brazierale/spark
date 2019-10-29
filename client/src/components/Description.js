@@ -16,7 +16,6 @@ class Description extends Component {
                         placeholder="Enter new description..."
                         value={this.props.description}
                         onChange={this.handleUserInput}
-                        onBlur={this.handleBlur}
                         disabled={this.props.disabled}
                     />
             </div>

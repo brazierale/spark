@@ -23,7 +23,6 @@ class Step extends Component {
                             className="Step-edit"
                             value={this.props.step.name}
                             onChange={this.handleUserInput}
-                            onBlur={this.handleBlur}
                             disabled={this.props.disabled}
                         />
                         <span 
