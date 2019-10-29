@@ -56,8 +56,10 @@ class TestCaseInput extends Component {
     }
     
     handleOnBlur = () => {
-        console.log(this.props.selectedTestCase.summary);
-        this.sendUpdate(this.props.selectedTestCase.summary);
+        // don't send update if this testcase is new as the user is likely to be using the detail pane
+        if (this.props.testCase.key !== 0) {
+            this.sendUpdate(this.props.selectedTestCase.summary);
+        }
     }
 
     sendUpdate = summary => {
