@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const TagFilter = props => {
     
     let color = 'black'
-    if (props.enabled) { color = 'blue' }
+    if (props.tagFilters.find((tag) => tag === props.tag)) { color = 'blue' }
 
     let style = {
         color: color,
@@ -23,8 +23,8 @@ const TagFilter = props => {
 
 TagFilter.propTypes = {
     tag: PropTypes.string.isRequired,
-    enabled: PropTypes.bool.isRequired,
-
+    tagFilters: PropTypes.array.isRequired,
+    
     filterByTag: PropTypes.func.isRequired
 }
 

@@ -14,7 +14,6 @@ class MainContainer extends Component {
     componentDidMount() {
         this.props.getTestCases();
     }
-
     render() {
         return(
             <div className="Main-container">
@@ -25,7 +24,7 @@ class MainContainer extends Component {
                 <TagFilter
                     tag={'working'}
                     filterByTag={this.filterByTag}
-                    enabled={false}
+                    tagFilters={this.props.tagFilters}
                 />
                 <div className="Test-case-list-container">
                     <TestCaseList 
@@ -64,7 +63,8 @@ const mapStateToProps = state => {
         selectedTestCase: state.selectedTestCase,
         loading: state.loading,
         saving: state.saving,
-        error: state.error
+        error: state.error,
+        tagFilters: state.tagFilters
     }
 }
 

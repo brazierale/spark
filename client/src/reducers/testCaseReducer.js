@@ -23,6 +23,7 @@ const blankState = {
     loading: false,
     saving: false,
     error: null,
+    tagFilters: [],
     dragEnabled: false
 }
 
