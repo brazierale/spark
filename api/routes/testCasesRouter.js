@@ -14,7 +14,7 @@ router.get("/", (req, res) => {
 });
 
 // get test cases that contain the given tag
-router.get("/tags/:tag", (req, res) => {
+router.get("/tag/:tag", (req, res) => {
     Data.find({tags: req.params.tag}, (err, data) => {
         if (err) return res.json ({ success: false, error: error});
         return res.json({ success:true, data: data })
