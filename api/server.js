@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const logger = require("morgan");
 
 const app = express();
-const testCasesRouter = require("./routes/testCases");
+const testCasesRouter = require("./routes/testCasesRouter");
 
 // mongoDB connection to spark database
 const dbRoute = 'mongodb+srv://alex:CXy0oQwqChhzDc1N@mongo-mvqti.mongodb.net/spark?retryWrites=true';
