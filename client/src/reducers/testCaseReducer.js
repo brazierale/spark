@@ -13,7 +13,8 @@ import {
     UPDATE_TEST_CASE_BEGIN,
     UPDATE_TEST_CASE_SUCCESS,
     UPDATE_TEST_CASE_FAILURE,
-    SET_DRAG_ENABLED
+    SET_DRAG_ENABLED,
+    TOGGLE_TAG_FILTER
 } from '../actions/testcase-actions';
 import { blankTestCase } from '../modules/TestCase';
 
@@ -129,6 +130,27 @@ export default function testCaseReducer(state = blankState, action) {
                 loading: false,
                 error: action.payload.error
             }
+        case TOGGLE_TAG_FILTER:
+            // if we find the tag, remove it
+            if (state.tagFilters.find(tag => tag === action.payload.tag)) {
+                return {
+                    ...state,
+                    tagFilters: [
+                        ...state.tagFilters.filter(tag => tag !== action.payload.tag)
+                    ]
+                }
+            }
+            // otherwise, add it
+            else {
+                return {
+                    ...state,
+                    tagFilters: [
+                        ...state.tagFilters,
+                        action.payload.tag
+                    ]
+                }
+            }
+            
         case SET_DRAG_ENABLED:
             return {
                 ...state,

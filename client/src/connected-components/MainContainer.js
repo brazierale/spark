@@ -6,7 +6,7 @@ import TestCaseList from '../components/TestCaseList';
 import Indicator from '../components/Indicator';
 import TagFilter from '../components/TagFilter';
 
-import { getTestCases } from '../actions/testcase-actions';
+import { getTestCases, filterByTag } from '../actions/testcase-actions';
 import { generateSortId } from '../modules/KeyGen';
 
 class MainContainer extends Component {
@@ -51,8 +51,8 @@ class MainContainer extends Component {
         }
     }
 
-    filterByTag = () => {
-        console.log("HIIIIIII")
+    filterByTag = tag => {
+        this.props.filterByTag(tag);
     }
 
 }
@@ -70,6 +70,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
     getTestCases: getTestCases,
+    filterByTag: filterByTag
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainContainer);

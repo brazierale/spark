@@ -13,7 +13,7 @@ const TagFilter = props => {
 
     return (
         <div
-            onClick={props.filterByTag}
+            onClick={() => props.filterByTag(props.tag)}
             style={style}
         >
         {props.tag}
