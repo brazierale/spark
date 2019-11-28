@@ -145,12 +145,16 @@ export function updateTestCase(testCase) {
     }
 }
 
-export function getTestCases() {
+export function getTestCases(tag) {
     return dispatch => {
         dispatch(getTestCasesBegin());
+        
+        let route = `/api/testCases/tag/${tag}`;
+        
+        if (typeof tag === 'undefined') { route = '/api/testCases/' }
 
         let testCases = [];
-        axios.get("/api/testCases")
+        axios.get(route)
             .then(res => {
                 if (res.data.data.length > 0) {
                     testCases = res.data.data.map((testCase) =>
