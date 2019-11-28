@@ -7,7 +7,6 @@ const router = express.Router();
 
 // for now GET gets all data, should be updated to only look in testcase collection?
 router.get("/", (req,res) => {
-    console.log(Data.collection);
     Data.find((err, data) => {
         if (err) return res.json( {success: false, error: err });
         return res.json({ success:true, data: data });
