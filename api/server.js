@@ -2,10 +2,9 @@ const mongoose = require("mongoose");
 const express = require('express');
 const bodyParser = require('body-parser');
 const logger = require("morgan");
-const Data = require("./dataSchema");
 
 const app = express();
-const router = express.Router();
+const testCasesRouter = require("./routes/testCases");
 
 // mongoDB connection to spark database
 const dbRoute = 'mongodb+srv://alex:CXy0oQwqChhzDc1N@mongo-mvqti.mongodb.net/spark?retryWrites=true';
@@ -31,57 +30,7 @@ app.use((req, res, next) => {
     next();
 });
 
-
-// for now GET gets all data, should be updated to only look in testcase collection?
-router.get("/testCases", (req,res) => {
-    Data.find((err, data) => {
-        if (err) return res.json( {success: false, error: err });
-        return res.json({ success:true, data: data });
-    });
-});
-
-// get details for a single test case
-router.get("/testCases/:key", (req, res) => {
-    Data.findOne({key: req.params.key}, (err, data) => {
-        if (err) return res.json ( {success:false, error: err });
-        return res.json({ success:true, data: data });
-    });
-});
-
-// create a new test case
-router.post("/testCases", (req, res) => {
-    let data = new Data();
-    const { key, sortId, summary, description, steps, tags } = req.body;
-    data.key = key;
-    data.sortId = sortId;
-    data.summary = summary;
-    data.description = description;
-    data.steps = steps;
-    data.tags = tags;
-
-    data.save(err => {
-        if (err) return res.json({success:false, error: err });
-        return res.json({ success: true });
-    });
-});
-
-// update an existing test case
-router.put("/testCases/:key", (req, res) => {
-    Data.findOneAndUpdate({ key: req.params.key }, req.body.update, err => {
-        if (err) return res.json({ success: false, error: err });
-        return res.json({ success: true });
-    });
-});
-
-// delete a test case
-router.delete("/testCases/:key", (req, res) => {
-    Data.findOneAndDelete({ key: req.params.key }, err => {
-        if (err) return res.send(err);
-        return res.json({ success: true });
-    });
-});
-
 // append /api to http requests
-app.use("/api", router);
+app.use("/api/testCases", testCasesRouter);
 
 app.listen(5000, () => console.log('Example app listening on port 5000!'));
