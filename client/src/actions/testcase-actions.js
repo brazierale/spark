@@ -15,6 +15,7 @@ export const UPDATE_TEST_CASE_FAILURE = 'UPDATE_TESTCASE_FAILURE';
 export const GET_TESTCASES_BEGIN = 'GET_TESTCASES_BEGIN';
 export const GET_TESTCASES_SUCCESS = 'GET_TESTCASES_SUCCESS';
 export const GET_TESTCASES_FAILURE = 'GET_TESTCASES_FAILURE';
+export const UPDATE_FILTER_TAGS = 'UPDATE_FILTER_TAGS';
 export const SET_DRAG_ENABLED = 'SET_DRAG_ENABLED';
 
 export const setSelectedTestCase = key => ({
@@ -69,10 +70,14 @@ export const getTestCasesFailure = err => ({
     type: GET_TESTCASES_FAILURE,
     payload: { err }
 });
+export const updateFilterTags = (tag, enabled) => ({
+    type: UPDATE_FILTER_TAGS,
+    payload: { tag, enabled }
+});
 export const setDragEnabled = dragEnabled => ({
     type: SET_DRAG_ENABLED,
     payload: { dragEnabled }
-})
+});
 
 export function setSelectedTestCaseByKey(key) {
     return dispatch => {
@@ -148,7 +153,7 @@ export function updateTestCase(testCase) {
 export function getTestCases(tag) {
     return dispatch => {
         dispatch(getTestCasesBegin());
-        
+
         let route = `/api/testCases/tag/${tag}`;
         
         if (typeof tag === 'undefined') { route = '/api/testCases/' }
@@ -174,6 +179,12 @@ export function getTestCases(tag) {
                 dispatch(getTestCasesSuccess(testCases));
             })
             .catch(err => dispatch(getTestCasesFailure(err)));
+    }
+}
+
+export function updateFilterTag(tag, enabled) {
+    return dispatch => {
+        dispatch(updateFilterTags(tag, enabled)) 
     }
 }
 

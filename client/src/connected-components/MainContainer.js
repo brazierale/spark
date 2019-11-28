@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import DetailPane from './DetailPane'
 import TestCaseList from '../components/TestCaseList';
 import Indicator from '../components/Indicator';
+import TagFilter from '../components/TagFilter';
 
 import { getTestCases } from '../actions/testcase-actions';
 import { generateSortId } from '../modules/KeyGen';
@@ -20,6 +21,11 @@ class MainContainer extends Component {
                 <Indicator
                     loading={this.props.loading}
                     saving={this.props.saving}
+                />
+                <TagFilter
+                    tag={'working'}
+                    filterByTag={this.filterByTag}
+                    enabled={false}
                 />
                 <div className="Test-case-list-container">
                     <TestCaseList 
@@ -45,6 +51,11 @@ class MainContainer extends Component {
             return generateSortId(0);
         }
     }
+
+    filterByTag = () => {
+        console.log("HIIIIIII")
+    }
+
 }
 
 const mapStateToProps = state => {    
