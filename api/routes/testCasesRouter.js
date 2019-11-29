@@ -13,6 +13,14 @@ router.get("/", (req, res) => {
     });
 });
 
+// get all tags
+router.get("/tags", (req, res) => {
+    Data.distinct('tags', (err, data) => {
+        if (err) return res.json({ success: false, error: err });
+        return res.json({ success:true, data: data });
+    });
+});
+
 // get details for a single test case
 router.get("/:key", (req, res) => {
     Data.findOne({key: req.params.key}, (err, data) => {
@@ -31,7 +39,7 @@ router.post("/", (req, res) => {
     data.description = description;
     data.steps = steps;
     data.tags = tags;
-
+    
     data.save(err => {
         if (err) return res.json({success:false, error: err });
         return res.json({ success: true });
