@@ -1,7 +1,7 @@
 describe('stub test', function(){
     it('5 stub items', function(){
         // reset data to 1 new item
-        cy.exec('node api/support/dropData.js')
+        cy.exec('yarn cleardb')
         
         cy.server()
 
