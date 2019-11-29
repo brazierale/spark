@@ -150,16 +150,12 @@ export function updateTestCase(testCase) {
     }
 }
 
-export function getTestCases(tag) {
+export function getTestCases() {
     return dispatch => {
         dispatch(getTestCasesBegin());
 
-        let route = `/api/testCases/tag/${tag}`;
-        
-        if (typeof tag === 'undefined') { route = '/api/testCases/' }
-
         let testCases = [];
-        axios.get(route)
+        axios.get("/api/testCases/")
             .then(res => {
                 if (res.data.data.length > 0) {
                     testCases = res.data.data.map((testCase) =>
@@ -184,12 +180,13 @@ export function getTestCases(tag) {
 
 export function filterByTag(tag) {
     return dispatch => {
-        dispatch(toggleTagFilter(tag)) 
+        dispatch(toggleTagFilter(tag));
+        dispatch(getTestCases());
     }
 }
 
 export function setDragEnabledStatus(bool) {
     return dispatch => {
-        dispatch(setDragEnabled(bool))
+        dispatch(setDragEnabled(bool));
     }
 }

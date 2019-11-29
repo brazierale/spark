@@ -55,12 +55,15 @@ class TestCaseInput extends Component {
         }
     }
     
+    /* this is annoying as when trying to edit the details the test case saves
     handleOnBlur = () => {
+        
         // don't send update if this testcase is new as the user is likely to be using the detail pane
         if (this.props.testCase.key !== 0) {
             this.sendUpdate(this.props.selectedTestCase.summary);
         }
     }
+    */
 
     sendUpdate = summary => {
         // create new test case if this is the entryRow

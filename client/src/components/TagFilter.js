@@ -8,11 +8,11 @@ const TagFilter = props => {
 
     let style = {
         color: color,
-        padding: "60px"
+        padding: "60px 20px"
     }
 
     return (
-        <div
+        <div className="Tag-filter"
             onClick={() => props.filterByTag(props.tag)}
             style={style}
         >

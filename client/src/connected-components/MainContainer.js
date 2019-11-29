@@ -26,6 +26,11 @@ class MainContainer extends Component {
                     filterByTag={this.filterByTag}
                     tagFilters={this.props.tagFilters}
                 />
+                <TagFilter
+                    tag={'test'}
+                    filterByTag={this.filterByTag}
+                    tagFilters={this.props.tagFilters}
+                />
                 <div className="Test-case-list-container">
                     <TestCaseList 
                         testCases={this.props.testCases}

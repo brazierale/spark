@@ -14,7 +14,7 @@ class TestCaseList extends Component {
             </div>
         );
     }
-
+    
     testCasesToRender = testCases => {
         testCases.sort((a, b) => this.sortBySortId(a, b));
     

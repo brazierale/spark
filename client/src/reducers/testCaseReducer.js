@@ -117,9 +117,38 @@ export default function testCaseReducer(state = blankState, action) {
                 error: null
             }
         case GET_TESTCASES_SUCCESS:
+            
+            const filterTestCases = testCases => {
+                
+                let filteredTestCases = []
+
+                testCases.forEach(testCase => {
+                    let match = false;
+
+                    testCase.tags.forEach(tag => {
+                        state.tagFilters.forEach((filterTag) => {
+                            if (tag === filterTag) { match = true; }
+                        })
+                    })
+
+                    if (match) { filteredTestCases.push(testCase) }
+                })
+                filteredTestCases.push(blankTestCase());
+                return filteredTestCases;
+            }
+
+            const filteredTestCases = testCases => {
+                if (state.tagFilters.length !== 0) {
+                    return filterTestCases(testCases);
+                }
+                else {
+                    return testCases;
+                }
+            }             
+
             return {
                 ...state,
-                testCases: action.payload.testCases,
+                testCases: filteredTestCases(action.payload.testCases),
                 selectedTestCase: action.payload.testCases.find(x => x.key === state.selectedTestCase.key),
                 loading: false,
                 error: null
