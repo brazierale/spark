@@ -13,19 +13,6 @@ router.get("/", (req, res) => {
     });
 });
 
-// get test cases that contain the given tag
-router.get("/tag/:tag", (req, res) => {
-    Data.find({tags: req.params.tag}, (err, data) => {
-        if (err) return res.json ({ success: false, error: error});
-        return res.json({ success:true, data: data })
-    })
-});
-
-// get test cases that contain any of the given tags
-router.get("/tags/:tags", (req, res) => {
-    // code here to find testcases that match any of the given tags, will need to parse array of params
-})
-
 // get details for a single test case
 router.get("/:key", (req, res) => {
     Data.findOne({key: req.params.key}, (err, data) => {
