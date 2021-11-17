@@ -9,6 +9,7 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
 const DeleteTag = props => {
     return (
         <FontAwesomeIcon
+            data-testid='delete-tag'
             className={Classes(props.disabled)}
             icon={faTimes}
             onClick={props.deleteTag}

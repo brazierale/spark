@@ -8,7 +8,10 @@ class Description extends Component {
 
     render() {
         return(
-            <div className="Description-container">
+            <div 
+                data-testid='description'
+                className="Description-container"
+            >
                 <span className="Label">Description</span>
                     <textarea
                         className="Description-input"

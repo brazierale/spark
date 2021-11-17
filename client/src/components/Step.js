@@ -14,18 +14,21 @@ class Step extends Component {
         return(
                 <div className="Step-container">
                     <input
+                        data-testid="step-checkbox"
                         className="Step-checkbox"
                         type="checkbox"
                         disabled={this.props.disabled}
                     />
                     <div className={stepClasses}>
-                        <input 
+                        <input
+                            data-testid="step-description"
                             className="Step-edit"
                             value={this.props.step.name}
                             onChange={this.handleUserInput}
                             disabled={this.props.disabled}
                         />
-                        <span 
+                        <span
+                            data-testid="step-delete"
                             className="Delete-step"
                             onClick={this.deleteStep}
                         >x</span>

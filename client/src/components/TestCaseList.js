@@ -9,7 +9,7 @@ import '../styles/TestCaseList.css'
 class TestCaseList extends Component {
     render() {
         return(
-            <div>
+            <div data-testid="test-case-list">
                 {this.testCasesToRender(this.props.testCases)}
             </div>
         );

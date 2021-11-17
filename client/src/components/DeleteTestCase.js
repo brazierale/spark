@@ -8,6 +8,7 @@ const DeleteTestCase = props => {
     if (props.testCaseKey !==0 && props.disabled !== true) {
         return (
             <FontAwesomeIcon
+                data-testid='test-case-delete'
                 className="Delete-row"
                 icon={faTimes}
                 onClick={props.deleteTestCase}

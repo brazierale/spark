@@ -24,11 +24,12 @@ class StepList extends Component {
         );
 
         return(
-            <div className="Step-list-container">
+            <div data-testid="step-list" className="Step-list-container">
                 <span className="Label">Steps</span>
                 <span className="Step-list">
                     {stepsToRender}
                     <input
+                        data-testid="step-new"
                         className="Step-input"
                         placeholder="Enter new step..."
                         value={this.state.newStep}

@@ -30,11 +30,12 @@ class TagList extends Component {
         })
 
         return(
-            <div className="Tag-list-container">
+            <div data-testid="tag-list" className="Tag-list-container">
                 <span className="Label">Tags</span>
                 <span className={listClasses}>
                     {tagsToRender}
                     <input
+                        data-testid="tag-new"
                         className="Tag-input"
                         placeholder="Enter new tag..."
                         value={this.state.newTag}

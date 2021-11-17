@@ -8,6 +8,7 @@ const MoveTestCase = props => {
     if (props.testCaseKey !== 0 && props.disabled !== true) {
         return (
             <FontAwesomeIcon
+                data-testid='move-row'
                 className="Move-row"
                 icon={faArrowsAlt}
                 size="sm"
