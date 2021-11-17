@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const express = require('express');
 const bodyParser = require('body-parser');
 const logger = require("morgan");
+const cors = require('cors');
 const Data = require("./dataSchema");
 
 const app = express();
@@ -25,6 +26,9 @@ db.on("error", console.error.bind(console, "MongoDB connection error:"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(logger("dev"));
+app.use(cors({
+    origin: 'http://localhost:3000'
+}))
 
 app.use((req, res, next) => {
     console.log('Request received by express');

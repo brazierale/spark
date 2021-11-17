@@ -1,6 +1,8 @@
 import { TestCaseObject, blankTestCase } from '../modules/TestCase';
 import axios from 'axios';
 
+const baseUrl = 'http://localhost:3001'
+
 export const SET_SELECTED_TESTCASE = 'SET_SELECTED_TESTCASE';
 export const UPDATE_SELECTED_TESTCASE = 'UPDATE_SELECTED_TESTCASE';
 export const ADD_TEST_CASE_BEGIN = 'ADD_TESTCASE_BEGIN';
@@ -93,7 +95,7 @@ export function addTestCase(testCase) {
 
         dispatch(addTestCasesBegin(testCase));
 
-        axios.post("/api/testCases", {
+        axios.post(`${baseUrl}/api/testCases`, {
             key: testCase.key,
             sortId: testCase.sortId,
             summary: testCase.summary,
@@ -112,7 +114,7 @@ export function addTestCase(testCase) {
 export function deleteTestCaseByKey(key) {
     return dispatch => {
         dispatch(deleteTestCasesBegin(key));
-        axios.delete(`/api/testCases/${key}`)
+        axios.delete(`${baseUrl}/api/testCases/${key}`)
         .then(res => {
             dispatch(deleteTestCaseSuccess());
             dispatch(getTestCases());
@@ -128,7 +130,7 @@ export function updateTestCase(testCase) {
 
         dispatch(updateTestCasesBegin(updatedTestCase));
 
-        axios.put(`/api/testCases/${testCase.key}`, {
+        axios.put(`${baseUrl}/api/testCases/${testCase.key}`, {
             update: {
                 summary: testCase.summary,
                 sortId: testCase.sortId,
@@ -150,7 +152,7 @@ export function getTestCases() {
         dispatch(getTestCasesBegin());
 
         let testCases = [];
-        axios.get("/api/testCases")
+        axios.get(`${baseUrl}/api/testCases`)
             .then(res => {
                 if (res.data.data.length > 0) {
                     testCases = res.data.data.map((testCase) =>
