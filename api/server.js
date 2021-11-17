@@ -84,4 +84,4 @@ router.delete("/testCases/:key", (req, res) => {
 // append /api to http requests
 app.use("/api", router);
 
-app.listen(5000, () => console.log('Example app listening on port 5000!'));
+app.listen(3001, () => console.log('Example app listening on port 3001!'));
