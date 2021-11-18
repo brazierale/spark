@@ -13,16 +13,16 @@ const App = () => {
       <MainContainer />
     </DragDropContextProvider>
   );
-}
+};
 
 const Header = () => {
   return (
     <div className="Header">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-        </header>
-      </div>
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+      </header>
+    </div>
   );
-}
+};
 
 export default App;

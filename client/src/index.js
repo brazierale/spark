@@ -5,32 +5,32 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import registerServiceWorker from './registerServiceWorker';
 
-import testCaseReducer from './reducers/testCaseReducer'
+import testCaseReducer from './reducers/testCaseReducer';
 import './styles/index.css';
-import App from './App'
+import App from './App';
 
 const allStoreEnhancers = compose(
-    applyMiddleware(thunk),
-    ( 
-        window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ && 
+  applyMiddleware(thunk),
+  ( 
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ && 
         window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__()
-    ) || compose
-)
+  ) || compose
+);
 
 const testCaseStore = createStore(
-    testCaseReducer,
-    allStoreEnhancers
+  testCaseReducer,
+  allStoreEnhancers
 );
 
 ReactDOM.render(
-    <Provider store={testCaseStore}>
-        <App/>
-    </Provider>,
-    document.getElementById('root')
+  <Provider store={testCaseStore}>
+    <App/>
+  </Provider>,
+  document.getElementById('root')
 );
 
 if (window.Cypress) {
-    window.store = testCaseStore;
+  window.store = testCaseStore;
 }
 
 registerServiceWorker();
