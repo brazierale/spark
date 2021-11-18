@@ -4,12 +4,13 @@ const bodyParser = require('body-parser');
 const logger = require('morgan');
 const cors = require('cors');
 const Data = require('./dataSchema');
+const path = require('path');
+require('dotenv').config({ path: path.resolve(__dirname, '../.env')});
 
 const app = express();
 const router = express.Router();
-
+const dbRoute = process.env.DB_ROUTE;
 // mongoDB connection to spark database
-const dbRoute = 'mongodb+srv://alex:CXy0oQwqChhzDc1N@mongo-mvqti.mongodb.net/spark?retryWrites=true';
 mongoose.connect(
   dbRoute,
   { useNewUrlParser: true }
