@@ -1,11 +1,11 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
+require('dotenv').config();
 
-// this is our MongoDB database
-const dbRoute = 'mongodb+srv://alex:dpAFhp9Or8o0ZKKQ@mongo-mvqti.mongodb.net/spark?retryWrites=true';
+const dbRoute = process.env.DB_ROUTE;
 
 // connect, drop, then disconnect
 mongoose.connect( dbRoute, function() {
-    mongoose.connection.db.dropCollection('testcases', function() {
-            mongoose.disconnect();
-        });
+  mongoose.connection.db.dropCollection('testcases', function() {
+    mongoose.disconnect();
+  });
 });
