@@ -136,19 +136,19 @@ const mapDispatchToProps = {
 };
 
 Row.propTypes = {
-  testCase: TestCasePropTypes,
+  testCase: TestCasePropTypes.isRequired,
+  setSelectedTestCaseByKey: PropTypes.func.isRequired,
   isDragging: PropTypes.bool.isRequired,
   isOver: PropTypes.bool.isRequired,
+  dragEnabled: PropTypes.bool.isRequired,
   connectDragSource: PropTypes.func.isRequired,
   connectDropTarget: PropTypes.func.isRequired,
   moveAboveSortId: PropTypes.func.isRequired,
   nextSortId: PropTypes.func.isRequired,
-  selectedTestCase: PropTypes.func.isRequired,
-  dragEnabled: PropTypes.func.isRequired,
+  selectedTestCase: TestCasePropTypes.isRequired,
   addTestCase: PropTypes.func.isRequired,
   deleteTestCaseByKey: PropTypes.func.isRequired,
   updateTestCase: PropTypes.func.isRequired,
-  setSelectedTestCaseByKey: PropTypes.func.isRequired,
   updateSelectedTestCase: PropTypes.func.isRequired,
   setDragEnabledStatus: PropTypes.func.isRequired
 };

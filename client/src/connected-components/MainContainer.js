@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { TestCasePropTypes } from '../modules/TestCase';
 import { connect } from 'react-redux';
 
 import DetailPane from './DetailPane';
@@ -63,11 +64,11 @@ const mapDispatchToProps = {
 };
 
 MainContainer.propTypes = {
-  testCases: PropTypes.func.isRequired,
-  selectedTestCase: PropTypes.func.isRequired,
+  testCases: PropTypes.arrayOf(TestCasePropTypes).isRequired,
+  selectedTestCase: TestCasePropTypes.isRequired,
   loading: PropTypes.bool.isRequired,
   saving: PropTypes.bool.isRequired,
-  error: PropTypes.object.isRequired,
+  error: PropTypes.object,
   getTestCases: PropTypes.func.isRequired
 };
 

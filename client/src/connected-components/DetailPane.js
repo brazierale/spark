@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { TestCasePropTypes } from '../modules/TestCase';
 import { connect } from 'react-redux';
 
 import TagList from '../components/TagList';
@@ -142,7 +143,7 @@ const mapDispatchToProps = {
 
 DetailPane.propTypes = {
   nextSortId: PropTypes.func.isRequired,
-  selectedTestCase: PropTypes.func.isRequired,
+  selectedTestCase: TestCasePropTypes.isRequired,
   addTestCase: PropTypes.func.isRequired,
   updateTestCase: PropTypes.func.isRequired,
   updateSelectedTestCase: PropTypes.func.isRequired
