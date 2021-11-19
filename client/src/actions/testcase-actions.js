@@ -1,7 +1,8 @@
 import { TestCaseObject, blankTestCase } from '../modules/TestCase';
 import axios from 'axios';
 
-const baseUrl = 'http://localhost:3001';
+// eslint-disable-next-line no-undef
+const baseUrl = process.env.REACT_APP_API_ROUTE;
 
 export const SET_SELECTED_TESTCASE = 'SET_SELECTED_TESTCASE';
 export const UPDATE_SELECTED_TESTCASE = 'UPDATE_SELECTED_TESTCASE';

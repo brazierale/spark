@@ -4,8 +4,7 @@ const bodyParser = require('body-parser');
 const logger = require('morgan');
 const cors = require('cors');
 const Data = require('./dataSchema');
-const path = require('path');
-require('dotenv').config({ path: path.resolve(__dirname, '../.env')});
+require('dotenv').config();
 
 const app = express();
 const router = express.Router();
