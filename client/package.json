@@ -6,7 +6,7 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.24",
     "@fortawesome/free-solid-svg-icons": "^5.11.1",
     "@fortawesome/react-fontawesome": "^0.1.4",
-    "axios": "^0.18.1",
+    "axios": "^0.21.2",
     "react": "^16.9.0",
     "react-dnd": "^7.7.0",
     "react-dnd-html5-backend": "^7.7.0",
