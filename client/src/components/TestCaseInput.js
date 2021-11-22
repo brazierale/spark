@@ -22,10 +22,10 @@ class TestCaseInput extends Component {
     }
 
     return (
-      <input
-        data-testid="test-case-new"
-        ref={(input) => { this.nameInput = input; }}
-        type="text"
+      <textarea
+        data-testid="test-case-input"
+        rows="1"
+        wrap="off"
         maxLength="255"
         placeholder="Enter your test case here..."
         className={classes}
