@@ -34,9 +34,11 @@ class TagList extends Component {
         <span className="Label">Tags</span>
         <span className={listClasses}>
           {tagsToRender}
-          <input
+          <textarea
             data-testid="tag-new"
             className="Tag-input"
+            rows="1"
+            wrap="off"
             placeholder="Enter new tag..."
             value={this.state.newTag}
             onChange={this.handleUserInput}
