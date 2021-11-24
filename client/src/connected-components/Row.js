@@ -38,8 +38,8 @@ class Row extends Component {
 
     if (!isDragging) {
       return connectDropTarget(connectDragSource(
-        <div className={classes}>
-          <div className="Test-case-container" data-testid="test-case">
+        <div className={classes} data-testid="test-case">
+          <div className="Test-case-container">
             <TestCaseInput
               testCase={this.props.testCase}
               addTestCase={testCase => this.props.addTestCase(testCase)}
