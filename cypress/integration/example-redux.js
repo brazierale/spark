@@ -1,3 +1,4 @@
+// example of using redux actions within a test
 import { blankTestCase, TestCaseObject } from '../../client/src/modules/TestCase'
 import { addTestCase, updateTestCase } from '../../client/src/actions/testcase-actions'
 

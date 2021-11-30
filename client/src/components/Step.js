@@ -12,7 +12,7 @@ class Step extends Component {
     });
 
     return(
-      <div className="Step-container">
+      <div className="Step-container" data-testid="step">
         <input
           data-testid="step-checkbox"
           className="Step-checkbox"
@@ -20,9 +20,11 @@ class Step extends Component {
           disabled={this.props.disabled}
         />
         <div className={stepClasses}>
-          <input
-            data-testid="step-description"
+          <textarea
+            data-testid="step-input"
             className="Step-edit"
+            rows="1"
+            wrap="off"
             value={this.props.step.name}
             onChange={this.handleUserInput}
             disabled={this.props.disabled}

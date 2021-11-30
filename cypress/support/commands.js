@@ -1,25 +1,32 @@
-// ***********************************************
-// This example commands.js shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
-// ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add("login", (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add("drag", { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add("dismiss", { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This is will overwrite an existing command --
-// Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+// Common
+Cypress.Commands.add('getBySel', (selector, ...args) => {
+  return cy.get(`[data-testid=${selector}]`, ...args);
+});
+
+Cypress.Commands.add('getBySelContaining', (selector, contains, ...args) => {
+  // adds ':contains' to getting the element so the whole command is automatically retried
+  return cy.get(`[data-testid=${selector}]:contains("${contains}")`, ...args);
+});
+
+// Delete
+Cypress.Commands.add('delete', (detailItem, description) => {
+  // find the delete button within the test case / step / tag and click it
+  cy.getBySelContaining(`${detailItem}`, `${description}`).within(() => {
+    cy.getBySel(`${detailItem}-delete`).click({force: true});
+  });
+});
+
+// Test Case specific
+Cypress.Commands.add('selectTestCase', (title) => {
+  // force true as the list can be scrolled underneath the header of the page
+  cy.getBySelContaining('test-case-input', title).click({force: true});
+});
+
+// API mocking
+Cypress.Commands.add('mockGetTestCases', (fixture) => {
+  cy.intercept('/api/testCases', { fixture: fixture }).as('getTestCases');
+});
+
+Cypress.Commands.add('mockDeleteTestCase', (fixture) => {
+  cy.intercept('/api/testCases/*', { fixture: fixture }).as('deleteTestCase');
+});

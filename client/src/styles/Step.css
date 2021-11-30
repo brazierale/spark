@@ -56,6 +56,8 @@
 }
 
 .Step-input {
+    resize: none;
+    overflow: hidden;
     width: auto;
     font-size: 0.9rem;
     height: 20px;
@@ -72,6 +74,8 @@
 }
 
 .Step-edit {
+    resize: none;
+    overflow: hidden;
     width: auto;
     font-size: 0.9rem;
     height: 20px;

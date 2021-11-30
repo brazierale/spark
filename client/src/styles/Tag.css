@@ -47,6 +47,8 @@
 }
 
 .Tag-input {
+    resize: none;
+    overflow: hidden;
     flex: 1 1 auto;
     font-size: 0.8rem;
     color: #005B70;
