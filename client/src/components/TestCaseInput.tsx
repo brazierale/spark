@@ -1,12 +1,21 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import PropTypes from 'prop-types';
-
-import { TestCaseObject, TestCasePropTypes } from '../modules/TestCase';
+import { TestCaseObject } from '../modules/TestCase';
 import { generateKey } from '../modules/KeyGen';
 
-class TestCaseInput extends Component {
+interface TestCaseInputProps {
+  testCase: TestCaseObject;
+  selectedTestCase: TestCaseObject;
+  isSelected: Boolean;
+  addTestCase: (newTestCase: TestCaseObject) => void;
+  deleteTestCaseByKey: (key: string) => void;
+  setSelectedTestCaseByKey: (key: string) => void;
+  updateTestCase: (updatedTestCase: TestCaseObject) => void;
+  updateSelectedTestCaseSummary: (summary: string) => void;
+  nextSortId: () => number;
+};
 
+class TestCaseInput extends Component<TestCaseInputProps> {
   render() {
     let classes = classNames({
       'Test-case': true,
@@ -24,9 +33,9 @@ class TestCaseInput extends Component {
     return (
       <textarea
         data-testid="test-case-input"
-        rows="1"
+        rows={1}
         wrap="off"
-        maxLength="255"
+        maxLength={255}
         placeholder="Enter your test case here..."
         className={classes}
         value={summary}
@@ -38,12 +47,12 @@ class TestCaseInput extends Component {
     );
   }
 
-  handleUserInput = event => {
+  handleUserInput = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     this.props.updateSelectedTestCaseSummary(event.target.value);
   }
 
-  handleKeyDown = event => {
-    if (event.key === 'Enter' || event.keyCode === 9) {
+  handleKeyDown = (event: React.KeyboardEvent) => {
+    if (event.key === 'Enter' || event.key === 'Tab') {
       event.preventDefault();
       this.sendUpdate(event.target.value);
     }
@@ -55,9 +64,9 @@ class TestCaseInput extends Component {
     }
   }
 
-  sendUpdate = summary => {
+  sendUpdate = ( summary: string ) => {
     // create new test case if this is the entryRow
-    if(this.props.testCase.key === 0 && summary !== '') {
+    if(this.props.testCase.key === 'blank' && summary !== '') {
       let newTestCase = this.props.testCase;
       newTestCase.key = generateKey();
       newTestCase.sortId = this.props.nextSortId();
@@ -65,15 +74,15 @@ class TestCaseInput extends Component {
 
       this.props.addTestCase(newTestCase);
 
-      this.props.setSelectedTestCaseByKey(0);
+      this.props.setSelectedTestCaseByKey('blank');
     }
     // delete the test case if it is empty
-    else if (summary === '' && this.props.testCase.key !== 0) {
-      this.props.setSelectedTestCaseByKey(0);
+    else if (summary === '' && this.props.testCase.key !== 'blank') {
+      this.props.setSelectedTestCaseByKey('blank');
       this.props.deleteTestCaseByKey(this.props.testCase.key);
     }
     // otherwise, update the test case
-    else if (this.props.testCase.key !==0) {
+    else if (this.props.testCase.key !== 'blank') {
       let updatedTestCase = new TestCaseObject(
         this.props.testCase.key,
         this.props.testCase.sortId,
@@ -86,19 +95,5 @@ class TestCaseInput extends Component {
     }
   }
 }
-
-TestCaseInput.propTypes = {
-  testCase: TestCasePropTypes,
-  selectedTestCase: TestCasePropTypes.isRequired,
-    
-  isSelected: PropTypes.bool.isRequired,
-    
-  addTestCase: PropTypes.func.isRequired,
-  deleteTestCaseByKey: PropTypes.func.isRequired,
-  setSelectedTestCaseByKey: PropTypes.func.isRequired,
-  updateSelectedTestCaseSummary: PropTypes.func.isRequired,
-  updateTestCase: PropTypes.func.isRequired,
-  nextSortId: PropTypes.func.isRequired
-};
 
 export default TestCaseInput;

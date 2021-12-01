@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-
 import Step from './Step';
-
-import { StepPropTypes } from '../modules/TestCase';
+import { StepObject } from '../modules/TestCase';
 import '../styles/Step.css';
 
+interface StepListProps {
+  disabled: boolean;
+  steps: StepObject[];
+  deleteStep: (id: number) => void;
+  addStep: (newStep: string) => void;
+  updateStepList: (updatedStepList: StepObject[]) => void;
+}
 
 // list of steps to run a test case
-class StepList extends Component {
+class StepList extends Component<StepListProps> {
   state = {
     newStep: ''
   }
@@ -18,7 +22,7 @@ class StepList extends Component {
         key={step.id}
         step={step}
         deleteStep={this.props.deleteStep}
-        updateStep={(id, newName) => this.updateStep(id, newName)}
+        updateStep={(id: number, newName: string) => this.updateStep(id, newName)}
         disabled={this.props.disabled}
       />
     );
@@ -43,19 +47,19 @@ class StepList extends Component {
     );
   }
 
-  updateStep = (id, newName) => {
+  updateStep = (id: number, newName: string) => {
     let updatedStepList = this.props.steps;
     updatedStepList[id].name = newName;
 
     this.props.updateStepList(updatedStepList);
   }
 
-  handleUserInput = event => {
+  handleUserInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({ newStep: event.target.value });
   }
 
-  handleKeyDown = event => {
-    if (event.key === 'Enter' || event.keyCode === 9) {
+  handleKeyDown = (event: React.KeyboardEvent) => {
+    if (event.key === 'Enter' || event.key === 'Tab') {
       if (this.state.newStep !== '') {
         event.preventDefault();
         this.props.addStep(this.state.newStep);
@@ -71,13 +75,5 @@ class StepList extends Component {
     this.setState({ newStep: '' });
   }
 }
-
-StepList.propTypes = {
-  steps: StepPropTypes,
-  disabled: PropTypes.bool.isRequired,
-  addStep: PropTypes.func.isRequired,
-  deleteStep: PropTypes.func.isRequired,
-  updateStepList: PropTypes.func.isRequired,
-};
 
 export default StepList;

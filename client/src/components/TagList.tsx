@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
-
 import Tag from './Tag';
-
 import '../styles/Tag.css';
 
+interface TagListProps {
+  tags: string[];
+  disabled: boolean;
+  addTag: (newTag: string) => void;
+  deleteTag: (toDelete: string) => void;
+};
 
 // list of tags
-class TagList extends Component {
+class TagList extends Component<TagListProps> {
   state = {
     newTag: ''
   }
@@ -37,7 +40,7 @@ class TagList extends Component {
           <textarea
             data-testid="tag-new"
             className="Tag-input"
-            rows="1"
+            rows={1}
             wrap="off"
             placeholder="Enter new tag..."
             value={this.state.newTag}
@@ -51,12 +54,12 @@ class TagList extends Component {
     );
   }
 
-  handleUserInput = event => {
+  handleUserInput = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     this.setState({ newTag: event.target.value});
   }
 
-  handleKeyDown = event => {
-    if (event.key === 'Enter' || event.keyCode === 9) {
+  handleKeyDown = (event: React.KeyboardEvent) => {
+    if (event.key === 'Enter' || event.key === 'Tab') {
       event.preventDefault();
       this.props.addTag(this.state.newTag);
       this.setState({ newTag: '' });
@@ -67,12 +70,5 @@ class TagList extends Component {
     this.setState({ newTag: '' });
   }
 }
-
-TagList.propTypes = {
-  tags: PropTypes.arrayOf(PropTypes.string).isRequired,
-  disabled: PropTypes.bool.isRequired,
-  addTag: PropTypes.func.isRequired,
-  deleteTag: PropTypes.func.isRequired
-};
 
 export default TagList;

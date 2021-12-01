@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-
 import '../styles/Description.css';
 
-// description field
-class Description extends Component {
+interface DescriptionProps {
+  description: string;
+  disabled: boolean;
+  updateDescription: (updatedDescription: string) => void;
+}
 
+// description field
+class Description extends Component<DescriptionProps> {
   render() {
     return(
       <div 
@@ -15,7 +18,7 @@ class Description extends Component {
         <span className="Label">Description</span>
         <textarea
           className="Description-input"
-          rows="4"
+          rows={4}
           placeholder="Enter new description..."
           value={this.props.description}
           onChange={this.handleUserInput}
@@ -24,16 +27,10 @@ class Description extends Component {
       </div>
     );
   }
-
-  handleUserInput = event => {
+  
+  handleUserInput = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     this.props.updateDescription(event.target.value);
   }
 }
-
-Description.propTypes = {
-  description: PropTypes.string.isRequired,
-  disabled: PropTypes.bool.isRequired,
-  updateDescription: PropTypes.func.isRequired
-};
 
 export default Description;

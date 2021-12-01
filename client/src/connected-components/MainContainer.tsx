@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { TestCasePropTypes } from '../modules/TestCase';
-import { connect } from 'react-redux';
+import { TestCaseObject } from '../modules/TestCase';
+import { connect, RootStateOrAny } from 'react-redux';
 
 import DetailPane from './DetailPane';
 import TestCaseList from '../components/TestCaseList';
@@ -10,7 +10,16 @@ import Indicator from '../components/Indicator';
 import { getTestCases } from '../actions/testcase-actions';
 import { generateSortId } from '../modules/KeyGen';
 
-class MainContainer extends Component {
+interface MainContainerProps {
+  testCases: TestCaseObject[];
+  selectedTestCase: TestCaseObject;
+  loading: boolean;
+  saving: boolean;
+  error: object;
+  getTestCases: () => void;
+};
+
+class MainContainer extends Component<MainContainerProps> {
 
   componentDidMount() {
     this.props.getTestCases();
@@ -49,7 +58,7 @@ class MainContainer extends Component {
   }
 }
 
-const mapStateToProps = state => {    
+const mapStateToProps = ( state: RootStateOrAny ) => {    
   return {
     testCases: state.testCases,
     selectedTestCase: state.selectedTestCase,
@@ -61,15 +70,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
   getTestCases: getTestCases,
-};
-
-MainContainer.propTypes = {
-  testCases: PropTypes.arrayOf(TestCasePropTypes).isRequired,
-  selectedTestCase: TestCasePropTypes.isRequired,
-  loading: PropTypes.bool.isRequired,
-  saving: PropTypes.bool.isRequired,
-  error: PropTypes.object,
-  getTestCases: PropTypes.func.isRequired
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainContainer);

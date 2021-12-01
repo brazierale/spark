@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { StepObject } from '../modules/TestCase';
+
+interface StepProps {
+  disabled: boolean;
+  step: StepObject;
+  deleteStep: (id: number) => void;
+  updateStep: (id: number, newName: string) => void;
+}
 
 // single step
-class Step extends Component {
-
+class Step extends Component<StepProps> {
   render() {
     let stepClasses = classNames({
       'Step': true,
@@ -23,7 +29,7 @@ class Step extends Component {
           <textarea
             data-testid="step-input"
             className="Step-edit"
-            rows="1"
+            rows={1}
             wrap="off"
             value={this.props.step.name}
             onChange={this.handleUserInput}
@@ -32,27 +38,16 @@ class Step extends Component {
           <span
             data-testid="step-delete"
             className="Delete-step"
-            onClick={this.deleteStep}
+            onClick={() => this.props.deleteStep(this.props.step.id)}
           >x</span>
         </div>
       </div>
     );
   }
 
-  deleteStep = () => {
-    this.props.deleteStep(this.props.step.id);
-  }
-
-  handleUserInput = event => {
+  handleUserInput = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     this.props.updateStep(this.props.step.id, event.target.value);
   }
 }
-
-Step.propTypes = {
-  step: PropTypes.object.isRequired,
-  disabled: PropTypes.bool.isRequired,
-  deleteStep: PropTypes.func.isRequired,
-  updateStep: PropTypes.func.isRequired
-};
 
 export default Step;

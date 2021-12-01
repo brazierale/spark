@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { TestCasePropTypes } from '../modules/TestCase';
-import { connect } from 'react-redux';
-
+import { connect, RootStateOrAny } from 'react-redux';
 import TagList from '../components/TagList';
 import StepList from '../components/StepList';
 import Description from '../components/Description';
-
-import { StepObject } from '../modules/TestCase';
+import { StepObject, TestCaseObject } from '../modules/TestCase';
 import { generateKey } from '../modules/KeyGen';
 import '../styles/DetailPane.css';
 import { 
@@ -16,7 +12,11 @@ import {
   updateTestCase
 } from '../actions/testcase-actions';
 
-class DetailPane extends Component {
+interface DetailPaneProps {
+  nextSortId: () => number;
+};
+
+class DetailPane extends Component<DetailPaneProps> {
   render() {
     if (this.props.selectedTestCase){
       return (
@@ -59,8 +59,8 @@ class DetailPane extends Component {
       return null;
     }
   }
-  addTag = newTag => {
-    const isDuplicate = element => {
+  addTag = ( newTag: string ) => {
+    const isDuplicate = ( element: string ) => {
       return element === newTag;
     };
     let updatedTagList = [...this.props.selectedTestCase.tags];
@@ -73,7 +73,7 @@ class DetailPane extends Component {
     this.props.updateSelectedTestCase('tags', updatedTagList);
   };
 
-  deleteTag = toDelete => {
+  deleteTag = ( toDelete: string ) => {
     let updatedTagList = this.props.selectedTestCase.tags.filter(
       tag => tag !== toDelete
     );
@@ -81,7 +81,7 @@ class DetailPane extends Component {
     this.props.updateSelectedTestCase('tags', updatedTagList);
   }
 
-  addStep = name => {
+  addStep = ( name: string ) => {
     let newStep = new StepObject (
       this.props.selectedTestCase.steps.length,
       name
@@ -90,7 +90,7 @@ class DetailPane extends Component {
     this.props.updateSelectedTestCase('steps', updatedStepList);
   }
 
-  deleteStep = id => {
+  deleteStep = ( id: number ) => {
     let updatedStepList = this.props.selectedTestCase.steps.filter(
       step => step.id !== id
     );
@@ -98,17 +98,17 @@ class DetailPane extends Component {
     this.props.updateSelectedTestCase('steps', updatedStepList);
   }
 
-  updateDescription = updatedDescription => {
+  updateDescription = ( updatedDescription: string ) => {
     this.props.updateSelectedTestCase('description', updatedDescription);
   }
 
-  updateStepList = updatedSteps => {
+  updateStepList = ( updatedSteps: StepObject[] ) => {
     this.props.updateSelectedTestCase('steps', updatedSteps);
   }
 
   save = () => {
     // create new test case if this is the entryRow
-    if (this.props.selectedTestCase.key === 0 &&
+    if (this.props.selectedTestCase.key === 'blank' &&
                 this.props.selectedTestCase.summary !== '') {
       const newTestCase = this.props.selectedTestCase;
       newTestCase.key = generateKey();
@@ -119,17 +119,15 @@ class DetailPane extends Component {
     else if (this.props.selectedTestCase.summary === '') {
       // do nothing
     }
-    else if (this.props.selectedTestCase.key !== 0) {
+    else if (this.props.selectedTestCase.key !== 'blank') {
       this.props.updateTestCase(this.props.selectedTestCase);
       // forcing update as otherwise the detail pane isn't getting the selectedTestCase updates - not sure why
       this.forceUpdate();
     }
   }
-
-    
 }
 
-const mapStateToProps = state => {    
+const mapStateToProps = ( state: RootStateOrAny ) => {    
   return {
     selectedTestCase: state.selectedTestCase,
   };
@@ -139,14 +137,6 @@ const mapDispatchToProps = {
   addTestCase: addTestCase,
   updateTestCase: updateTestCase,
   updateSelectedTestCase: updateSelectedTestCase
-};
-
-DetailPane.propTypes = {
-  nextSortId: PropTypes.func.isRequired,
-  selectedTestCase: TestCasePropTypes.isRequired,
-  addTestCase: PropTypes.func.isRequired,
-  updateTestCase: PropTypes.func.isRequired,
-  updateSelectedTestCase: PropTypes.func.isRequired
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(DetailPane);

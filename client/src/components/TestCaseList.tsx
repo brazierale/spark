@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-
 import Row from '../connected-components/Row';
-
-import { TestCasePropTypes } from '../modules/TestCase';
+import { blankTestCase, TestCaseObject } from '../modules/TestCase';
 import '../styles/TestCaseList.css';
 
-class TestCaseList extends Component {
+interface TestCaseListProps {
+  testCases: TestCaseObject[];
+  nextSortId: () => number;
+}
+
+class TestCaseList extends Component<TestCaseListProps> {
   render() {
     return(
       <div data-testid="test-case-list">
@@ -15,7 +17,7 @@ class TestCaseList extends Component {
     );
   }
 
-  testCasesToRender = testCases => {
+  testCasesToRender = ( testCases: TestCaseObject[] ) => {
     testCases.sort((a, b) => this.sortBySortId(a, b));
     
     return (
@@ -23,14 +25,14 @@ class TestCaseList extends Component {
         <Row key={testCase.key}
           testCase={testCase}
           nextSortId={this.props.nextSortId}
-          moveAboveSortId={key => this.moveAboveSortId(key)}
+          moveAboveSortId={ (key: string ) => this.moveAboveSortId(key)}
         >
         </Row>
       )
     );
   }
     
-  sortBySortId = (a, b) => {
+  sortBySortId = ( a: TestCaseObject, b: TestCaseObject ) => {
     if (a.sortId < b.sortId) {
       return -1;
     }
@@ -42,23 +44,16 @@ class TestCaseList extends Component {
     }
   }
     
-  moveAboveSortId = key => {
+  moveAboveSortId = ( key: string ) => {
     // get the numbers either side of the new position and pick a sortId between them
     let thisIndex = this.props.testCases.findIndex( tc => {return tc.key === key;});
     let toMoveAbove = this.props.testCases[thisIndex];
     let toMoveBelow = this.props.testCases[thisIndex-1];
 
-    if (!toMoveBelow) {toMoveBelow = {sortId: 0};}
+    if (!toMoveBelow) { toMoveBelow = blankTestCase(); }
         
     return ( toMoveAbove.sortId + toMoveBelow.sortId) / 2;
   }
 }
-
-
-TestCaseList.propTypes = {
-  testCases: PropTypes.arrayOf(TestCasePropTypes).isRequired,
-
-  nextSortId: PropTypes.func.isRequired
-};
 
 export default TestCaseList;

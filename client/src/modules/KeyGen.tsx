@@ -8,6 +8,6 @@ export function generateKey(){
   return keygen;
 }
 
-export function generateSortId(latestId) {
+export function generateSortId( latestId: number ) {
   return latestId + 100000;
 }

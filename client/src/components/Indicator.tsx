@@ -1,22 +1,21 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+
+type IndicatorProps = {
+  loading: boolean;
+  saving: boolean;
+}
 
 // indicator to show API calls are outstanding
-const Indicator = props => {
-  if (props.loading) {
+const Indicator = ({ loading, saving }: IndicatorProps) => {
+  if (loading) {
     return <div data-testid='loading' className="Loading"/>;
   }
-  else if (props.saving) {
+  else if (saving) {
     return <div data-testid='saving' className="Saving"/>;
   }
   else {
     return null;
   }
-};
-
-Indicator.propTypes = {
-  loading: PropTypes.bool.isRequired,
-  saving: PropTypes.bool.isRequired
 };
 
 export default Indicator;
