@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { connect, RootStateOrAny } from 'react-redux';
+import { connect, ConnectedProps } from 'react-redux';
 import TagList from '../components/TagList';
 import StepList from '../components/StepList';
 import Description from '../components/Description';
-import { StepObject, TestCaseObject } from '../modules/TestCase';
+import { StepObject } from '../modules/TestCase';
 import { generateKey } from '../modules/KeyGen';
 import '../styles/DetailPane.css';
 import { 
@@ -11,11 +11,28 @@ import {
   updateSelectedTestCase,
   updateTestCase
 } from '../actions/testcase-actions';
+import { RootState } from '../index';
 
-interface DetailPaneProps {
-  nextSortId: () => number;
+
+const mapStateToProps = ( state: RootState ) => {    
+  return {
+    selectedTestCase: state.selectedTestCase,
+  };
 };
 
+const mapDispatchToProps = {
+  addTestCase: addTestCase,
+  updateTestCase: updateTestCase,
+  updateSelectedTestCase: updateSelectedTestCase
+};
+
+const connector = connect(mapStateToProps, mapDispatchToProps)
+
+type PropsFromRedux = ConnectedProps<typeof connector>
+
+interface DetailPaneProps extends PropsFromRedux {
+  nextSortId: () => number;
+};
 class DetailPane extends Component<DetailPaneProps> {
   render() {
     if (this.props.selectedTestCase){
@@ -127,16 +144,4 @@ class DetailPane extends Component<DetailPaneProps> {
   }
 }
 
-const mapStateToProps = ( state: RootStateOrAny ) => {    
-  return {
-    selectedTestCase: state.selectedTestCase,
-  };
-};
-
-const mapDispatchToProps = {
-  addTestCase: addTestCase,
-  updateTestCase: updateTestCase,
-  updateSelectedTestCase: updateSelectedTestCase
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(DetailPane);
+export default connector(DetailPane);

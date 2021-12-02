@@ -5,7 +5,7 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
 type DeleteTestCaseProps = {
   testCaseKey: string;
   disabled: boolean;
-  deleteTestCase: undefined
+  deleteTestCase: () => void;
 }
 
 // x button to delete a test case
@@ -16,7 +16,7 @@ const DeleteTestCase = ({ testCaseKey, disabled, deleteTestCase }: DeleteTestCas
         data-testid='test-case-delete'
         className="Delete-row"
         icon={faTimes}
-        onClick={deleteTestCase}
+        onClick={() => deleteTestCase}
       />
     );
   }

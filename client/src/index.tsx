@@ -12,8 +12,10 @@ import App from './App';
 const allStoreEnhancers = compose(
   applyMiddleware(thunk),
   ( 
+    // @ts-ignore
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ && 
-        window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__()
+      // @ts-ignore
+      window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__()
   ) || compose
 );
 
@@ -22,14 +24,18 @@ const testCaseStore = createStore(
   allStoreEnhancers
 );
 
+export type RootState = ReturnType<typeof testCaseStore.getState>;
+export type AppDispatch = typeof testCaseStore.dispatch;
+
 ReactDOM.render(
   <Provider store={testCaseStore}>
     <App/>
   </Provider>,
   document.getElementById('root')
 );
-
+// @ts-ignore
 if (window.Cypress) {
+  // @ts-ignore
   window.store = testCaseStore;
 }
 

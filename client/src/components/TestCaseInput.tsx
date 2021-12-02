@@ -54,7 +54,7 @@ class TestCaseInput extends Component<TestCaseInputProps> {
   handleKeyDown = (event: React.KeyboardEvent) => {
     if (event.key === 'Enter' || event.key === 'Tab') {
       event.preventDefault();
-      this.sendUpdate(event.target.value);
+      this.sendUpdate(this.props.selectedTestCase.summary);
     }
   }
     

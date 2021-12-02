@@ -1,25 +1,32 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { TestCaseObject } from '../modules/TestCase';
-import { connect, RootStateOrAny } from 'react-redux';
-
+import { connect, ConnectedProps } from 'react-redux';
 import DetailPane from './DetailPane';
 import TestCaseList from '../components/TestCaseList';
 import Indicator from '../components/Indicator';
-
 import { getTestCases } from '../actions/testcase-actions';
 import { generateSortId } from '../modules/KeyGen';
+import { RootState } from '../index';
 
-interface MainContainerProps {
-  testCases: TestCaseObject[];
-  selectedTestCase: TestCaseObject;
-  loading: boolean;
-  saving: boolean;
-  error: object;
-  getTestCases: () => void;
+const mapStateToProps = ( state: RootState ) => {    
+  return {
+    testCases: state.testCases,
+    selectedTestCase: state.selectedTestCase,
+    loading: state.loading,
+    saving: state.saving,
+    error: state.error
+  };
 };
 
-class MainContainer extends Component<MainContainerProps> {
+const mapDispatchToProps = {
+  getTestCases: getTestCases,
+};
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector>
+
+class MainContainer extends Component<PropsFromRedux> {
 
   componentDidMount() {
     this.props.getTestCases();
@@ -58,18 +65,4 @@ class MainContainer extends Component<MainContainerProps> {
   }
 }
 
-const mapStateToProps = ( state: RootStateOrAny ) => {    
-  return {
-    testCases: state.testCases,
-    selectedTestCase: state.selectedTestCase,
-    loading: state.loading,
-    saving: state.saving,
-    error: state.error
-  };
-};
-
-const mapDispatchToProps = {
-  getTestCases: getTestCases,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(MainContainer);
+export default connector(MainContainer);

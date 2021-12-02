@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { connect, ConnectedProps } from 'react-redux';
 import classNames from 'classnames';
 import { ItemTypes } from '../modules/Constants.js';
-import { DragSource, DropTarget } from 'react-dnd';
-
+import { DragSource, DragSourceConnector, DragSourceMonitor, DropTarget, DropTargetConnector, DropTargetMonitor } from 'react-dnd';
 import TestCaseInput from '../components/TestCaseInput';
 import DeleteTestCase from  '../components/DeleteTestCase';
 import MoveTestCase from '../components/MoveTestCase';
-
-import { TestCasePropTypes } from '../modules/TestCase';
+import { TestCaseObject } from '../modules/TestCase';
 import { 
   addTestCase,
   deleteTestCaseByKey,
@@ -18,9 +15,41 @@ import {
   updateSelectedTestCase,
   setDragEnabledStatus
 } from '../actions/testcase-actions';
+import { RootState } from '../index';
+import { ReactNode } from 'hoist-non-react-statics/node_modules/@types/react';
 
-class Row extends Component {
 
+const mapStateToProps = ( state: RootState ) => {    
+  return {
+    selectedTestCase: state.selectedTestCase,
+    dragEnabled: state.dragEnabled
+  };
+};
+
+const mapDispatchToProps = {
+  addTestCase: addTestCase,
+  deleteTestCaseByKey: deleteTestCaseByKey,
+  updateTestCase: updateTestCase,
+  setSelectedTestCaseByKey: setSelectedTestCaseByKey,
+  updateSelectedTestCase: updateSelectedTestCase,
+  setDragEnabledStatus: setDragEnabledStatus
+};
+
+const connector = connect(mapStateToProps, mapDispatchToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+interface RowProps extends PropsFromRedux {
+  testCase: TestCaseObject;
+  moveAboveSortId: (key: string) => void;
+  nextSortId: () => number;
+  connectDragSource: (element: ReactNode) => ReactNode;
+  connectDropTarget: (element: ReactNode) => ReactNode;
+  isDragging: boolean;
+  isOver: boolean;
+}
+
+class Row extends Component<RowProps> {
   render() {
     const {
       connectDragSource,
@@ -67,15 +96,18 @@ class Row extends Component {
     }
     else return null;
   }
-  updateSelectedTestCaseSummary = summary => {
+
+  updateSelectedTestCaseSummary = ( summary: string ) => {
     this.props.updateSelectedTestCase('summary', summary);
   }
+
   deleteTestCase = () => {
     if (this.isSelected()) {
       this.props.setSelectedTestCaseByKey(0);
     }
     this.props.deleteTestCaseByKey(this.props.testCase.key);
   }
+
   isSelected = () => {
     return this.props.testCase.key === this.props.selectedTestCase.key;
   }
@@ -83,18 +115,18 @@ class Row extends Component {
 
 // actions to carry out when drag starts
 const testCaseSource = {
-  beginDrag(props) {
+  beginDrag(props: RowProps) {
     console.log('dragging ' + props.testCase.summary);
     return {testCase: props.testCase};
   },
-  canDrag(props) {
+  canDrag(props: RowProps) {
     return props.dragEnabled;
   }
 };
 
 // actions to carry out when item is dropped
 const testCaseTarget = {
-  drop(props, monitor) {
+  drop(props: RowProps, monitor: DragSourceMonitor) {
     // get the test case we're dropping
     let testCaseToMove = monitor.getItem().testCase;
     // current this is the row being dropped onto, so get the Id to sort above
@@ -104,7 +136,7 @@ const testCaseTarget = {
 };
 
 // set methods for Dragging
-const collectDrag = (connect, monitor) => {
+const collectDrag = (connect: DragSourceConnector, monitor: DragSourceMonitor) => {
   return {
     connectDragSource: connect.dragSource(),
     isDragging: monitor.isDragging()
@@ -112,45 +144,11 @@ const collectDrag = (connect, monitor) => {
 };
 
 // set methods for Dropping
-const collectDrop = (connect, monitor) => {
+const collectDrop = (connect: DropTargetConnector, monitor: DropTargetMonitor) => {
   return {
     connectDropTarget: connect.dropTarget(),
     isOver: monitor.isOver(),
   };
-};
-
-const mapStateToProps = state => {    
-  return {
-    selectedTestCase: state.selectedTestCase,
-    dragEnabled: state.dragEnabled
-  };
-};
-
-const mapDispatchToProps = {
-  addTestCase: addTestCase,
-  deleteTestCaseByKey: deleteTestCaseByKey,
-  updateTestCase: updateTestCase,
-  setSelectedTestCaseByKey: setSelectedTestCaseByKey,
-  updateSelectedTestCase: updateSelectedTestCase,
-  setDragEnabledStatus: setDragEnabledStatus
-};
-
-Row.propTypes = {
-  testCase: TestCasePropTypes.isRequired,
-  setSelectedTestCaseByKey: PropTypes.func.isRequired,
-  isDragging: PropTypes.bool.isRequired,
-  isOver: PropTypes.bool.isRequired,
-  dragEnabled: PropTypes.bool.isRequired,
-  connectDragSource: PropTypes.func.isRequired,
-  connectDropTarget: PropTypes.func.isRequired,
-  moveAboveSortId: PropTypes.func.isRequired,
-  nextSortId: PropTypes.func.isRequired,
-  selectedTestCase: TestCasePropTypes.isRequired,
-  addTestCase: PropTypes.func.isRequired,
-  deleteTestCaseByKey: PropTypes.func.isRequired,
-  updateTestCase: PropTypes.func.isRequired,
-  updateSelectedTestCase: PropTypes.func.isRequired,
-  setDragEnabledStatus: PropTypes.func.isRequired
 };
 
 // attach the HOC one at a time
