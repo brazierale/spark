@@ -126,7 +126,7 @@ const testCaseSource = {
 
 // actions to carry out when item is dropped
 const testCaseTarget = {
-  drop(props: RowProps, monitor: DragSourceMonitor) {
+  drop(props: RowProps, monitor: DropTargetMonitor) {
     // get the test case we're dropping
     let testCaseToMove = monitor.getItem().testCase;
     // current this is the row being dropped onto, so get the Id to sort above
@@ -155,4 +155,4 @@ const collectDrop = (connect: DropTargetConnector, monitor: DropTargetMonitor) =
 const draggableRow = DragSource(ItemTypes.TEST_CASE, testCaseSource, collectDrag)(Row);
 const targetableRow = DropTarget(ItemTypes.TEST_CASE, testCaseTarget, collectDrop)(draggableRow);
 
-export default connect(mapStateToProps, mapDispatchToProps)(targetableRow);
+export default connector(targetableRow);
